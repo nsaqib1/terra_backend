@@ -47,6 +47,7 @@ export type UserMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  role: $Enums.UserRole | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -62,6 +63,7 @@ export type UserMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  role: $Enums.UserRole | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -77,6 +79,7 @@ export type UserCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   deletedAt: number
+  role: number
   _all: number
 }
 
@@ -102,6 +105,7 @@ export type UserMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -117,6 +121,7 @@ export type UserMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -132,6 +137,7 @@ export type UserCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  role?: true
   _all?: true
 }
 
@@ -234,6 +240,7 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
+  role: $Enums.UserRole
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -272,6 +279,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
@@ -295,6 +303,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   memberships?: Prisma.CommunityMembershipOrderByRelationAggregateInput
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   reviewedProposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
@@ -321,6 +330,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
@@ -344,6 +354,7 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -367,6 +378,7 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
 }
 
 export type UserCreateInput = {
@@ -382,6 +394,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -405,6 +418,7 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -428,6 +442,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -451,6 +466,7 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -474,6 +490,7 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
 }
 
 export type UserUpdateManyMutationInput = {
@@ -489,6 +506,7 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -504,6 +522,7 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -519,6 +538,7 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -538,6 +558,7 @@ export type UserMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -553,6 +574,7 @@ export type UserMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -595,6 +617,10 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type EnumUserRoleFieldUpdateOperationsInput = {
+  set?: $Enums.UserRole
 }
 
 export type UserCreateNestedOneWithoutProposalsInput = {
@@ -724,6 +750,7 @@ export type UserCreateWithoutProposalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -746,6 +773,7 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -773,6 +801,7 @@ export type UserCreateWithoutReviewedProposalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -795,6 +824,7 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -833,6 +863,7 @@ export type UserUpdateWithoutProposalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -855,6 +886,7 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -888,6 +920,7 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -910,6 +943,7 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -932,6 +966,7 @@ export type UserCreateWithoutMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
@@ -954,6 +989,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
@@ -992,6 +1028,7 @@ export type UserUpdateWithoutMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
@@ -1014,6 +1051,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1036,6 +1074,7 @@ export type UserCreateWithoutPostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1058,6 +1097,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1096,6 +1136,7 @@ export type UserUpdateWithoutPostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1118,6 +1159,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1140,6 +1182,7 @@ export type UserCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1162,6 +1205,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1200,6 +1244,7 @@ export type UserUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1222,6 +1267,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1244,6 +1290,7 @@ export type UserCreateWithoutVotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1266,6 +1313,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1304,6 +1352,7 @@ export type UserUpdateWithoutVotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1326,6 +1375,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1348,6 +1398,7 @@ export type UserCreateWithoutReputationEventsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1370,6 +1421,7 @@ export type UserUncheckedCreateWithoutReputationEventsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1408,6 +1460,7 @@ export type UserUpdateWithoutReputationEventsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1430,6 +1483,7 @@ export type UserUncheckedUpdateWithoutReputationEventsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1452,6 +1506,7 @@ export type UserCreateWithoutRefreshSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1474,6 +1529,7 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  role?: $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1512,6 +1568,7 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1534,6 +1591,7 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1650,6 +1708,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  role?: boolean
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
@@ -1674,6 +1733,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1689,6 +1749,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1704,9 +1765,10 @@ export type UserSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "bio" | "reputation" | "status" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "bio" | "reputation" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
@@ -1746,6 +1808,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
+    role: $Enums.UserRole
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2189,6 +2252,7 @@ export interface UserFieldRefs {
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly role: Prisma.FieldRef<"User", 'UserRole'>
 }
     
 

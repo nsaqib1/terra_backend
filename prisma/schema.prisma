@@ -8,6 +8,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 enum UserStatus {
   ACTIVE
   SUSPENDED
@@ -92,6 +97,7 @@ model User {
   votes             Vote[]
   reputationEvents  ReputationEvent[]
   refreshSessions   RefreshSession[]
+  role              UserRole              @default(USER)
 
   @@index([status])
   @@index([deletedAt])
