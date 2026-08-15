@@ -1,14 +1,314 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider     = "prisma-client"
-  output       = "../generated/prisma"
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum CommunityStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum CommunityMaturity {
+  NEW
+  GROWING
+  ESTABLISHED
+  SELF_GOVERNED
+}
+
+enum GovernanceMode {
+  PLATFORM_MANAGED
+  SELF_GOVERNED
+}
+
+enum CommunityMemberRole {
+  CITIZEN
+  MODERATOR
+}
+
+enum CommunityProposalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+enum PostStatus {
+  ACTIVE
+  LOCKED
+  REMOVED
+}
+
+enum VoteValue {
+  UP
+  DOWN
+}
+
+enum ReputationEventType {
+  POST_CREATED
+  COMMENT_CREATED
+  POST_UPVOTED
+  COMMENT_UPVOTED
+}
+
+enum ReputationSourceType {
+  POST
+  COMMENT
+  VOTE
+  SYSTEM
+}
+
+model User {
+  id           String     @id @default(uuid()) @db.Uuid
+  username     String     @unique @db.VarChar(30)
+  displayName  String     @db.VarChar(100)
+  email        String     @unique @db.VarChar(255)
+  passwordHash String
+  avatarUrl    String?
+  bio          String?    @db.Text
+  reputation   Int        @default(0)
+  status       UserStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  memberships       CommunityMembership[]
+  proposals         CommunityProposal[]   @relation("ProposedBy")
+  reviewedProposals CommunityProposal[]   @relation("ReviewedBy")
+  posts             Post[]
+  comments          Comment[]
+  votes             Vote[]
+  reputationEvents  ReputationEvent[]
+  refreshSessions   RefreshSession[]
+
+  @@index([status])
+  @@index([deletedAt])
+}
+
+model Community {
+  id          String  @id @default(uuid()) @db.Uuid
+  name        String  @db.VarChar(100)
+  slug        String  @unique @db.VarChar(100)
+  description String? @db.Text
+
+  status         CommunityStatus   @default(ACTIVE)
+  maturity       CommunityMaturity @default(NEW)
+  governanceMode GovernanceMode    @default(PLATFORM_MANAGED)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  memberships CommunityMembership[]
+  proposals   CommunityProposal[]
+  posts       Post[]
+  hashtags    Hashtag[]
+
+  @@index([status])
+  @@index([maturity])
+  @@index([deletedAt])
+}
+
+model CommunityProposal {
+  id           String                  @id @default(uuid()) @db.Uuid
+  proposedName String                  @db.VarChar(100)
+  proposedSlug String                  @db.VarChar(100)
+  description  String?                 @db.Text
+  reason       String?                 @db.Text
+  status       CommunityProposalStatus @default(PENDING)
+
+  proposedById String  @db.Uuid
+  reviewedById String? @db.Uuid
+
+  reviewReason String?   @db.Text
+  reviewedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proposedBy  User       @relation("ProposedBy", fields: [proposedById], references: [id])
+  reviewedBy  User?      @relation("ReviewedBy", fields: [reviewedById], references: [id])
+  community   Community? @relation(fields: [communityId], references: [id])
+  communityId String?    @db.Uuid
+
+  @@index([proposedById])
+  @@index([reviewedById])
+  @@index([status])
+  @@index([communityId])
+}
+
+model CommunityMembership {
+  id          String @id @default(uuid()) @db.Uuid
+  userId      String @db.Uuid
+  communityId String @db.Uuid
+
+  role CommunityMemberRole @default(CITIZEN)
+
+  joinedAt DateTime  @default(now())
+  leftAt   DateTime?
+
+  user      User      @relation(fields: [userId], references: [id])
+  community Community @relation(fields: [communityId], references: [id])
+
+  @@unique([userId, communityId])
+  @@index([communityId])
+  @@index([userId])
+  @@index([role])
+}
+
+model Post {
+  id          String @id @default(uuid()) @db.Uuid
+  communityId String @db.Uuid
+  authorId    String @db.Uuid
+
+  title        String @db.VarChar(300)
+  body         String @db.Text
+  score        Int    @default(0)
+  commentCount Int    @default(0)
+
+  status PostStatus @default(ACTIVE)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  community Community @relation(fields: [communityId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
+
+  comments Comment[]
+  votes    Vote[]
+  hashtags PostHashtag[]
+
+  @@index([communityId, createdAt])
+  @@index([communityId, score])
+  @@index([authorId, createdAt])
+  @@index([status])
+  @@index([deletedAt])
+}
+
+model Comment {
+  id       String  @id @default(uuid()) @db.Uuid
+  postId   String  @db.Uuid
+  authorId String  @db.Uuid
+  parentId String? @db.Uuid
+
+  body  String @db.Text
+  score Int    @default(0)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  post    Post      @relation(fields: [postId], references: [id])
+  author  User      @relation(fields: [authorId], references: [id])
+  parent  Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies Comment[] @relation("CommentReplies")
+
+  votes Vote[]
+
+  @@index([postId, createdAt])
+  @@index([postId, score])
+  @@index([authorId])
+  @@index([parentId])
+  @@index([deletedAt])
+}
+
+model Hashtag {
+  id          String @id @default(uuid()) @db.Uuid
+  communityId String @db.Uuid
+
+  name String @db.VarChar(100)
+  slug String @db.VarChar(100)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  community Community     @relation(fields: [communityId], references: [id])
+  posts     PostHashtag[]
+
+  @@unique([communityId, slug])
+  @@index([communityId])
+}
+
+model PostHashtag {
+  postId    String @db.Uuid
+  hashtagId String @db.Uuid
+
+  post    Post    @relation(fields: [postId], references: [id])
+  hashtag Hashtag @relation(fields: [hashtagId], references: [id])
+
+  @@id([postId, hashtagId])
+  @@index([hashtagId])
+}
+
+model Vote {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @db.Uuid
+  postId    String?   @db.Uuid
+  commentId String?   @db.Uuid
+  value     VoteValue
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User     @relation(fields: [userId], references: [id])
+  post    Post?    @relation(fields: [postId], references: [id])
+  comment Comment? @relation(fields: [commentId], references: [id])
+
+  @@unique([userId, postId])
+  @@unique([userId, commentId])
+  @@index([postId])
+  @@index([commentId])
+  @@index([userId])
+}
+
+model ReputationEvent {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+
+  type   ReputationEventType
+  points Int
+
+  sourceType ReputationSourceType
+  sourceId   String?              @db.Uuid
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId, createdAt])
+  @@index([type])
+  @@index([sourceType, sourceId])
+}
+
+model RefreshSession {
+  id String @id @default(uuid()) @db.Uuid
+
+  userId    String @db.Uuid
+  tokenHash String @unique @db.VarChar(255)
+
+  userAgent String? @db.Text
+  ipAddress String? @db.VarChar(45)
+
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  revokedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([revokedAt])
 }
