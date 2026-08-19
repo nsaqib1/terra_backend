@@ -5,12 +5,69 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 import { ReviewCommunityProposalDto } from './dto/review-community-proposal.dto';
+import { CommunityProposalQueryDto } from './dto/community-proposal-query.dto';
 
 @Injectable()
 export class AdminService {
   constructor(
     private readonly prisma: PrismaService,
   ) { }
+
+  async getCommunityProposals(
+    query: CommunityProposalQueryDto,
+  ) {
+    return this.prisma.communityProposal.findMany({
+      where: {
+        ...(query.status
+          ? {
+            status: query.status,
+          }
+          : {}),
+      },
+
+      orderBy: {
+        createdAt: 'desc',
+      },
+
+      select: {
+        id: true,
+        proposedName: true,
+        proposedSlug: true,
+        description: true,
+        reason: true,
+        status: true,
+        reviewReason: true,
+        reviewedAt: true,
+        createdAt: true,
+        updatedAt: true,
+
+        proposedBy: {
+          select: {
+            id: true,
+            username: true,
+            displayName: true,
+            avatarUrl: true,
+          },
+        },
+
+        reviewedBy: {
+          select: {
+            id: true,
+            username: true,
+            displayName: true,
+          },
+        },
+
+        community: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+          },
+        },
+      },
+    });
+  }
 
   async reviewCommunityProposal(
     adminUserId: string,
