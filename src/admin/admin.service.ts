@@ -16,57 +16,84 @@ export class AdminService {
   async getCommunityProposals(
     query: CommunityProposalQueryDto,
   ) {
-    return this.prisma.communityProposal.findMany({
-      where: {
-        ...(query.status
-          ? {
-            status: query.status,
-          }
-          : {}),
-      },
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 20;
 
-      orderBy: {
-        createdAt: 'desc',
-      },
+    const skip = (page - 1) * limit;
 
-      select: {
-        id: true,
-        proposedName: true,
-        proposedSlug: true,
-        description: true,
-        reason: true,
-        status: true,
-        reviewReason: true,
-        reviewedAt: true,
-        createdAt: true,
-        updatedAt: true,
+    const where = {
+      ...(query.status
+        ? {
+          status: query.status,
+        }
+        : {}),
+    };
 
-        proposedBy: {
-          select: {
-            id: true,
-            username: true,
-            displayName: true,
-            avatarUrl: true,
-          },
+    const [proposals, total] = await this.prisma.$transaction([
+      this.prisma.communityProposal.findMany({
+        where,
+
+        orderBy: {
+          createdAt: 'desc',
         },
 
-        reviewedBy: {
-          select: {
-            id: true,
-            username: true,
-            displayName: true,
-          },
-        },
+        skip,
+        take: limit,
 
-        community: {
-          select: {
-            id: true,
-            name: true,
-            slug: true,
+        select: {
+          id: true,
+          proposedName: true,
+          proposedSlug: true,
+          description: true,
+          reason: true,
+          status: true,
+          reviewReason: true,
+          reviewedAt: true,
+          createdAt: true,
+          updatedAt: true,
+
+          proposedBy: {
+            select: {
+              id: true,
+              username: true,
+              displayName: true,
+              avatarUrl: true,
+            },
+          },
+
+          reviewedBy: {
+            select: {
+              id: true,
+              username: true,
+              displayName: true,
+            },
+          },
+
+          community: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+            },
           },
         },
+      }),
+
+      this.prisma.communityProposal.count({
+        where,
+      }),
+    ]);
+
+    return {
+      data: proposals,
+
+      meta: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
       },
-    });
+    };
   }
 
   async reviewCommunityProposal(
