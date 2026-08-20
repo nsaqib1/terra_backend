@@ -284,6 +284,7 @@ export type UserWhereInput = {
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
+  media?: Prisma.MediaListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   votes?: Prisma.VoteListRelationFilter
   reputationEvents?: Prisma.ReputationEventListRelationFilter
@@ -308,6 +309,7 @@ export type UserOrderByWithRelationInput = {
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   reviewedProposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
+  media?: Prisma.MediaOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   votes?: Prisma.VoteOrderByRelationAggregateInput
   reputationEvents?: Prisma.ReputationEventOrderByRelationAggregateInput
@@ -335,6 +337,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
+  media?: Prisma.MediaListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   votes?: Prisma.VoteListRelationFilter
   reputationEvents?: Prisma.ReputationEventListRelationFilter
@@ -399,6 +402,7 @@ export type UserCreateInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -423,6 +427,7 @@ export type UserUncheckedCreateInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -447,6 +452,7 @@ export type UserUpdateInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -471,6 +477,7 @@ export type UserUncheckedUpdateInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -695,6 +702,20 @@ export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentsInput, Prisma.UserUpdateWithoutCommentsInput>, Prisma.UserUncheckedUpdateWithoutCommentsInput>
 }
 
+export type UserCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaInput, Prisma.UserUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaInput, Prisma.UserUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.UserUpsertWithoutMediaInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMediaInput, Prisma.UserUpdateWithoutMediaInput>, Prisma.UserUncheckedUpdateWithoutMediaInput>
+}
+
 export type UserCreateNestedOneWithoutVotesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVotesInput, Prisma.UserUncheckedCreateWithoutVotesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVotesInput
@@ -754,6 +775,7 @@ export type UserCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -777,6 +799,7 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -805,6 +828,7 @@ export type UserCreateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -828,6 +852,7 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -867,6 +892,7 @@ export type UserUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -890,6 +916,7 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -924,6 +951,7 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -947,6 +975,7 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -970,6 +999,7 @@ export type UserCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -993,6 +1023,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -1032,6 +1063,7 @@ export type UserUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -1055,6 +1087,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -1078,6 +1111,7 @@ export type UserCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -1101,6 +1135,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -1140,6 +1175,7 @@ export type UserUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -1163,6 +1199,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -1187,6 +1224,7 @@ export type UserCreateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1210,6 +1248,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1249,6 +1288,7 @@ export type UserUpdateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1272,6 +1312,119 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMediaInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  reputation?: number
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMediaInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  reputation?: number
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMediaInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaInput, Prisma.UserUncheckedCreateWithoutMediaInput>
+}
+
+export type UserUpsertWithoutMediaInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMediaInput, Prisma.UserUncheckedUpdateWithoutMediaInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaInput, Prisma.UserUncheckedCreateWithoutMediaInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMediaInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMediaInput, Prisma.UserUncheckedUpdateWithoutMediaInput>
+}
+
+export type UserUpdateWithoutMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1295,6 +1448,7 @@ export type UserCreateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1318,6 +1472,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1357,6 +1512,7 @@ export type UserUpdateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1380,6 +1536,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1403,6 +1560,7 @@ export type UserCreateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1426,6 +1584,7 @@ export type UserUncheckedCreateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1465,6 +1624,7 @@ export type UserUpdateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1488,6 +1648,7 @@ export type UserUncheckedUpdateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1511,6 +1672,7 @@ export type UserCreateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
@@ -1534,6 +1696,7 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
   reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
@@ -1573,6 +1736,7 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
@@ -1596,6 +1760,7 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
   reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
@@ -1611,6 +1776,7 @@ export type UserCountOutputType = {
   proposals: number
   reviewedProposals: number
   posts: number
+  media: number
   comments: number
   votes: number
   reputationEvents: number
@@ -1622,6 +1788,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   proposals?: boolean | UserCountOutputTypeCountProposalsArgs
   reviewedProposals?: boolean | UserCountOutputTypeCountReviewedProposalsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
+  media?: boolean | UserCountOutputTypeCountMediaArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
   votes?: boolean | UserCountOutputTypeCountVotesArgs
   reputationEvents?: boolean | UserCountOutputTypeCountReputationEventsArgs
@@ -1664,6 +1831,13 @@ export type UserCountOutputTypeCountReviewedProposalsArgs<ExtArgs extends runtim
  */
 export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PostWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaWhereInput
 }
 
 /**
@@ -1713,6 +1887,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
+  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
   reputationEvents?: boolean | Prisma.User$reputationEventsArgs<ExtArgs>
@@ -1774,6 +1949,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
+  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
   reputationEvents?: boolean | Prisma.User$reputationEventsArgs<ExtArgs>
@@ -1790,6 +1966,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     proposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     reviewedProposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
+    media: Prisma.$MediaPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
     votes: Prisma.$VotePayload<ExtArgs>[]
     reputationEvents: Prisma.$ReputationEventPayload<ExtArgs>[]
@@ -2207,6 +2384,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   proposals<T extends Prisma.User$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedProposals<T extends Prisma.User$reviewedProposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedProposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  media<T extends Prisma.User$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   votes<T extends Prisma.User$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reputationEvents<T extends Prisma.User$reputationEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reputationEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReputationEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2739,6 +2917,30 @@ export type User$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.PostScalarFieldEnum | Prisma.PostScalarFieldEnum[]
+}
+
+/**
+ * User.media
+ */
+export type User$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Media
+   */
+  select?: Prisma.MediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Media
+   */
+  omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  where?: Prisma.MediaWhereInput
+  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
+  cursor?: Prisma.MediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
 }
 
 /**

@@ -59,6 +59,7 @@ export const ModelName = {
   Comment: 'Comment',
   Hashtag: 'Hashtag',
   PostHashtag: 'PostHashtag',
+  Media: 'Media',
   Vote: 'Vote',
   ReputationEvent: 'ReputationEvent',
   RefreshSession: 'RefreshSession'
@@ -150,8 +151,8 @@ export const PostScalarFieldEnum = {
   id: 'id',
   communityId: 'communityId',
   authorId: 'authorId',
-  title: 'title',
-  body: 'body',
+  document: 'document',
+  searchText: 'searchText',
   score: 'score',
   commentCount: 'commentCount',
   status: 'status',
@@ -183,6 +184,9 @@ export const HashtagScalarFieldEnum = {
   communityId: 'communityId',
   name: 'name',
   slug: 'slug',
+  description: 'description',
+  status: 'status',
+  usageCount: 'usageCount',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -196,6 +200,26 @@ export const PostHashtagScalarFieldEnum = {
 } as const
 
 export type PostHashtagScalarFieldEnum = (typeof PostHashtagScalarFieldEnum)[keyof typeof PostHashtagScalarFieldEnum]
+
+
+export const MediaScalarFieldEnum = {
+  id: 'id',
+  uploadedById: 'uploadedById',
+  postId: 'postId',
+  type: 'type',
+  status: 'status',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  width: 'width',
+  height: 'height',
+  size: 'size',
+  altText: 'altText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
 
 
 export const VoteScalarFieldEnum = {
@@ -246,6 +270,13 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -260,4 +291,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

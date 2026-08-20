@@ -80,6 +80,11 @@ export type Hashtag = Prisma.HashtagModel
  */
 export type PostHashtag = Prisma.PostHashtagModel
 /**
+ * Model Media
+ * 
+ */
+export type Media = Prisma.MediaModel
+/**
  * Model Vote
  * 
  */

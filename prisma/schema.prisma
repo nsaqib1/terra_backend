@@ -74,6 +74,21 @@ enum ReputationSourceType {
   SYSTEM
 }
 
+enum HashtagStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum MediaStatus {
+  ACTIVE
+  DELETED
+}
+
 model User {
   id           String     @id @default(uuid()) @db.Uuid
   username     String     @unique @db.VarChar(30)
@@ -93,6 +108,7 @@ model User {
   proposals         CommunityProposal[]   @relation("ProposedBy")
   reviewedProposals CommunityProposal[]   @relation("ReviewedBy")
   posts             Post[]
+  media             Media[]
   comments          Comment[]
   votes             Vote[]
   reputationEvents  ReputationEvent[]
@@ -175,14 +191,20 @@ model CommunityMembership {
 }
 
 model Post {
-  id          String @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   communityId String @db.Uuid
   authorId    String @db.Uuid
 
-  title        String @db.VarChar(300)
-  body         String @db.Text
-  score        Int    @default(0)
-  commentCount Int    @default(0)
+  // Canonical rich-content document.
+  // Stored as JSONB by PostgreSQL.
+  document Json
+
+  // Derived plain-text representation used for search.
+  searchText String @db.Text
+
+  score        Int @default(0)
+  commentCount Int @default(0)
 
   status PostStatus @default(ACTIVE)
 
@@ -196,6 +218,7 @@ model Post {
   comments Comment[]
   votes    Vote[]
   hashtags PostHashtag[]
+  media    Media[]
 
   @@index([communityId, createdAt])
   @@index([communityId, score])
@@ -232,11 +255,18 @@ model Comment {
 }
 
 model Hashtag {
-  id          String @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
+
   communityId String @db.Uuid
 
   name String @db.VarChar(100)
   slug String @db.VarChar(100)
+
+  description String? @db.Text
+
+  status HashtagStatus @default(ACTIVE)
+
+  usageCount Int @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -246,6 +276,7 @@ model Hashtag {
 
   @@unique([communityId, slug])
   @@index([communityId])
+  @@index([communityId, status])
 }
 
 model PostHashtag {
@@ -257,6 +288,39 @@ model PostHashtag {
 
   @@id([postId, hashtagId])
   @@index([hashtagId])
+}
+
+model Media {
+  id String @id @default(uuid()) @db.Uuid
+
+  uploadedById String  @db.Uuid
+  postId       String? @db.Uuid
+
+  type   MediaType
+  status MediaStatus @default(ACTIVE)
+
+  storageKey String @db.Text
+
+  mimeType String @db.VarChar(100)
+
+  width  Int?
+  height Int?
+
+  size Int?
+
+  altText String? @db.Text
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  uploadedBy User  @relation(fields: [uploadedById], references: [id])
+  post       Post? @relation(fields: [postId], references: [id])
+
+  @@index([uploadedById])
+  @@index([postId])
+  @@index([status])
+  @@index([deletedAt])
 }
 
 model Vote {
