@@ -15,6 +15,7 @@ import {
   extractPostMediaIds,
   extractPostSearchText,
 } from './schemas/post-document.utils';
+import { GetPostsQueryDto } from './dto/get-post-query.dto';
 
 
 @Injectable()
@@ -260,6 +261,237 @@ export class PostsService {
 
       updatedAt:
         post.updatedAt,
+    };
+  }
+
+  async findOne(postId: string) {
+    const post = await this.prisma.post.findFirst({
+      where: {
+        id: postId,
+        status: 'ACTIVE',
+        deletedAt: null,
+      },
+
+      select: {
+        id: true,
+
+        document: true,
+
+        score: true,
+        commentCount: true,
+
+        status: true,
+
+        createdAt: true,
+        updatedAt: true,
+
+        community: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+          },
+        },
+
+        author: {
+          select: {
+            id: true,
+            username: true,
+            displayName: true,
+            avatarUrl: true,
+          },
+        },
+
+        hashtags: {
+          select: {
+            hashtag: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+              },
+            },
+          },
+        },
+
+        media: {
+          where: {
+            status: 'ACTIVE',
+            deletedAt: null,
+          },
+
+          select: {
+            id: true,
+            type: true,
+            storageKey: true,
+            mimeType: true,
+            width: true,
+            height: true,
+            size: true,
+            altText: true,
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return {
+      id: post.id,
+
+      document: post.document,
+
+      community: post.community,
+
+      author: post.author,
+
+      hashtags: post.hashtags.map(
+        (item) => item.hashtag,
+      ),
+
+      media: post.media,
+
+      score: post.score,
+
+      commentCount: post.commentCount,
+
+      status: post.status,
+
+      createdAt: post.createdAt,
+
+      updatedAt: post.updatedAt,
+    };
+  }
+
+  async findMany(query: GetPostsQueryDto) {
+    const { communityId, page, limit } = query;
+
+    const skip = (page - 1) * limit;
+
+    const [posts, total] =
+      await this.prisma.$transaction([
+        this.prisma.post.findMany({
+          where: {
+            communityId,
+            status: 'ACTIVE',
+            deletedAt: null,
+          },
+
+          orderBy: {
+            createdAt: 'desc',
+          },
+
+          skip,
+          take: limit,
+
+          select: {
+            id: true,
+
+            document: true,
+
+            score: true,
+            commentCount: true,
+
+            status: true,
+
+            createdAt: true,
+            updatedAt: true,
+
+            community: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+              },
+            },
+
+            author: {
+              select: {
+                id: true,
+                username: true,
+                displayName: true,
+                avatarUrl: true,
+              },
+            },
+
+            hashtags: {
+              select: {
+                hashtag: {
+                  select: {
+                    id: true,
+                    name: true,
+                    slug: true,
+                  },
+                },
+              },
+            },
+
+            media: {
+              where: {
+                status: 'ACTIVE',
+                deletedAt: null,
+              },
+
+              select: {
+                id: true,
+                type: true,
+                storageKey: true,
+                mimeType: true,
+                width: true,
+                height: true,
+                size: true,
+                altText: true,
+              },
+            },
+          },
+        }),
+
+        this.prisma.post.count({
+          where: {
+            communityId,
+            status: 'ACTIVE',
+            deletedAt: null,
+          },
+        }),
+      ]);
+
+    return {
+      data: posts.map((post) => ({
+        id: post.id,
+
+        document: post.document,
+
+        community: post.community,
+
+        author: post.author,
+
+        hashtags: post.hashtags.map(
+          (item) => item.hashtag,
+        ),
+
+        media: post.media,
+
+        score: post.score,
+
+        commentCount: post.commentCount,
+
+        status: post.status,
+
+        createdAt: post.createdAt,
+
+        updatedAt: post.updatedAt,
+      })),
+
+      meta: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+        hasNextPage:
+          page * limit < total,
+      },
     };
   }
 }
