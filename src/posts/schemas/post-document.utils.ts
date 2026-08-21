@@ -42,3 +42,17 @@ export function extractPostSearchText(
     .replace(/\s+/g, ' ')
     .trim();
 }
+
+export function extractPostMediaIds(
+  document: PostDocument,
+): string[] {
+  const mediaIds: string[] = [];
+
+  for (const node of document.content) {
+    if (node.type === 'image') {
+      mediaIds.push(node.mediaId);
+    }
+  }
+
+  return [...new Set(mediaIds)];
+}

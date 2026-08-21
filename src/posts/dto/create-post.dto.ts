@@ -1,8 +1,15 @@
-import { IsArray, IsUUID } from 'class-validator';
-import { PostDocument } from '../schemas/post-document.schema';
+import {
+  IsArray,
+  IsObject,
+  IsUUID,
+} from 'class-validator';
 
 export class CreatePostDto {
-  document!: PostDocument;
+  @IsUUID()
+  communityId!: string;
+
+  @IsObject()
+  document!: unknown;
 
   @IsArray()
   @IsUUID('4', { each: true })
