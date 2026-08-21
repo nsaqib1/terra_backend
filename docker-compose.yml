@@ -10,6 +10,8 @@ services:
       - "3001:3000"
     env_file:
       - .env
+    volumes:
+      - ./storage/media:/app/storage/media
     environment:
       DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/community?schema=public"
       REDIS_HOST: redis

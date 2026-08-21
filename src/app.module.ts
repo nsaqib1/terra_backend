@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { CommunitiesModule } from './communities/communities.module';
 import { AdminModule } from './admin/admin.module';
 import { PostsModule } from './posts/posts.module';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PostsModule } from './posts/posts.module';
     CommunitiesModule,
     AdminModule,
     PostsModule,
+    MediaModule,
   ],
 })
 export class AppModule { }
