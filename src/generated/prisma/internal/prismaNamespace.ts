@@ -1488,6 +1488,7 @@ export const MediaScalarFieldEnum = {
   height: 'height',
   size: 'size',
   altText: 'altText',
+  originalFilename: 'originalFilename',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
