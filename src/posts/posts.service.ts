@@ -1,9 +1,11 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
-  ForbiddenException,
 } from '@nestjs/common';
+
+import { UpdatePostDto } from './dto/update-post.dto';
 
 
 import { PrismaService } from 'src/database/prisma.service';
@@ -492,6 +494,251 @@ export class PostsService {
         hasNextPage:
           page * limit < total,
       },
+    };
+  }
+
+  async update(
+    userId: string,
+    postId: string,
+    dto: UpdatePostDto,
+  ) {
+    const post = await this.prisma.post.findFirst({
+      where: {
+        id: postId,
+        deletedAt: null,
+      },
+      select: {
+        id: true,
+        authorId: true,
+        communityId: true,
+        status: true,
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    if (post.authorId !== userId) {
+      throw new ForbiddenException(
+        'You can only edit your own posts',
+      );
+    }
+
+    if (post.status === 'REMOVED') {
+      throw new ConflictException(
+        'Removed posts cannot be edited',
+      );
+    }
+
+    let document;
+    let searchText;
+
+    if (dto.document !== undefined) {
+      document = validatePostDocument(dto.document);
+
+      searchText =
+        extractPostSearchText(document);
+    }
+
+    let hashtagIds: string[] | undefined;
+
+    if (dto.hashtagIds !== undefined) {
+      hashtagIds = [
+        ...new Set(dto.hashtagIds),
+      ];
+
+      if (hashtagIds.length > 0) {
+        const hashtags =
+          await this.prisma.hashtag.findMany({
+            where: {
+              id: {
+                in: hashtagIds,
+              },
+              communityId: post.communityId,
+              status: 'ACTIVE',
+            },
+            select: {
+              id: true,
+            },
+          });
+
+        const validIds = new Set(
+          hashtags.map((item) => item.id),
+        );
+
+        const invalidIds =
+          hashtagIds.filter(
+            (id) => !validIds.has(id),
+          );
+
+        if (invalidIds.length > 0) {
+          throw new ConflictException(
+            'One or more hashtags do not belong to this community',
+          );
+        }
+      }
+    }
+
+    const updatedPost =
+      await this.prisma.$transaction(
+        async (tx) => {
+          const updated =
+            await tx.post.update({
+              where: {
+                id: post.id,
+              },
+
+              data: {
+                ...(document !== undefined && {
+                  document,
+                  searchText,
+                }),
+
+                ...(hashtagIds !== undefined && {
+                  hashtags: {
+                    deleteMany: {},
+
+                    create: hashtagIds.map(
+                      (hashtagId) => ({
+                        hashtagId,
+                      }),
+                    ),
+                  },
+                }),
+              },
+
+              select: {
+                id: true,
+                document: true,
+                score: true,
+                commentCount: true,
+                status: true,
+                createdAt: true,
+                updatedAt: true,
+
+                community: {
+                  select: {
+                    id: true,
+                    name: true,
+                    slug: true,
+                  },
+                },
+
+                author: {
+                  select: {
+                    id: true,
+                    username: true,
+                    displayName: true,
+                    avatarUrl: true,
+                  },
+                },
+
+                hashtags: {
+                  select: {
+                    hashtag: {
+                      select: {
+                        id: true,
+                        name: true,
+                        slug: true,
+                      },
+                    },
+                  },
+                },
+
+                media: {
+                  where: {
+                    status: 'ACTIVE',
+                    deletedAt: null,
+                  },
+
+                  select: {
+                    id: true,
+                    type: true,
+                    storageKey: true,
+                    mimeType: true,
+                    width: true,
+                    height: true,
+                    size: true,
+                    altText: true,
+                  },
+                },
+              },
+            });
+
+          return updated;
+        },
+      );
+
+    return {
+      id: updatedPost.id,
+      document: updatedPost.document,
+      community: updatedPost.community,
+      author: updatedPost.author,
+
+      hashtags:
+        updatedPost.hashtags.map(
+          (item) => item.hashtag,
+        ),
+
+      media: updatedPost.media,
+
+      score: updatedPost.score,
+      commentCount:
+        updatedPost.commentCount,
+
+      status: updatedPost.status,
+
+      createdAt:
+        updatedPost.createdAt,
+
+      updatedAt:
+        updatedPost.updatedAt,
+    };
+  }
+
+  async remove(
+    userId: string,
+    postId: string,
+  ) {
+    const post = await this.prisma.post.findFirst({
+      where: {
+        id: postId,
+        deletedAt: null,
+      },
+
+      select: {
+        id: true,
+        authorId: true,
+        status: true,
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException(
+        'Post not found',
+      );
+    }
+
+    if (post.authorId !== userId) {
+      throw new ForbiddenException(
+        'You can only remove your own posts',
+      );
+    }
+
+    await this.prisma.post.update({
+      where: {
+        id: post.id,
+      },
+
+      data: {
+        status: 'REMOVED',
+        deletedAt: new Date(),
+      },
+    });
+
+    return {
+      message: 'Post removed successfully',
     };
   }
 }
