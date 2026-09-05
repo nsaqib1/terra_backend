@@ -74,7 +74,7 @@ export class PostsService {
 
     const document = validatePostDocument(dto.document);
 
-    const mediaIds = extractMediaIds(document);
+    const mediaIds = extractPostMediaIds(document);
 
     if (mediaIds.length > 0) {
       const media =
