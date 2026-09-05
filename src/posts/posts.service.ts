@@ -118,16 +118,16 @@ export class PostsService {
       }
     }
 
-    const hashtagIds = [
-      ...new Set(dto.hashtagIds),
+    const tagIds = [
+      ...new Set(dto.tagIds),
     ];
 
-    if (hashtagIds.length > 0) {
-      const hashtags =
-        await this.prisma.hashtag.findMany({
+    if (tagIds.length > 0) {
+      const tags =
+        await this.prisma.tag.findMany({
           where: {
             id: {
-              in: hashtagIds,
+              in: tagIds,
             },
             communityId: community.id,
             status: 'ACTIVE',
@@ -139,18 +139,18 @@ export class PostsService {
 
       const foundHashtagIds =
         new Set(
-          hashtags.map(
+          tags.map(
             (hashtag) => hashtag.id,
           ),
         );
 
-      const invalidHashtagIds =
-        hashtagIds.filter(
+      const invalidTagIds =
+        tagIds.filter(
           (id) =>
             !foundHashtagIds.has(id),
         );
 
-      if (invalidHashtagIds.length > 0) {
+      if (invalidTagIds.length > 0) {
         throw new ConflictException(
           'One or more hashtags do not belong to this community',
         );
@@ -175,11 +175,11 @@ export class PostsService {
 
                 searchText,
 
-                hashtags: {
+                tags: {
                   create:
-                    hashtagIds.map(
-                      (hashtagId) => ({
-                        hashtagId,
+                    tagIds.map(
+                      (tagId) => ({
+                        tagId,
                       }),
                     ),
                 },
@@ -211,9 +211,9 @@ export class PostsService {
                   },
                 },
 
-                hashtags: {
+                tags: {
                   select: {
-                    hashtag: {
+                    tag: {
                       select: {
                         id: true,
                         name: true,
@@ -257,9 +257,9 @@ export class PostsService {
 
       author: post.author,
 
-      hashtags:
-        post.hashtags.map(
-          (item) => item.hashtag,
+      tags:
+        post.tags.map(
+          (item) => item.tag,
         ),
 
       score: post.score,
@@ -315,9 +315,9 @@ export class PostsService {
           },
         },
 
-        hashtags: {
+        tags: {
           select: {
-            hashtag: {
+            tag: {
               select: {
                 id: true,
                 name: true,
@@ -360,8 +360,8 @@ export class PostsService {
 
       author: post.author,
 
-      hashtags: post.hashtags.map(
-        (item) => item.hashtag,
+      tags: post.tags.map(
+        (item) => item.tag,
       ),
 
       media: post.media,
@@ -429,9 +429,9 @@ export class PostsService {
               },
             },
 
-            hashtags: {
+            tags: {
               select: {
-                hashtag: {
+                tag: {
                   select: {
                     id: true,
                     name: true,
@@ -480,8 +480,8 @@ export class PostsService {
 
         author: post.author,
 
-        hashtags: post.hashtags.map(
-          (item) => item.hashtag,
+        tags: post.tags.map(
+          (item) => item.tag,
         ),
 
         media: post.media,
@@ -552,19 +552,19 @@ export class PostsService {
         extractPostSearchText(document);
     }
 
-    let hashtagIds: string[] | undefined;
+    let tagIds: string[] | undefined;
 
-    if (dto.hashtagIds !== undefined) {
-      hashtagIds = [
-        ...new Set(dto.hashtagIds),
+    if (dto.tagIds !== undefined) {
+      tagIds = [
+        ...new Set(dto.tagIds),
       ];
 
-      if (hashtagIds.length > 0) {
-        const hashtags =
-          await this.prisma.hashtag.findMany({
+      if (tagIds.length > 0) {
+        const tags =
+          await this.prisma.tag.findMany({
             where: {
               id: {
-                in: hashtagIds,
+                in: tagIds,
               },
               communityId: post.communityId,
               status: 'ACTIVE',
@@ -575,11 +575,11 @@ export class PostsService {
           });
 
         const validIds = new Set(
-          hashtags.map((item) => item.id),
+          tags.map((item) => item.id),
         );
 
         const invalidIds =
-          hashtagIds.filter(
+          tagIds.filter(
             (id) => !validIds.has(id),
           );
 
@@ -606,13 +606,13 @@ export class PostsService {
                   searchText,
                 }),
 
-                ...(hashtagIds !== undefined && {
-                  hashtags: {
+                ...(tagIds !== undefined && {
+                  tags: {
                     deleteMany: {},
 
-                    create: hashtagIds.map(
-                      (hashtagId) => ({
-                        hashtagId,
+                    create: tagIds.map(
+                      (tagId) => ({
+                        tagId,
                       }),
                     ),
                   },
@@ -645,9 +645,9 @@ export class PostsService {
                   },
                 },
 
-                hashtags: {
+                tags: {
                   select: {
-                    hashtag: {
+                    tag: {
                       select: {
                         id: true,
                         name: true,
@@ -687,10 +687,9 @@ export class PostsService {
       community: updatedPost.community,
       author: updatedPost.author,
 
-      hashtags:
-        updatedPost.hashtags.map(
-          (item) => item.hashtag,
-        ),
+      tags: updatedPost.tags.map(
+        (item) => item.tag,
+      ),
 
       media: updatedPost.media,
 

@@ -403,21 +403,21 @@ export type EnumPostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPostStatusFilter<$PrismaModel>
 }
 
-export type EnumHashtagStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.HashtagStatus | Prisma.EnumHashtagStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel> | $Enums.HashtagStatus
+export type EnumTagStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagStatus | Prisma.EnumTagStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagStatusFilter<$PrismaModel> | $Enums.TagStatus
 }
 
-export type EnumHashtagStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.HashtagStatus | Prisma.EnumHashtagStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumHashtagStatusWithAggregatesFilter<$PrismaModel> | $Enums.HashtagStatus
+export type EnumTagStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagStatus | Prisma.EnumTagStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagStatusWithAggregatesFilter<$PrismaModel> | $Enums.TagStatus
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagStatusFilter<$PrismaModel>
 }
 
 export type EnumMediaTypeFilter<$PrismaModel = never> = {
@@ -903,21 +903,21 @@ export type NestedEnumPostStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPostStatusFilter<$PrismaModel>
 }
 
-export type NestedEnumHashtagStatusFilter<$PrismaModel = never> = {
-  equals?: $Enums.HashtagStatus | Prisma.EnumHashtagStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel> | $Enums.HashtagStatus
+export type NestedEnumTagStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagStatus | Prisma.EnumTagStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagStatusFilter<$PrismaModel> | $Enums.TagStatus
 }
 
-export type NestedEnumHashtagStatusWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.HashtagStatus | Prisma.EnumHashtagStatusFieldRefInput<$PrismaModel>
-  in?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  notIn?: $Enums.HashtagStatus[] | Prisma.ListEnumHashtagStatusFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumHashtagStatusWithAggregatesFilter<$PrismaModel> | $Enums.HashtagStatus
+export type NestedEnumTagStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TagStatus | Prisma.EnumTagStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.TagStatus[] | Prisma.ListEnumTagStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumTagStatusWithAggregatesFilter<$PrismaModel> | $Enums.TagStatus
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumHashtagStatusFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTagStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTagStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumMediaTypeFilter<$PrismaModel = never> = {

@@ -70,15 +70,15 @@ export type Post = Prisma.PostModel
  */
 export type Comment = Prisma.CommentModel
 /**
- * Model Hashtag
+ * Model Tag
  * 
  */
-export type Hashtag = Prisma.HashtagModel
+export type Tag = Prisma.TagModel
 /**
- * Model PostHashtag
+ * Model PostTag
  * 
  */
-export type PostHashtag = Prisma.PostHashtagModel
+export type PostTag = Prisma.PostTagModel
 /**
  * Model Media
  * 

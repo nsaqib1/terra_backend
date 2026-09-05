@@ -13,5 +13,5 @@ export class UpdatePostDto {
   @IsOptional()
   @IsArray()
   @IsUUID('4', { each: true })
-  hashtagIds?: string[];
+  tagIds?: string[];
 }

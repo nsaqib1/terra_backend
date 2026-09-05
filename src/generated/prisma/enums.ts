@@ -108,12 +108,12 @@ export const ReputationSourceType = {
 export type ReputationSourceType = (typeof ReputationSourceType)[keyof typeof ReputationSourceType]
 
 
-export const HashtagStatus = {
+export const TagStatus = {
   ACTIVE: 'ACTIVE',
   ARCHIVED: 'ARCHIVED'
 } as const
 
-export type HashtagStatus = (typeof HashtagStatus)[keyof typeof HashtagStatus]
+export type TagStatus = (typeof TagStatus)[keyof typeof TagStatus]
 
 
 export const MediaType = {

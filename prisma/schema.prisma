@@ -74,9 +74,11 @@ enum ReputationSourceType {
   SYSTEM
 }
 
-enum HashtagStatus {
+enum TagStatus {
   ACTIVE
   ARCHIVED
+
+  @@map("TagStatus")
 }
 
 enum MediaType {
@@ -137,7 +139,7 @@ model Community {
   memberships CommunityMembership[]
   proposals   CommunityProposal[]
   posts       Post[]
-  hashtags    Hashtag[]
+  tags        Tag[]
 
   @@index([status])
   @@index([maturity])
@@ -218,7 +220,7 @@ model Post {
 
   comments Comment[]
   votes    Vote[]
-  hashtags PostHashtag[]
+  tags     PostTag[]
   media    Media[]
 
   @@index([communityId, createdAt])
@@ -255,7 +257,7 @@ model Comment {
   @@index([deletedAt])
 }
 
-model Hashtag {
+model Tag {
   id String @id @default(uuid()) @db.Uuid
 
   communityId String @db.Uuid
@@ -265,30 +267,30 @@ model Hashtag {
 
   description String? @db.Text
 
-  status HashtagStatus @default(ACTIVE)
+  status TagStatus @default(ACTIVE)
 
   usageCount Int @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  community Community     @relation(fields: [communityId], references: [id])
-  posts     PostHashtag[]
+  community Community @relation(fields: [communityId], references: [id])
+  posts     PostTag[]
 
   @@unique([communityId, slug])
   @@index([communityId])
   @@index([communityId, status])
 }
 
-model PostHashtag {
-  postId    String @db.Uuid
-  hashtagId String @db.Uuid
+model PostTag {
+  postId String @db.Uuid
+  tagId  String @db.Uuid
 
-  post    Post    @relation(fields: [postId], references: [id])
-  hashtag Hashtag @relation(fields: [hashtagId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+  tag  Tag  @relation(fields: [tagId], references: [id])
 
-  @@id([postId, hashtagId])
-  @@index([hashtagId])
+  @@id([postId, tagId])
+  @@index([tagId])
 }
 
 model Media {

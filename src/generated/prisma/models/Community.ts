@@ -225,7 +225,7 @@ export type CommunityWhereInput = {
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
-  hashtags?: Prisma.HashtagListRelationFilter
+  tags?: Prisma.TagListRelationFilter
 }
 
 export type CommunityOrderByWithRelationInput = {
@@ -242,7 +242,7 @@ export type CommunityOrderByWithRelationInput = {
   memberships?: Prisma.CommunityMembershipOrderByRelationAggregateInput
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
-  hashtags?: Prisma.HashtagOrderByRelationAggregateInput
+  tags?: Prisma.TagOrderByRelationAggregateInput
 }
 
 export type CommunityWhereUniqueInput = Prisma.AtLeast<{
@@ -262,7 +262,7 @@ export type CommunityWhereUniqueInput = Prisma.AtLeast<{
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
-  hashtags?: Prisma.HashtagListRelationFilter
+  tags?: Prisma.TagListRelationFilter
 }, "id" | "slug">
 
 export type CommunityOrderByWithAggregationInput = {
@@ -311,7 +311,7 @@ export type CommunityCreateInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateInput = {
@@ -328,7 +328,7 @@ export type CommunityUncheckedCreateInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUpdateInput = {
@@ -345,7 +345,7 @@ export type CommunityUpdateInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateInput = {
@@ -362,7 +362,7 @@ export type CommunityUncheckedUpdateInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateManyInput = {
@@ -509,18 +509,18 @@ export type CommunityUpdateOneRequiredWithoutPostsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutPostsInput, Prisma.CommunityUpdateWithoutPostsInput>, Prisma.CommunityUncheckedUpdateWithoutPostsInput>
 }
 
-export type CommunityCreateNestedOneWithoutHashtagsInput = {
-  create?: Prisma.XOR<Prisma.CommunityCreateWithoutHashtagsInput, Prisma.CommunityUncheckedCreateWithoutHashtagsInput>
-  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutHashtagsInput
+export type CommunityCreateNestedOneWithoutTagsInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutTagsInput, Prisma.CommunityUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutTagsInput
   connect?: Prisma.CommunityWhereUniqueInput
 }
 
-export type CommunityUpdateOneRequiredWithoutHashtagsNestedInput = {
-  create?: Prisma.XOR<Prisma.CommunityCreateWithoutHashtagsInput, Prisma.CommunityUncheckedCreateWithoutHashtagsInput>
-  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutHashtagsInput
-  upsert?: Prisma.CommunityUpsertWithoutHashtagsInput
+export type CommunityUpdateOneRequiredWithoutTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutTagsInput, Prisma.CommunityUncheckedCreateWithoutTagsInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutTagsInput
+  upsert?: Prisma.CommunityUpsertWithoutTagsInput
   connect?: Prisma.CommunityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutHashtagsInput, Prisma.CommunityUpdateWithoutHashtagsInput>, Prisma.CommunityUncheckedUpdateWithoutHashtagsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutTagsInput, Prisma.CommunityUpdateWithoutTagsInput>, Prisma.CommunityUncheckedUpdateWithoutTagsInput>
 }
 
 export type CommunityCreateWithoutProposalsInput = {
@@ -536,7 +536,7 @@ export type CommunityCreateWithoutProposalsInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutProposalsInput = {
@@ -552,7 +552,7 @@ export type CommunityUncheckedCreateWithoutProposalsInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutProposalsInput = {
@@ -584,7 +584,7 @@ export type CommunityUpdateWithoutProposalsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutProposalsInput = {
@@ -600,7 +600,7 @@ export type CommunityUncheckedUpdateWithoutProposalsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutMembershipsInput = {
@@ -616,7 +616,7 @@ export type CommunityCreateWithoutMembershipsInput = {
   deletedAt?: Date | string | null
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutMembershipsInput = {
@@ -632,7 +632,7 @@ export type CommunityUncheckedCreateWithoutMembershipsInput = {
   deletedAt?: Date | string | null
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutMembershipsInput = {
@@ -664,7 +664,7 @@ export type CommunityUpdateWithoutMembershipsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutMembershipsInput = {
@@ -680,7 +680,7 @@ export type CommunityUncheckedUpdateWithoutMembershipsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutPostsInput = {
@@ -696,7 +696,7 @@ export type CommunityCreateWithoutPostsInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutPostsInput = {
@@ -712,7 +712,7 @@ export type CommunityUncheckedCreateWithoutPostsInput = {
   deletedAt?: Date | string | null
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
-  hashtags?: Prisma.HashtagUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutPostsInput = {
@@ -744,7 +744,7 @@ export type CommunityUpdateWithoutPostsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutPostsInput = {
@@ -760,10 +760,10 @@ export type CommunityUncheckedUpdateWithoutPostsInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
-  hashtags?: Prisma.HashtagUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
-export type CommunityCreateWithoutHashtagsInput = {
+export type CommunityCreateWithoutTagsInput = {
   id?: string
   name: string
   slug: string
@@ -779,7 +779,7 @@ export type CommunityCreateWithoutHashtagsInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
 }
 
-export type CommunityUncheckedCreateWithoutHashtagsInput = {
+export type CommunityUncheckedCreateWithoutTagsInput = {
   id?: string
   name: string
   slug: string
@@ -795,23 +795,23 @@ export type CommunityUncheckedCreateWithoutHashtagsInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
 }
 
-export type CommunityCreateOrConnectWithoutHashtagsInput = {
+export type CommunityCreateOrConnectWithoutTagsInput = {
   where: Prisma.CommunityWhereUniqueInput
-  create: Prisma.XOR<Prisma.CommunityCreateWithoutHashtagsInput, Prisma.CommunityUncheckedCreateWithoutHashtagsInput>
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutTagsInput, Prisma.CommunityUncheckedCreateWithoutTagsInput>
 }
 
-export type CommunityUpsertWithoutHashtagsInput = {
-  update: Prisma.XOR<Prisma.CommunityUpdateWithoutHashtagsInput, Prisma.CommunityUncheckedUpdateWithoutHashtagsInput>
-  create: Prisma.XOR<Prisma.CommunityCreateWithoutHashtagsInput, Prisma.CommunityUncheckedCreateWithoutHashtagsInput>
+export type CommunityUpsertWithoutTagsInput = {
+  update: Prisma.XOR<Prisma.CommunityUpdateWithoutTagsInput, Prisma.CommunityUncheckedUpdateWithoutTagsInput>
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutTagsInput, Prisma.CommunityUncheckedCreateWithoutTagsInput>
   where?: Prisma.CommunityWhereInput
 }
 
-export type CommunityUpdateToOneWithWhereWithoutHashtagsInput = {
+export type CommunityUpdateToOneWithWhereWithoutTagsInput = {
   where?: Prisma.CommunityWhereInput
-  data: Prisma.XOR<Prisma.CommunityUpdateWithoutHashtagsInput, Prisma.CommunityUncheckedUpdateWithoutHashtagsInput>
+  data: Prisma.XOR<Prisma.CommunityUpdateWithoutTagsInput, Prisma.CommunityUncheckedUpdateWithoutTagsInput>
 }
 
-export type CommunityUpdateWithoutHashtagsInput = {
+export type CommunityUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -827,7 +827,7 @@ export type CommunityUpdateWithoutHashtagsInput = {
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
 }
 
-export type CommunityUncheckedUpdateWithoutHashtagsInput = {
+export type CommunityUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -852,14 +852,14 @@ export type CommunityCountOutputType = {
   memberships: number
   proposals: number
   posts: number
-  hashtags: number
+  tags: number
 }
 
 export type CommunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | CommunityCountOutputTypeCountMembershipsArgs
   proposals?: boolean | CommunityCountOutputTypeCountProposalsArgs
   posts?: boolean | CommunityCountOutputTypeCountPostsArgs
-  hashtags?: boolean | CommunityCountOutputTypeCountHashtagsArgs
+  tags?: boolean | CommunityCountOutputTypeCountTagsArgs
 }
 
 /**
@@ -896,8 +896,8 @@ export type CommunityCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types
 /**
  * CommunityCountOutputType without action
  */
-export type CommunityCountOutputTypeCountHashtagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.HashtagWhereInput
+export type CommunityCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TagWhereInput
 }
 
 
@@ -915,7 +915,7 @@ export type CommunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   memberships?: boolean | Prisma.Community$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.Community$proposalsArgs<ExtArgs>
   posts?: boolean | Prisma.Community$postsArgs<ExtArgs>
-  hashtags?: boolean | Prisma.Community$hashtagsArgs<ExtArgs>
+  tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["community"]>
 
@@ -963,7 +963,7 @@ export type CommunityInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   memberships?: boolean | Prisma.Community$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.Community$proposalsArgs<ExtArgs>
   posts?: boolean | Prisma.Community$postsArgs<ExtArgs>
-  hashtags?: boolean | Prisma.Community$hashtagsArgs<ExtArgs>
+  tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CommunityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -975,7 +975,7 @@ export type $CommunityPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     memberships: Prisma.$CommunityMembershipPayload<ExtArgs>[]
     proposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
-    hashtags: Prisma.$HashtagPayload<ExtArgs>[]
+    tags: Prisma.$TagPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1385,7 +1385,7 @@ export interface Prisma__CommunityClient<T, Null = never, ExtArgs extends runtim
   memberships<T extends Prisma.Community$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proposals<T extends Prisma.Community$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.Community$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  hashtags<T extends Prisma.Community$hashtagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$hashtagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HashtagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tags<T extends Prisma.Community$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1890,27 +1890,27 @@ export type Community$postsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Community.hashtags
+ * Community.tags
  */
-export type Community$hashtagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Community$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Hashtag
+   * Select specific fields to fetch from the Tag
    */
-  select?: Prisma.HashtagSelect<ExtArgs> | null
+  select?: Prisma.TagSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Hashtag
+   * Omit specific fields from the Tag
    */
-  omit?: Prisma.HashtagOmit<ExtArgs> | null
+  omit?: Prisma.TagOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.HashtagInclude<ExtArgs> | null
-  where?: Prisma.HashtagWhereInput
-  orderBy?: Prisma.HashtagOrderByWithRelationInput | Prisma.HashtagOrderByWithRelationInput[]
-  cursor?: Prisma.HashtagWhereUniqueInput
+  include?: Prisma.TagInclude<ExtArgs> | null
+  where?: Prisma.TagWhereInput
+  orderBy?: Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[]
+  cursor?: Prisma.TagWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.HashtagScalarFieldEnum | Prisma.HashtagScalarFieldEnum[]
+  distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
 }
 
 /**

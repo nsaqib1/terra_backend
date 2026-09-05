@@ -57,8 +57,8 @@ export const ModelName = {
   CommunityMembership: 'CommunityMembership',
   Post: 'Post',
   Comment: 'Comment',
-  Hashtag: 'Hashtag',
-  PostHashtag: 'PostHashtag',
+  Tag: 'Tag',
+  PostTag: 'PostTag',
   Media: 'Media',
   Vote: 'Vote',
   ReputationEvent: 'ReputationEvent',
@@ -179,7 +179,7 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const HashtagScalarFieldEnum = {
+export const TagScalarFieldEnum = {
   id: 'id',
   communityId: 'communityId',
   name: 'name',
@@ -191,15 +191,15 @@ export const HashtagScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type HashtagScalarFieldEnum = (typeof HashtagScalarFieldEnum)[keyof typeof HashtagScalarFieldEnum]
+export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
-export const PostHashtagScalarFieldEnum = {
+export const PostTagScalarFieldEnum = {
   postId: 'postId',
-  hashtagId: 'hashtagId'
+  tagId: 'tagId'
 } as const
 
-export type PostHashtagScalarFieldEnum = (typeof PostHashtagScalarFieldEnum)[keyof typeof PostHashtagScalarFieldEnum]
+export type PostTagScalarFieldEnum = (typeof PostTagScalarFieldEnum)[keyof typeof PostTagScalarFieldEnum]
 
 
 export const MediaScalarFieldEnum = {
