@@ -9,6 +9,14 @@ import {
   writeFile,
 } from 'fs/promises';
 
+import {
+  createReadStream,
+} from 'fs';
+
+import {
+  stat,
+} from 'fs/promises';
+
 import { join } from 'path';
 
 import { randomUUID } from 'crypto';
@@ -96,5 +104,27 @@ export class MediaStorageService {
       this.basePath,
       storageKey,
     );
+  }
+
+  async getFile(
+    storageKey: string,
+  ) {
+    const absolutePath =
+      this.getPath(storageKey);
+
+    try {
+      const fileStat =
+        await stat(absolutePath);
+
+      return {
+        stream:
+          createReadStream(absolutePath),
+
+        size:
+          fileStat.size,
+      };
+    } catch {
+      return null;
+    }
   }
 }

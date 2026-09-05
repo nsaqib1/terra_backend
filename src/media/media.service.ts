@@ -1,9 +1,10 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 
-
+import { createReadStream } from 'fs';
 import { MediaImageService } from './media.image.service';
 import { MediaStorageService } from './media.storage.service';
 import { PrismaService } from 'src/database/prisma.service';
@@ -98,5 +99,45 @@ export class MediaService {
 
       throw error;
     }
+  }
+
+  async getFile(mediaId: string) {
+    const media =
+      await this.prisma.media.findFirst({
+        where: {
+          id: mediaId,
+          status: 'ACTIVE',
+          deletedAt: null,
+        },
+
+        select: {
+          id: true,
+          storageKey: true,
+          mimeType: true,
+          size: true,
+        },
+      });
+
+    if (!media) {
+      throw new NotFoundException(
+        'Media not found',
+      );
+    }
+
+    const file =
+      await this.storageService.getFile(
+        media.storageKey,
+      );
+
+    if (!file) {
+      throw new NotFoundException(
+        'Media file not found',
+      );
+    }
+
+    return {
+      media,
+      ...file,
+    };
   }
 }
