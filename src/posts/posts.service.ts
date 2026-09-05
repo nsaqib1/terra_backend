@@ -18,6 +18,7 @@ import {
   extractPostSearchText,
 } from './schemas/post-document.utils';
 import { GetPostsQueryDto } from './dto/get-post-query.dto';
+import { extractMediaIds } from './utils/extract-media-ids';
 
 
 @Injectable()
@@ -71,11 +72,9 @@ export class PostsService {
       );
     }
 
-    const document =
-      validatePostDocument(dto.document);
+    const document = validatePostDocument(dto.document);
 
-    const mediaIds =
-      extractPostMediaIds(document);
+    const mediaIds = extractMediaIds(document);
 
     if (mediaIds.length > 0) {
       const media =
@@ -84,28 +83,37 @@ export class PostsService {
             id: {
               in: mediaIds,
             },
+
             uploadedById: userId,
-            status: 'ACTIVE',
+
+            status: 'TEMPORARY',
+
             deletedAt: null,
-            postId: null,
           },
+
           select: {
             id: true,
           },
         });
 
-      const foundMediaIds = new Set(
-        media.map((item) => item.id),
-      );
+      const validMediaIds =
+        new Set(
+          media.map(
+            (item) => item.id,
+          ),
+        );
 
       const invalidMediaIds =
         mediaIds.filter(
-          (id) => !foundMediaIds.has(id),
+          (id) =>
+            !validMediaIds.has(id),
         );
 
-      if (invalidMediaIds.length > 0) {
+      if (
+        invalidMediaIds.length > 0
+      ) {
         throw new ConflictException(
-          'One or more media files cannot be attached to this post',
+          'One or more media files are invalid or unavailable',
         );
       }
     }
@@ -223,16 +231,19 @@ export class PostsService {
                 id: {
                   in: mediaIds,
                 },
+
                 uploadedById: userId,
-                postId: null,
+
+                status: 'TEMPORARY',
               },
 
               data: {
-                postId:
-                  createdPost.id,
+                postId: createdPost.id,
+                status: 'ACTIVE',
               },
             });
           }
+
 
           return createdPost;
         },
