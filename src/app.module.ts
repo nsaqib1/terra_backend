@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { PostsModule } from './posts/posts.module';
 import { MediaModule } from './media/media.module';
 import { TagsModule } from './tags/tags.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TagsModule } from './tags/tags.module';
     PostsModule,
     MediaModule,
     TagsModule,
+    CommentModule,
   ],
 })
 export class AppModule { }
