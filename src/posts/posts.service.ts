@@ -31,6 +31,10 @@ export class PostsService {
     userId: string,
     dto: CreatePostDto,
   ) {
+    // -----------------------------------------
+    // Find community
+    // -----------------------------------------
+
     const community =
       await this.prisma.community.findFirst({
         where: {
@@ -38,6 +42,7 @@ export class PostsService {
           status: 'ACTIVE',
           deletedAt: null,
         },
+
         select: {
           id: true,
           name: true,
@@ -51,6 +56,10 @@ export class PostsService {
       );
     }
 
+    // -----------------------------------------
+    // Verify community membership
+    // -----------------------------------------
+
     const membership =
       await this.prisma.communityMembership.findUnique({
         where: {
@@ -59,6 +68,7 @@ export class PostsService {
             communityId: community.id,
           },
         },
+
         select: {
           id: true,
           leftAt: true,
@@ -72,9 +82,23 @@ export class PostsService {
       );
     }
 
-    const document = validatePostDocument(dto.document);
+    // -----------------------------------------
+    // Validate document
+    // -----------------------------------------
 
-    const mediaIds = extractPostMediaIds(document);
+    const document =
+      validatePostDocument(dto.document);
+
+    // -----------------------------------------
+    // Extract media IDs from document
+    // -----------------------------------------
+
+    const mediaIds =
+      extractPostMediaIds(document);
+
+    // -----------------------------------------
+    // Validate media ownership/status
+    // -----------------------------------------
 
     if (mediaIds.length > 0) {
       const media =
@@ -109,18 +133,24 @@ export class PostsService {
             !validMediaIds.has(id),
         );
 
-      if (
-        invalidMediaIds.length > 0
-      ) {
+      if (invalidMediaIds.length > 0) {
         throw new ConflictException(
           'One or more media files are invalid or unavailable',
         );
       }
     }
 
+    // -----------------------------------------
+    // Prepare tag IDs
+    // -----------------------------------------
+
     const tagIds = [
       ...new Set(dto.tagIds),
     ];
+
+    // -----------------------------------------
+    // Validate tags
+    // -----------------------------------------
 
     if (tagIds.length > 0) {
       const tags =
@@ -129,60 +159,67 @@ export class PostsService {
             id: {
               in: tagIds,
             },
+
             communityId: community.id,
+
             status: 'ACTIVE',
           },
+
           select: {
             id: true,
           },
         });
 
-      const foundHashtagIds =
+      const validTagIds =
         new Set(
           tags.map(
-            (hashtag) => hashtag.id,
+            (tag) => tag.id,
           ),
         );
 
       const invalidTagIds =
         tagIds.filter(
           (id) =>
-            !foundHashtagIds.has(id),
+            !validTagIds.has(id),
         );
 
       if (invalidTagIds.length > 0) {
         throw new ConflictException(
-          'One or more hashtags do not belong to this community',
+          'One or more tags do not belong to this community',
         );
       }
     }
 
+    // -----------------------------------------
+    // Extract searchable text
+    // -----------------------------------------
+
     const searchText =
       extractPostSearchText(document);
+
+    // -----------------------------------------
+    // Create post transaction
+    // -----------------------------------------
 
     const post =
       await this.prisma.$transaction(
         async (tx) => {
+          // -----------------------------------
+          // Create post
+          // -----------------------------------
+
           const createdPost =
             await tx.post.create({
               data: {
                 communityId:
                   community.id,
 
-                authorId: userId,
+                authorId:
+                  userId,
 
                 document,
 
                 searchText,
-
-                tags: {
-                  create:
-                    tagIds.map(
-                      (tagId) => ({
-                        tagId,
-                      }),
-                    ),
-                },
               },
 
               select: {
@@ -225,6 +262,48 @@ export class PostsService {
               },
             });
 
+          // -----------------------------------
+          // Create PostTag relationships
+          // -----------------------------------
+
+          if (tagIds.length > 0) {
+            await tx.postTag.createMany({
+              data: tagIds.map(
+                (tagId) => ({
+                  postId:
+                    createdPost.id,
+
+                  tagId,
+                }),
+              ),
+            });
+
+            // ---------------------------------
+            // Increase tag usage counts
+            // ---------------------------------
+
+            await Promise.all(
+              tagIds.map(
+                (tagId) =>
+                  tx.tag.update({
+                    where: {
+                      id: tagId,
+                    },
+
+                    data: {
+                      usageCount: {
+                        increment: 1,
+                      },
+                    },
+                  }),
+              ),
+            );
+          }
+
+          // -----------------------------------
+          // Attach media to post
+          // -----------------------------------
+
           if (mediaIds.length > 0) {
             await tx.media.updateMany({
               where: {
@@ -235,32 +314,39 @@ export class PostsService {
                 uploadedById: userId,
 
                 status: 'TEMPORARY',
+
+                deletedAt: null,
               },
 
               data: {
-                postId: createdPost.id,
+                postId:
+                  createdPost.id,
+
                 status: 'ACTIVE',
               },
             });
           }
 
-
           return createdPost;
         },
       );
 
+    // -----------------------------------------
+    // Return API response
+    // -----------------------------------------
+
     return {
       id: post.id,
+
       document: post.document,
 
       community: post.community,
 
       author: post.author,
 
-      tags:
-        post.tags.map(
-          (item) => item.tag,
-        ),
+      tags: post.tags.map(
+        (item) => item.tag,
+      ),
 
       score: post.score,
 
@@ -523,6 +609,11 @@ export class PostsService {
         authorId: true,
         communityId: true,
         status: true,
+        tags: {
+          select: {
+            tagId: true,
+          },
+        },
       },
     });
 
@@ -542,58 +633,97 @@ export class PostsService {
       );
     }
 
+    // -----------------------------------------
+    // Validate document if it was provided
+    // -----------------------------------------
+
     let document;
     let searchText;
 
     if (dto.document !== undefined) {
       document = validatePostDocument(dto.document);
 
-      searchText =
-        extractPostSearchText(document);
+      searchText = extractPostSearchText(document);
     }
+
+    // -----------------------------------------
+    // Prepare and validate tags if provided
+    // -----------------------------------------
 
     let tagIds: string[] | undefined;
 
     if (dto.tagIds !== undefined) {
-      tagIds = [
-        ...new Set(dto.tagIds),
-      ];
+      // Remove duplicate tag IDs
+      tagIds = [...new Set(dto.tagIds)];
 
       if (tagIds.length > 0) {
-        const tags =
-          await this.prisma.tag.findMany({
-            where: {
-              id: {
-                in: tagIds,
-              },
-              communityId: post.communityId,
-              status: 'ACTIVE',
+        const tags = await this.prisma.tag.findMany({
+          where: {
+            id: {
+              in: tagIds,
             },
-            select: {
-              id: true,
-            },
-          });
+            communityId: post.communityId,
+            status: 'ACTIVE',
+          },
+          select: {
+            id: true,
+          },
+        });
 
         const validIds = new Set(
-          tags.map((item) => item.id),
+          tags.map((tag) => tag.id),
         );
 
-        const invalidIds =
-          tagIds.filter(
-            (id) => !validIds.has(id),
-          );
+        const invalidIds = tagIds.filter(
+          (id) => !validIds.has(id),
+        );
 
         if (invalidIds.length > 0) {
           throw new ConflictException(
-            'One or more hashtags do not belong to this community',
+            'One or more tags do not belong to this community',
           );
         }
       }
     }
 
+    // -----------------------------------------
+    // Update post + tags in one transaction
+    // -----------------------------------------
+
     const updatedPost =
       await this.prisma.$transaction(
         async (tx) => {
+          // -----------------------------------
+          // Calculate tag changes
+          // -----------------------------------
+
+          let addedTagIds: string[] = [];
+          let removedTagIds: string[] = [];
+
+          if (tagIds !== undefined) {
+            const oldTagIds = new Set(
+              post.tags.map((tag) => tag.tagId),
+            );
+
+            const newTagIds = new Set(tagIds);
+
+            // Tags that are newly added
+            addedTagIds = tagIds.filter(
+              (tagId) => !oldTagIds.has(tagId),
+            );
+
+            // Tags that were removed
+            removedTagIds = post.tags
+              .map((tag) => tag.tagId)
+              .filter(
+                (tagId) => !newTagIds.has(tagId),
+              );
+          }
+
+          // -----------------------------------
+          // Update the Post
+          // -----------------------------------
+
           const updated =
             await tx.post.update({
               where: {
@@ -677,14 +807,63 @@ export class PostsService {
               },
             });
 
+          // -----------------------------------
+          // Decrease usage count for removed tags
+          // -----------------------------------
+
+          if (removedTagIds.length > 0) {
+            await Promise.all(
+              removedTagIds.map((tagId) =>
+                tx.tag.update({
+                  where: {
+                    id: tagId,
+                  },
+                  data: {
+                    usageCount: {
+                      decrement: 1,
+                    },
+                  },
+                }),
+              ),
+            );
+          }
+
+          // -----------------------------------
+          // Increase usage count for added tags
+          // -----------------------------------
+
+          if (addedTagIds.length > 0) {
+            await Promise.all(
+              addedTagIds.map((tagId) =>
+                tx.tag.update({
+                  where: {
+                    id: tagId,
+                  },
+                  data: {
+                    usageCount: {
+                      increment: 1,
+                    },
+                  },
+                }),
+              ),
+            );
+          }
+
           return updated;
         },
       );
 
+    // -----------------------------------------
+    // Return API response
+    // -----------------------------------------
+
     return {
       id: updatedPost.id,
+
       document: updatedPost.document,
+
       community: updatedPost.community,
+
       author: updatedPost.author,
 
       tags: updatedPost.tags.map(
@@ -694,6 +873,7 @@ export class PostsService {
       media: updatedPost.media,
 
       score: updatedPost.score,
+
       commentCount:
         updatedPost.commentCount,
 
@@ -721,6 +901,12 @@ export class PostsService {
         id: true,
         authorId: true,
         status: true,
+
+        tags: {
+          select: {
+            tagId: true,
+          },
+        },
       },
     });
 
@@ -736,16 +922,52 @@ export class PostsService {
       );
     }
 
-    await this.prisma.post.update({
-      where: {
-        id: post.id,
-      },
+    if (post.status === 'REMOVED') {
+      throw new ConflictException(
+        'Post has already been removed',
+      );
+    }
 
-      data: {
-        status: 'REMOVED',
-        deletedAt: new Date(),
+    await this.prisma.$transaction(
+      async (tx) => {
+        // -----------------------------------
+        // Remove the post
+        // -----------------------------------
+
+        await tx.post.update({
+          where: {
+            id: post.id,
+          },
+
+          data: {
+            status: 'REMOVED',
+            deletedAt: new Date(),
+          },
+        });
+
+        // -----------------------------------
+        // Decrease tag usage counts
+        // -----------------------------------
+
+        if (post.tags.length > 0) {
+          await Promise.all(
+            post.tags.map((tag) =>
+              tx.tag.update({
+                where: {
+                  id: tag.tagId,
+                },
+
+                data: {
+                  usageCount: {
+                    decrement: 1,
+                  },
+                },
+              }),
+            ),
+          );
+        }
       },
-    });
+    );
 
     return {
       message: 'Post removed successfully',
