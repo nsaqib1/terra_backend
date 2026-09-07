@@ -11,6 +11,7 @@ import { MediaModule } from './media/media.module';
 import { TagsModule } from './tags/tags.module';
 import { CommentModule } from './comment/comment.module';
 import { VoteModule } from './vote/vote.module';
+import { PointModule } from './point/point.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { VoteModule } from './vote/vote.module';
     TagsModule,
     CommentModule,
     VoteModule,
+    PointModule,
   ],
 })
 export class AppModule { }
