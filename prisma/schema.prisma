@@ -93,15 +93,17 @@ enum MediaStatus {
 }
 
 model User {
-  id           String     @id @default(uuid()) @db.Uuid
-  username     String     @unique @db.VarChar(30)
-  displayName  String     @db.VarChar(100)
-  email        String     @unique @db.VarChar(255)
+  id           String  @id @default(uuid()) @db.Uuid
+  username     String  @unique @db.VarChar(30)
+  displayName  String  @db.VarChar(100)
+  email        String  @unique @db.VarChar(255)
   passwordHash String
   avatarUrl    String?
-  bio          String?    @db.Text
-  reputation   Int        @default(0)
-  status       UserStatus @default(ACTIVE)
+  bio          String? @db.Text
+
+  points Int @default(0)
+
+  status UserStatus @default(ACTIVE)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -111,12 +113,17 @@ model User {
   proposals         CommunityProposal[]   @relation("ProposedBy")
   reviewedProposals CommunityProposal[]   @relation("ReviewedBy")
   posts             Post[]
-  media             Media[]
   comments          Comment[]
   votes             Vote[]
-  reputationEvents  ReputationEvent[]
-  refreshSessions   RefreshSession[]
-  role              UserRole              @default(USER)
+
+  pointEvents PointEvent[]
+  dailyVisits DailyVisit[]
+
+  refreshSessions RefreshSession[]
+
+  role UserRole @default(USER)
+
+  media Media[]
 
   @@index([status])
   @@index([deletedAt])
@@ -349,15 +356,31 @@ model Vote {
   @@index([userId])
 }
 
-model ReputationEvent {
+enum PointEventType {
+  DAILY_VISIT
+  POST_CREATED
+  COMMENT_CREATED
+  POST_UPVOTED
+  COMMENT_UPVOTED
+  SYSTEM
+}
+
+enum PointSourceType {
+  POST
+  COMMENT
+  VOTE
+  SYSTEM
+}
+
+model PointEvent {
   id     String @id @default(uuid()) @db.Uuid
   userId String @db.Uuid
 
-  type   ReputationEventType
+  type   PointEventType
   points Int
 
-  sourceType ReputationSourceType
-  sourceId   String?              @db.Uuid
+  sourceType PointSourceType
+  sourceId   String?         @db.Uuid
 
   createdAt DateTime @default(now())
 
@@ -366,6 +389,18 @@ model ReputationEvent {
   @@index([userId, createdAt])
   @@index([type])
   @@index([sourceType, sourceId])
+}
+
+model DailyVisit {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  visitDate DateTime @db.Date
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, visitDate])
+  @@index([userId, visitDate])
 }
 
 model RefreshSession {

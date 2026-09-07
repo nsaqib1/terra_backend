@@ -498,38 +498,38 @@ export type EnumVoteValueWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumVoteValueFilter<$PrismaModel>
 }
 
-export type EnumReputationEventTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationEventType | Prisma.EnumReputationEventTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel> | $Enums.ReputationEventType
+export type EnumPointEventTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointEventType | Prisma.EnumPointEventTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel> | $Enums.PointEventType
 }
 
-export type EnumReputationSourceTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationSourceType | Prisma.EnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel> | $Enums.ReputationSourceType
+export type EnumPointSourceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointSourceType | Prisma.EnumPointSourceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel> | $Enums.PointSourceType
 }
 
-export type EnumReputationEventTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationEventType | Prisma.EnumReputationEventTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReputationEventType
+export type EnumPointEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointEventType | Prisma.EnumPointEventTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.PointEventType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel>
 }
 
-export type EnumReputationSourceTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationSourceType | Prisma.EnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationSourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReputationSourceType
+export type EnumPointSourceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointSourceType | Prisma.EnumPointSourceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointSourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.PointSourceType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel>
 }
 
 export type NestedUuidFilter<$PrismaModel = never> = {
@@ -998,38 +998,38 @@ export type NestedEnumVoteValueWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumVoteValueFilter<$PrismaModel>
 }
 
-export type NestedEnumReputationEventTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationEventType | Prisma.EnumReputationEventTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel> | $Enums.ReputationEventType
+export type NestedEnumPointEventTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointEventType | Prisma.EnumPointEventTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel> | $Enums.PointEventType
 }
 
-export type NestedEnumReputationSourceTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationSourceType | Prisma.EnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel> | $Enums.ReputationSourceType
+export type NestedEnumPointSourceTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointSourceType | Prisma.EnumPointSourceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel> | $Enums.PointSourceType
 }
 
-export type NestedEnumReputationEventTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationEventType | Prisma.EnumReputationEventTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationEventType[] | Prisma.ListEnumReputationEventTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReputationEventType
+export type NestedEnumPointEventTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointEventType | Prisma.EnumPointEventTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointEventType[] | Prisma.ListEnumPointEventTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointEventTypeWithAggregatesFilter<$PrismaModel> | $Enums.PointEventType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumReputationEventTypeFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPointEventTypeFilter<$PrismaModel>
 }
 
-export type NestedEnumReputationSourceTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.ReputationSourceType | Prisma.EnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.ReputationSourceType[] | Prisma.ListEnumReputationSourceTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumReputationSourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReputationSourceType
+export type NestedEnumPointSourceTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PointSourceType | Prisma.EnumPointSourceTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PointSourceType[] | Prisma.ListEnumPointSourceTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPointSourceTypeWithAggregatesFilter<$PrismaModel> | $Enums.PointSourceType
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumReputationSourceTypeFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPointSourceTypeFilter<$PrismaModel>
 }
 
 

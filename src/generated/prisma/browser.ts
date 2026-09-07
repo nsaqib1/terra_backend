@@ -68,10 +68,15 @@ export type Media = Prisma.MediaModel
  */
 export type Vote = Prisma.VoteModel
 /**
- * Model ReputationEvent
+ * Model PointEvent
  * 
  */
-export type ReputationEvent = Prisma.ReputationEventModel
+export type PointEvent = Prisma.PointEventModel
+/**
+ * Model DailyVisit
+ * 
+ */
+export type DailyVisit = Prisma.DailyVisitModel
 /**
  * Model RefreshSession
  * 

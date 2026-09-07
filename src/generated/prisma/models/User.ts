@@ -27,11 +27,11 @@ export type AggregateUser = {
 }
 
 export type UserAvgAggregateOutputType = {
-  reputation: number | null
+  points: number | null
 }
 
 export type UserSumAggregateOutputType = {
-  reputation: number | null
+  points: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -42,7 +42,7 @@ export type UserMinAggregateOutputType = {
   passwordHash: string | null
   avatarUrl: string | null
   bio: string | null
-  reputation: number | null
+  points: number | null
   status: $Enums.UserStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -58,7 +58,7 @@ export type UserMaxAggregateOutputType = {
   passwordHash: string | null
   avatarUrl: string | null
   bio: string | null
-  reputation: number | null
+  points: number | null
   status: $Enums.UserStatus | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -74,7 +74,7 @@ export type UserCountAggregateOutputType = {
   passwordHash: number
   avatarUrl: number
   bio: number
-  reputation: number
+  points: number
   status: number
   createdAt: number
   updatedAt: number
@@ -85,11 +85,11 @@ export type UserCountAggregateOutputType = {
 
 
 export type UserAvgAggregateInputType = {
-  reputation?: true
+  points?: true
 }
 
 export type UserSumAggregateInputType = {
-  reputation?: true
+  points?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -100,7 +100,7 @@ export type UserMinAggregateInputType = {
   passwordHash?: true
   avatarUrl?: true
   bio?: true
-  reputation?: true
+  points?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -116,7 +116,7 @@ export type UserMaxAggregateInputType = {
   passwordHash?: true
   avatarUrl?: true
   bio?: true
-  reputation?: true
+  points?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -132,7 +132,7 @@ export type UserCountAggregateInputType = {
   passwordHash?: true
   avatarUrl?: true
   bio?: true
-  reputation?: true
+  points?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -235,7 +235,7 @@ export type UserGroupByOutputType = {
   passwordHash: string
   avatarUrl: string | null
   bio: string | null
-  reputation: number
+  points: number
   status: $Enums.UserStatus
   createdAt: Date
   updatedAt: Date
@@ -274,7 +274,7 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
-  reputation?: Prisma.IntFilter<"User"> | number
+  points?: Prisma.IntFilter<"User"> | number
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -284,11 +284,12 @@ export type UserWhereInput = {
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
-  media?: Prisma.MediaListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   votes?: Prisma.VoteListRelationFilter
-  reputationEvents?: Prisma.ReputationEventListRelationFilter
+  pointEvents?: Prisma.PointEventListRelationFilter
+  dailyVisits?: Prisma.DailyVisitListRelationFilter
   refreshSessions?: Prisma.RefreshSessionListRelationFilter
+  media?: Prisma.MediaListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -299,7 +300,7 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -309,11 +310,12 @@ export type UserOrderByWithRelationInput = {
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   reviewedProposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
-  media?: Prisma.MediaOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
   votes?: Prisma.VoteOrderByRelationAggregateInput
-  reputationEvents?: Prisma.ReputationEventOrderByRelationAggregateInput
+  pointEvents?: Prisma.PointEventOrderByRelationAggregateInput
+  dailyVisits?: Prisma.DailyVisitOrderByRelationAggregateInput
   refreshSessions?: Prisma.RefreshSessionOrderByRelationAggregateInput
+  media?: Prisma.MediaOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -327,7 +329,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
-  reputation?: Prisma.IntFilter<"User"> | number
+  points?: Prisma.IntFilter<"User"> | number
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -337,11 +339,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
-  media?: Prisma.MediaListRelationFilter
   comments?: Prisma.CommentListRelationFilter
   votes?: Prisma.VoteListRelationFilter
-  reputationEvents?: Prisma.ReputationEventListRelationFilter
+  pointEvents?: Prisma.PointEventListRelationFilter
+  dailyVisits?: Prisma.DailyVisitListRelationFilter
   refreshSessions?: Prisma.RefreshSessionListRelationFilter
+  media?: Prisma.MediaListRelationFilter
 }, "id" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -352,7 +355,7 @@ export type UserOrderByWithAggregationInput = {
   passwordHash?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -376,7 +379,7 @@ export type UserScalarWhereWithAggregatesInput = {
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  reputation?: Prisma.IntWithAggregatesFilter<"User"> | number
+  points?: Prisma.IntWithAggregatesFilter<"User"> | number
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -392,7 +395,7 @@ export type UserCreateInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -402,11 +405,12 @@ export type UserCreateInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -417,7 +421,7 @@ export type UserUncheckedCreateInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -427,11 +431,12 @@ export type UserUncheckedCreateInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUpdateInput = {
@@ -442,7 +447,7 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -452,11 +457,12 @@ export type UserUpdateInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -467,7 +473,7 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -477,11 +483,12 @@ export type UserUncheckedUpdateInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -492,7 +499,7 @@ export type UserCreateManyInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -508,7 +515,7 @@ export type UserUpdateManyMutationInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -524,7 +531,7 @@ export type UserUncheckedUpdateManyInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -540,7 +547,7 @@ export type UserCountOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -549,7 +556,7 @@ export type UserCountOrderByAggregateInput = {
 }
 
 export type UserAvgOrderByAggregateInput = {
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -560,7 +567,7 @@ export type UserMaxOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -576,7 +583,7 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   bio?: Prisma.SortOrder
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -585,7 +592,7 @@ export type UserMinOrderByAggregateInput = {
 }
 
 export type UserSumOrderByAggregateInput = {
-  reputation?: Prisma.SortOrder
+  points?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -730,18 +737,32 @@ export type UserUpdateOneRequiredWithoutVotesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVotesInput, Prisma.UserUpdateWithoutVotesInput>, Prisma.UserUncheckedUpdateWithoutVotesInput>
 }
 
-export type UserCreateNestedOneWithoutReputationEventsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReputationEventsInput, Prisma.UserUncheckedCreateWithoutReputationEventsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReputationEventsInput
+export type UserCreateNestedOneWithoutPointEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPointEventsInput, Prisma.UserUncheckedCreateWithoutPointEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPointEventsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutReputationEventsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReputationEventsInput, Prisma.UserUncheckedCreateWithoutReputationEventsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReputationEventsInput
-  upsert?: Prisma.UserUpsertWithoutReputationEventsInput
+export type UserUpdateOneRequiredWithoutPointEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPointEventsInput, Prisma.UserUncheckedCreateWithoutPointEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPointEventsInput
+  upsert?: Prisma.UserUpsertWithoutPointEventsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReputationEventsInput, Prisma.UserUpdateWithoutReputationEventsInput>, Prisma.UserUncheckedUpdateWithoutReputationEventsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPointEventsInput, Prisma.UserUpdateWithoutPointEventsInput>, Prisma.UserUncheckedUpdateWithoutPointEventsInput>
+}
+
+export type UserCreateNestedOneWithoutDailyVisitsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDailyVisitsInput, Prisma.UserUncheckedCreateWithoutDailyVisitsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDailyVisitsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDailyVisitsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDailyVisitsInput, Prisma.UserUncheckedCreateWithoutDailyVisitsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDailyVisitsInput
+  upsert?: Prisma.UserUpsertWithoutDailyVisitsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDailyVisitsInput, Prisma.UserUpdateWithoutDailyVisitsInput>, Prisma.UserUncheckedUpdateWithoutDailyVisitsInput>
 }
 
 export type UserCreateNestedOneWithoutRefreshSessionsInput = {
@@ -766,7 +787,7 @@ export type UserCreateWithoutProposalsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -775,11 +796,12 @@ export type UserCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutProposalsInput = {
@@ -790,7 +812,7 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -799,11 +821,12 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutProposalsInput = {
@@ -819,7 +842,7 @@ export type UserCreateWithoutReviewedProposalsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -828,11 +851,12 @@ export type UserCreateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutReviewedProposalsInput = {
@@ -843,7 +867,7 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -852,11 +876,12 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutReviewedProposalsInput = {
@@ -883,7 +908,7 @@ export type UserUpdateWithoutProposalsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -892,11 +917,12 @@ export type UserUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProposalsInput = {
@@ -907,7 +933,7 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -916,11 +942,12 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUpsertWithoutReviewedProposalsInput = {
@@ -942,7 +969,7 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -951,11 +978,12 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
@@ -966,7 +994,7 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -975,11 +1003,12 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutMembershipsInput = {
@@ -990,7 +1019,7 @@ export type UserCreateWithoutMembershipsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -999,11 +1028,12 @@ export type UserCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutMembershipsInput = {
@@ -1014,7 +1044,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1023,11 +1053,12 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutMembershipsInput = {
@@ -1054,7 +1085,7 @@ export type UserUpdateWithoutMembershipsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1063,11 +1094,12 @@ export type UserUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMembershipsInput = {
@@ -1078,7 +1110,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1087,11 +1119,12 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutPostsInput = {
@@ -1102,7 +1135,7 @@ export type UserCreateWithoutPostsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1111,11 +1144,12 @@ export type UserCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -1126,7 +1160,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1135,11 +1169,12 @@ export type UserUncheckedCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -1166,7 +1201,7 @@ export type UserUpdateWithoutPostsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1175,11 +1210,12 @@ export type UserUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -1190,7 +1226,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1199,11 +1235,12 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -1214,7 +1251,7 @@ export type UserCreateWithoutCommentsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1224,10 +1261,11 @@ export type UserCreateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -1238,7 +1276,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1248,10 +1286,11 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1278,7 +1317,7 @@ export type UserUpdateWithoutCommentsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1288,10 +1327,11 @@ export type UserUpdateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1302,7 +1342,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1312,10 +1352,11 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutMediaInput = {
@@ -1326,7 +1367,7 @@ export type UserCreateWithoutMediaInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1338,7 +1379,8 @@ export type UserCreateWithoutMediaInput = {
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
 }
 
@@ -1350,7 +1392,7 @@ export type UserUncheckedCreateWithoutMediaInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1362,7 +1404,8 @@ export type UserUncheckedCreateWithoutMediaInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -1390,7 +1433,7 @@ export type UserUpdateWithoutMediaInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1402,7 +1445,8 @@ export type UserUpdateWithoutMediaInput = {
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
 }
 
@@ -1414,7 +1458,7 @@ export type UserUncheckedUpdateWithoutMediaInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1426,7 +1470,8 @@ export type UserUncheckedUpdateWithoutMediaInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -1438,7 +1483,7 @@ export type UserCreateWithoutVotesInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1448,10 +1493,11 @@ export type UserCreateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutVotesInput = {
@@ -1462,7 +1508,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1472,10 +1518,11 @@ export type UserUncheckedCreateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutVotesInput = {
@@ -1502,7 +1549,7 @@ export type UserUpdateWithoutVotesInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1512,10 +1559,11 @@ export type UserUpdateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVotesInput = {
@@ -1526,7 +1574,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1536,13 +1584,14 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
-export type UserCreateWithoutReputationEventsInput = {
+export type UserCreateWithoutPointEventsInput = {
   id?: string
   username: string
   displayName: string
@@ -1550,7 +1599,7 @@ export type UserCreateWithoutReputationEventsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1560,13 +1609,14 @@ export type UserCreateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
-export type UserUncheckedCreateWithoutReputationEventsInput = {
+export type UserUncheckedCreateWithoutPointEventsInput = {
   id?: string
   username: string
   displayName: string
@@ -1574,7 +1624,7 @@ export type UserUncheckedCreateWithoutReputationEventsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1584,29 +1634,30 @@ export type UserUncheckedCreateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
-export type UserCreateOrConnectWithoutReputationEventsInput = {
+export type UserCreateOrConnectWithoutPointEventsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutReputationEventsInput, Prisma.UserUncheckedCreateWithoutReputationEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPointEventsInput, Prisma.UserUncheckedCreateWithoutPointEventsInput>
 }
 
-export type UserUpsertWithoutReputationEventsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutReputationEventsInput, Prisma.UserUncheckedUpdateWithoutReputationEventsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutReputationEventsInput, Prisma.UserUncheckedCreateWithoutReputationEventsInput>
+export type UserUpsertWithoutPointEventsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPointEventsInput, Prisma.UserUncheckedUpdateWithoutPointEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPointEventsInput, Prisma.UserUncheckedCreateWithoutPointEventsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutReputationEventsInput = {
+export type UserUpdateToOneWithWhereWithoutPointEventsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutReputationEventsInput, Prisma.UserUncheckedUpdateWithoutReputationEventsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPointEventsInput, Prisma.UserUncheckedUpdateWithoutPointEventsInput>
 }
 
-export type UserUpdateWithoutReputationEventsInput = {
+export type UserUpdateWithoutPointEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1614,7 +1665,7 @@ export type UserUpdateWithoutReputationEventsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1624,13 +1675,14 @@ export type UserUpdateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutReputationEventsInput = {
+export type UserUncheckedUpdateWithoutPointEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1638,7 +1690,7 @@ export type UserUncheckedUpdateWithoutReputationEventsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1648,10 +1700,127 @@ export type UserUncheckedUpdateWithoutReputationEventsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+}
+
+export type UserCreateWithoutDailyVisitsInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  points?: number
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+}
+
+export type UserUncheckedCreateWithoutDailyVisitsInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  points?: number
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+}
+
+export type UserCreateOrConnectWithoutDailyVisitsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDailyVisitsInput, Prisma.UserUncheckedCreateWithoutDailyVisitsInput>
+}
+
+export type UserUpsertWithoutDailyVisitsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDailyVisitsInput, Prisma.UserUncheckedUpdateWithoutDailyVisitsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDailyVisitsInput, Prisma.UserUncheckedCreateWithoutDailyVisitsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDailyVisitsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDailyVisitsInput, Prisma.UserUncheckedUpdateWithoutDailyVisitsInput>
+}
+
+export type UserUpdateWithoutDailyVisitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDailyVisitsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserCreateWithoutRefreshSessionsInput = {
@@ -1662,7 +1831,7 @@ export type UserCreateWithoutRefreshSessionsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1672,10 +1841,11 @@ export type UserCreateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserUncheckedCreateWithoutRefreshSessionsInput = {
@@ -1686,7 +1856,7 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   passwordHash: string
   avatarUrl?: string | null
   bio?: string | null
-  reputation?: number
+  points?: number
   status?: $Enums.UserStatus
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1696,10 +1866,11 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
-  reputationEvents?: Prisma.ReputationEventUncheckedCreateNestedManyWithoutUserInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
 }
 
 export type UserCreateOrConnectWithoutRefreshSessionsInput = {
@@ -1726,7 +1897,7 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1736,10 +1907,11 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
@@ -1750,7 +1922,7 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  reputation?: Prisma.IntFieldUpdateOperationsInput | number
+  points?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1760,10 +1932,11 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
-  reputationEvents?: Prisma.ReputationEventUncheckedUpdateManyWithoutUserNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
 }
 
 
@@ -1776,11 +1949,12 @@ export type UserCountOutputType = {
   proposals: number
   reviewedProposals: number
   posts: number
-  media: number
   comments: number
   votes: number
-  reputationEvents: number
+  pointEvents: number
+  dailyVisits: number
   refreshSessions: number
+  media: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1788,11 +1962,12 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   proposals?: boolean | UserCountOutputTypeCountProposalsArgs
   reviewedProposals?: boolean | UserCountOutputTypeCountReviewedProposalsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
-  media?: boolean | UserCountOutputTypeCountMediaArgs
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
   votes?: boolean | UserCountOutputTypeCountVotesArgs
-  reputationEvents?: boolean | UserCountOutputTypeCountReputationEventsArgs
+  pointEvents?: boolean | UserCountOutputTypeCountPointEventsArgs
+  dailyVisits?: boolean | UserCountOutputTypeCountDailyVisitsArgs
   refreshSessions?: boolean | UserCountOutputTypeCountRefreshSessionsArgs
+  media?: boolean | UserCountOutputTypeCountMediaArgs
 }
 
 /**
@@ -1836,13 +2011,6 @@ export type UserCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MediaWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CommentWhereInput
 }
@@ -1857,8 +2025,15 @@ export type UserCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountReputationEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReputationEventWhereInput
+export type UserCountOutputTypeCountPointEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PointEventWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDailyVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DailyVisitWhereInput
 }
 
 /**
@@ -1866,6 +2041,13 @@ export type UserCountOutputTypeCountReputationEventsArgs<ExtArgs extends runtime
  */
 export type UserCountOutputTypeCountRefreshSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RefreshSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaWhereInput
 }
 
 
@@ -1877,7 +2059,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   avatarUrl?: boolean
   bio?: boolean
-  reputation?: boolean
+  points?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1887,11 +2069,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
-  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
-  reputationEvents?: boolean | Prisma.User$reputationEventsArgs<ExtArgs>
+  pointEvents?: boolean | Prisma.User$pointEventsArgs<ExtArgs>
+  dailyVisits?: boolean | Prisma.User$dailyVisitsArgs<ExtArgs>
   refreshSessions?: boolean | Prisma.User$refreshSessionsArgs<ExtArgs>
+  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1903,7 +2086,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   avatarUrl?: boolean
   bio?: boolean
-  reputation?: boolean
+  points?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1919,7 +2102,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   avatarUrl?: boolean
   bio?: boolean
-  reputation?: boolean
+  points?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1935,7 +2118,7 @@ export type UserSelectScalar = {
   passwordHash?: boolean
   avatarUrl?: boolean
   bio?: boolean
-  reputation?: boolean
+  points?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1943,17 +2126,18 @@ export type UserSelectScalar = {
   role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "bio" | "reputation" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "bio" | "points" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
-  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   votes?: boolean | Prisma.User$votesArgs<ExtArgs>
-  reputationEvents?: boolean | Prisma.User$reputationEventsArgs<ExtArgs>
+  pointEvents?: boolean | Prisma.User$pointEventsArgs<ExtArgs>
+  dailyVisits?: boolean | Prisma.User$dailyVisitsArgs<ExtArgs>
   refreshSessions?: boolean | Prisma.User$refreshSessionsArgs<ExtArgs>
+  media?: boolean | Prisma.User$mediaArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1966,11 +2150,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     proposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     reviewedProposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
-    media: Prisma.$MediaPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
     votes: Prisma.$VotePayload<ExtArgs>[]
-    reputationEvents: Prisma.$ReputationEventPayload<ExtArgs>[]
+    pointEvents: Prisma.$PointEventPayload<ExtArgs>[]
+    dailyVisits: Prisma.$DailyVisitPayload<ExtArgs>[]
     refreshSessions: Prisma.$RefreshSessionPayload<ExtArgs>[]
+    media: Prisma.$MediaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1980,7 +2165,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordHash: string
     avatarUrl: string | null
     bio: string | null
-    reputation: number
+    points: number
     status: $Enums.UserStatus
     createdAt: Date
     updatedAt: Date
@@ -2384,11 +2569,12 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   proposals<T extends Prisma.User$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedProposals<T extends Prisma.User$reviewedProposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedProposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  media<T extends Prisma.User$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   votes<T extends Prisma.User$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  reputationEvents<T extends Prisma.User$reputationEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reputationEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReputationEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pointEvents<T extends Prisma.User$pointEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pointEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PointEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dailyVisits<T extends Prisma.User$dailyVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dailyVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DailyVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   refreshSessions<T extends Prisma.User$refreshSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  media<T extends Prisma.User$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2425,7 +2611,7 @@ export interface UserFieldRefs {
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly bio: Prisma.FieldRef<"User", 'String'>
-  readonly reputation: Prisma.FieldRef<"User", 'Int'>
+  readonly points: Prisma.FieldRef<"User", 'Int'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -2920,30 +3106,6 @@ export type User$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * User.media
- */
-export type User$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Media
-   */
-  select?: Prisma.MediaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Media
-   */
-  omit?: Prisma.MediaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MediaInclude<ExtArgs> | null
-  where?: Prisma.MediaWhereInput
-  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
-  cursor?: Prisma.MediaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
-}
-
-/**
  * User.comments
  */
 export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2992,27 +3154,51 @@ export type User$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * User.reputationEvents
+ * User.pointEvents
  */
-export type User$reputationEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$pointEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ReputationEvent
+   * Select specific fields to fetch from the PointEvent
    */
-  select?: Prisma.ReputationEventSelect<ExtArgs> | null
+  select?: Prisma.PointEventSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ReputationEvent
+   * Omit specific fields from the PointEvent
    */
-  omit?: Prisma.ReputationEventOmit<ExtArgs> | null
+  omit?: Prisma.PointEventOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReputationEventInclude<ExtArgs> | null
-  where?: Prisma.ReputationEventWhereInput
-  orderBy?: Prisma.ReputationEventOrderByWithRelationInput | Prisma.ReputationEventOrderByWithRelationInput[]
-  cursor?: Prisma.ReputationEventWhereUniqueInput
+  include?: Prisma.PointEventInclude<ExtArgs> | null
+  where?: Prisma.PointEventWhereInput
+  orderBy?: Prisma.PointEventOrderByWithRelationInput | Prisma.PointEventOrderByWithRelationInput[]
+  cursor?: Prisma.PointEventWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ReputationEventScalarFieldEnum | Prisma.ReputationEventScalarFieldEnum[]
+  distinct?: Prisma.PointEventScalarFieldEnum | Prisma.PointEventScalarFieldEnum[]
+}
+
+/**
+ * User.dailyVisits
+ */
+export type User$dailyVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DailyVisit
+   */
+  select?: Prisma.DailyVisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DailyVisit
+   */
+  omit?: Prisma.DailyVisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DailyVisitInclude<ExtArgs> | null
+  where?: Prisma.DailyVisitWhereInput
+  orderBy?: Prisma.DailyVisitOrderByWithRelationInput | Prisma.DailyVisitOrderByWithRelationInput[]
+  cursor?: Prisma.DailyVisitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DailyVisitScalarFieldEnum | Prisma.DailyVisitScalarFieldEnum[]
 }
 
 /**
@@ -3037,6 +3223,30 @@ export type User$refreshSessionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.RefreshSessionScalarFieldEnum | Prisma.RefreshSessionScalarFieldEnum[]
+}
+
+/**
+ * User.media
+ */
+export type User$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Media
+   */
+  select?: Prisma.MediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Media
+   */
+  omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  where?: Prisma.MediaWhereInput
+  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
+  cursor?: Prisma.MediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
 }
 
 /**

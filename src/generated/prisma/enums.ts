@@ -131,3 +131,25 @@ export const MediaStatus = {
 } as const
 
 export type MediaStatus = (typeof MediaStatus)[keyof typeof MediaStatus]
+
+
+export const PointEventType = {
+  DAILY_VISIT: 'DAILY_VISIT',
+  POST_CREATED: 'POST_CREATED',
+  COMMENT_CREATED: 'COMMENT_CREATED',
+  POST_UPVOTED: 'POST_UPVOTED',
+  COMMENT_UPVOTED: 'COMMENT_UPVOTED',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type PointEventType = (typeof PointEventType)[keyof typeof PointEventType]
+
+
+export const PointSourceType = {
+  POST: 'POST',
+  COMMENT: 'COMMENT',
+  VOTE: 'VOTE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type PointSourceType = (typeof PointSourceType)[keyof typeof PointSourceType]

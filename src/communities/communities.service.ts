@@ -298,7 +298,7 @@ export class CommunitiesService {
               username: true,
               displayName: true,
               avatarUrl: true,
-              reputation: true,
+              points: true,
             },
           },
         },

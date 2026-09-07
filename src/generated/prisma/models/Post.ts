@@ -191,11 +191,11 @@ export type PostAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 export type GetPostAggregateType<T extends PostAggregateArgs> = {
-  [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
-  ? T[P] extends true
-  ? number
-  : Prisma.GetScalarType<T[P], AggregatePost[P]>
-  : Prisma.GetScalarType<T[P], AggregatePost[P]>
+      [P in keyof T & keyof AggregatePost]: P extends '_count' | 'count'
+    ? T[P] extends true
+      ? number
+      : Prisma.GetScalarType<T[P], AggregatePost[P]>
+    : Prisma.GetScalarType<T[P], AggregatePost[P]>
 }
 
 
@@ -237,15 +237,15 @@ export type PostGroupByOutputType = {
 export type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PostGroupByOutputType, T['by']> &
-    {
-      [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
-      ? T[P] extends boolean
-      ? number
-      : Prisma.GetScalarType<T[P], PostGroupByOutputType[P]>
-      : Prisma.GetScalarType<T[P], PostGroupByOutputType[P]>
-    }
+      {
+        [P in ((keyof T) & (keyof PostGroupByOutputType))]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
+            : Prisma.GetScalarType<T[P], PostGroupByOutputType[P]>
+          : Prisma.GetScalarType<T[P], PostGroupByOutputType[P]>
+      }
+    >
   >
->
 
 
 
@@ -1712,10 +1712,10 @@ export interface PostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
     args?: Prisma.Subset<T, PostCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
-    ? T['select'] extends true
-    ? number
-    : Prisma.GetScalarType<T['select'], PostCountAggregateOutputType>
-    : number
+      ? T['select'] extends true
+        ? number
+        : Prisma.GetScalarType<T['select'], PostCountAggregateOutputType>
+      : number
   >
 
   /**
@@ -1769,8 +1769,8 @@ export interface PostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-    ? { orderBy: PostGroupByArgs['orderBy'] }
-    : { orderBy?: PostGroupByArgs['orderBy'] },
+      ? { orderBy: PostGroupByArgs['orderBy'] }
+      : { orderBy?: PostGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -1781,49 +1781,49 @@ export interface PostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
     ? `Error: "by" must not be empty.`
     : HavingValid extends Prisma.False
     ? {
-      [P in HavingFields]: P extends ByFields
-      ? never
-      : P extends string
-      ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-      : [
-        Error,
-        'Field ',
-        P,
-        ` in "having" needs to be provided in "by"`,
-      ]
-    }[HavingFields]
+        [P in HavingFields]: P extends ByFields
+          ? never
+          : P extends string
+          ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+          : [
+              Error,
+              'Field ',
+              P,
+              ` in "having" needs to be provided in "by"`,
+            ]
+      }[HavingFields]
     : 'take' extends Prisma.Keys<T>
     ? 'orderBy' extends Prisma.Keys<T>
-    ? ByValid extends Prisma.True
-    ? {}
-    : {
-      [P in OrderFields]: P extends ByFields
-      ? never
-      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-    }[OrderFields]
-    : 'Error: If you provide "take", you also need to provide "orderBy"'
+      ? ByValid extends Prisma.True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "take", you also need to provide "orderBy"'
     : 'skip' extends Prisma.Keys<T>
     ? 'orderBy' extends Prisma.Keys<T>
-    ? ByValid extends Prisma.True
-    ? {}
-    : {
-      [P in OrderFields]: P extends ByFields
-      ? never
-      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-    }[OrderFields]
-    : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      ? ByValid extends Prisma.True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+      : 'Error: If you provide "skip", you also need to provide "orderBy"'
     : ByValid extends Prisma.True
     ? {}
     : {
-      [P in OrderFields]: P extends ByFields
-      ? never
-      : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-    }[OrderFields]
+        [P in OrderFields]: P extends ByFields
+          ? never
+          : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+      }[OrderFields]
   >(args: Prisma.SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Post model
-   */
-  readonly fields: PostFieldRefs;
+/**
+ * Fields of the Post model
+ */
+readonly fields: PostFieldRefs;
 }
 
 /**
@@ -1881,7 +1881,7 @@ export interface PostFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Post", 'DateTime'>
 }
-
+    
 
 // Custom InputTypes
 /**

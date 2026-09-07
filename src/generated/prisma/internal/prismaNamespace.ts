@@ -407,7 +407,8 @@ export const ModelName = {
   PostTag: 'PostTag',
   Media: 'Media',
   Vote: 'Vote',
-  ReputationEvent: 'ReputationEvent',
+  PointEvent: 'PointEvent',
+  DailyVisit: 'DailyVisit',
   RefreshSession: 'RefreshSession'
 } as const
 
@@ -424,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "media" | "vote" | "reputationEvent" | "refreshSession"
+    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "media" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1168,77 +1169,151 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    ReputationEvent: {
-      payload: Prisma.$ReputationEventPayload<ExtArgs>
-      fields: Prisma.ReputationEventFieldRefs
+    PointEvent: {
+      payload: Prisma.$PointEventPayload<ExtArgs>
+      fields: Prisma.PointEventFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ReputationEventFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload> | null
+          args: Prisma.PointEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ReputationEventFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         findFirst: {
-          args: Prisma.ReputationEventFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload> | null
+          args: Prisma.PointEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ReputationEventFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         findMany: {
-          args: Prisma.ReputationEventFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>[]
+          args: Prisma.PointEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>[]
         }
         create: {
-          args: Prisma.ReputationEventCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         createMany: {
-          args: Prisma.ReputationEventCreateManyArgs<ExtArgs>
+          args: Prisma.PointEventCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ReputationEventCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>[]
+          args: Prisma.PointEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>[]
         }
         delete: {
-          args: Prisma.ReputationEventDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         update: {
-          args: Prisma.ReputationEventUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         deleteMany: {
-          args: Prisma.ReputationEventDeleteManyArgs<ExtArgs>
+          args: Prisma.PointEventDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ReputationEventUpdateManyArgs<ExtArgs>
+          args: Prisma.PointEventUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ReputationEventUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>[]
+          args: Prisma.PointEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>[]
         }
         upsert: {
-          args: Prisma.ReputationEventUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReputationEventPayload>
+          args: Prisma.PointEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PointEventPayload>
         }
         aggregate: {
-          args: Prisma.ReputationEventAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateReputationEvent>
+          args: Prisma.PointEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePointEvent>
         }
         groupBy: {
-          args: Prisma.ReputationEventGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReputationEventGroupByOutputType>[]
+          args: Prisma.PointEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PointEventGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ReputationEventCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReputationEventCountAggregateOutputType> | number
+          args: Prisma.PointEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PointEventCountAggregateOutputType> | number
+        }
+      }
+    }
+    DailyVisit: {
+      payload: Prisma.$DailyVisitPayload<ExtArgs>
+      fields: Prisma.DailyVisitFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DailyVisitFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DailyVisitFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        findFirst: {
+          args: Prisma.DailyVisitFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DailyVisitFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        findMany: {
+          args: Prisma.DailyVisitFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>[]
+        }
+        create: {
+          args: Prisma.DailyVisitCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        createMany: {
+          args: Prisma.DailyVisitCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DailyVisitCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>[]
+        }
+        delete: {
+          args: Prisma.DailyVisitDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        update: {
+          args: Prisma.DailyVisitUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        deleteMany: {
+          args: Prisma.DailyVisitDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DailyVisitUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DailyVisitUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>[]
+        }
+        upsert: {
+          args: Prisma.DailyVisitUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DailyVisitPayload>
+        }
+        aggregate: {
+          args: Prisma.DailyVisitAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDailyVisit>
+        }
+        groupBy: {
+          args: Prisma.DailyVisitGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DailyVisitGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DailyVisitCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DailyVisitCountAggregateOutputType> | number
         }
       }
     }
@@ -1363,7 +1438,7 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarUrl: 'avatarUrl',
   bio: 'bio',
-  reputation: 'reputation',
+  points: 'points',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -1510,7 +1585,7 @@ export const VoteScalarFieldEnum = {
 export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
 
 
-export const ReputationEventScalarFieldEnum = {
+export const PointEventScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   type: 'type',
@@ -1520,7 +1595,17 @@ export const ReputationEventScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type ReputationEventScalarFieldEnum = (typeof ReputationEventScalarFieldEnum)[keyof typeof ReputationEventScalarFieldEnum]
+export type PointEventScalarFieldEnum = (typeof PointEventScalarFieldEnum)[keyof typeof PointEventScalarFieldEnum]
+
+
+export const DailyVisitScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  visitDate: 'visitDate',
+  createdAt: 'createdAt'
+} as const
+
+export type DailyVisitScalarFieldEnum = (typeof DailyVisitScalarFieldEnum)[keyof typeof DailyVisitScalarFieldEnum]
 
 
 export const RefreshSessionScalarFieldEnum = {
@@ -1808,30 +1893,30 @@ export type ListEnumVoteValueFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
- * Reference to a field of type 'ReputationEventType'
+ * Reference to a field of type 'PointEventType'
  */
-export type EnumReputationEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReputationEventType'>
+export type EnumPointEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointEventType'>
     
 
 
 /**
- * Reference to a field of type 'ReputationEventType[]'
+ * Reference to a field of type 'PointEventType[]'
  */
-export type ListEnumReputationEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReputationEventType[]'>
+export type ListEnumPointEventTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointEventType[]'>
     
 
 
 /**
- * Reference to a field of type 'ReputationSourceType'
+ * Reference to a field of type 'PointSourceType'
  */
-export type EnumReputationSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReputationSourceType'>
+export type EnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointSourceType'>
     
 
 
 /**
- * Reference to a field of type 'ReputationSourceType[]'
+ * Reference to a field of type 'PointSourceType[]'
  */
-export type ListEnumReputationSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReputationSourceType[]'>
+export type ListEnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointSourceType[]'>
     
 
 
@@ -2009,7 +2094,8 @@ export type GlobalOmitConfig = {
   postTag?: Prisma.PostTagOmit
   media?: Prisma.MediaOmit
   vote?: Prisma.VoteOmit
-  reputationEvent?: Prisma.ReputationEventOmit
+  pointEvent?: Prisma.PointEventOmit
+  dailyVisit?: Prisma.DailyVisitOmit
   refreshSession?: Prisma.RefreshSessionOmit
 }
 

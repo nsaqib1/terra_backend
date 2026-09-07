@@ -61,7 +61,8 @@ export const ModelName = {
   PostTag: 'PostTag',
   Media: 'Media',
   Vote: 'Vote',
-  ReputationEvent: 'ReputationEvent',
+  PointEvent: 'PointEvent',
+  DailyVisit: 'DailyVisit',
   RefreshSession: 'RefreshSession'
 } as const
 
@@ -89,7 +90,7 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarUrl: 'avatarUrl',
   bio: 'bio',
-  reputation: 'reputation',
+  points: 'points',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -236,7 +237,7 @@ export const VoteScalarFieldEnum = {
 export type VoteScalarFieldEnum = (typeof VoteScalarFieldEnum)[keyof typeof VoteScalarFieldEnum]
 
 
-export const ReputationEventScalarFieldEnum = {
+export const PointEventScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   type: 'type',
@@ -246,7 +247,17 @@ export const ReputationEventScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type ReputationEventScalarFieldEnum = (typeof ReputationEventScalarFieldEnum)[keyof typeof ReputationEventScalarFieldEnum]
+export type PointEventScalarFieldEnum = (typeof PointEventScalarFieldEnum)[keyof typeof PointEventScalarFieldEnum]
+
+
+export const DailyVisitScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  visitDate: 'visitDate',
+  createdAt: 'createdAt'
+} as const
+
+export type DailyVisitScalarFieldEnum = (typeof DailyVisitScalarFieldEnum)[keyof typeof DailyVisitScalarFieldEnum]
 
 
 export const RefreshSessionScalarFieldEnum = {
