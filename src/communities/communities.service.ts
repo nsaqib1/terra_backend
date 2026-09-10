@@ -39,6 +39,44 @@ export class CommunitiesService {
     });
   }
 
+  async findJoinedByUser(userId: string) {
+    const memberships =
+      await this.prisma.communityMembership.findMany({
+        where: {
+          userId,
+          leftAt: null,
+          community: {
+            status: 'ACTIVE',
+            deletedAt: null,
+          },
+        },
+        orderBy: {
+          community: {
+            name: 'asc',
+          },
+        },
+        select: {
+          role: true,
+          joinedAt: true,
+          community: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+            },
+          },
+        },
+      });
+
+    return memberships.map((membership) => ({
+      id: membership.community.id,
+      name: membership.community.name,
+      slug: membership.community.slug,
+      role: membership.role,
+      joinedAt: membership.joinedAt,
+    }));
+  }
+
   async findBySlug(slug: string) {
     const community = await this.prisma.community.findFirst({
       where: {

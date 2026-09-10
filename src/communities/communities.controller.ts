@@ -32,6 +32,14 @@ export class CommunitiesController {
     return this.communitiesService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  async findJoined(@Req() request: AuthenticatedRequest) {
+    return this.communitiesService.findJoinedByUser(
+      request.user.userId,
+    );
+  }
+
   @Get(':slug')
   async findBySlug(@Param('slug') slug: string) {
     return this.communitiesService.findBySlug(slug);
