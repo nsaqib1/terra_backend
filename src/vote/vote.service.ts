@@ -275,4 +275,44 @@ export class VoteService {
       };
     });
   }
+
+  async getMyVotesForPost(userId: string, postId: string) {
+    const postVote = await this.prisma.vote.findUnique({
+      where: {
+        userId_postId: {
+          userId,
+          postId,
+        },
+      },
+      select: {
+        value: true,
+      },
+    });
+
+    const commentVotes = await this.prisma.vote.findMany({
+      where: {
+        userId,
+        comment: {
+          postId,
+          deletedAt: null,
+        },
+      },
+      select: {
+        commentId: true,
+        value: true,
+      },
+    });
+
+    const commentVotesMap: Record<string, 'UP' | 'DOWN'> = {};
+    for (const v of commentVotes) {
+      if (v.commentId) {
+        commentVotesMap[v.commentId] = v.value;
+      }
+    }
+
+    return {
+      postVote: postVote?.value ?? null,
+      commentVotes: commentVotesMap,
+    };
+  }
 }

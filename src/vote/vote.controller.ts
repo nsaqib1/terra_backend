@@ -1,6 +1,9 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
   Post,
   Req,
   UseGuards,
@@ -31,6 +34,18 @@ export class VoteController {
     return this.voteService.vote(
       req.user.userId,
       dto,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('post-votes/:postId')
+  async getPostVotes(
+    @Req() req: AuthenticatedRequest,
+    @Param('postId', ParseUUIDPipe) postId: string,
+  ) {
+    return this.voteService.getMyVotesForPost(
+      req.user.userId,
+      postId,
     );
   }
 }
