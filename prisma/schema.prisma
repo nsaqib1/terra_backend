@@ -100,6 +100,8 @@ model User {
   passwordHash String
   avatarUrl    String?
   bio          String? @db.Text
+  location     String? @db.VarChar(150)
+  website      String? @db.VarChar(500)
 
   points Int @default(0)
 

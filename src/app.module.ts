@@ -12,6 +12,7 @@ import { TagsModule } from './tags/tags.module';
 import { CommentModule } from './comment/comment.module';
 import { VoteModule } from './vote/vote.module';
 import { PointModule } from './point/point.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PointModule } from './point/point.module';
     CommentModule,
     VoteModule,
     PointModule,
+    UserModule,
   ],
 })
 export class AppModule { }
