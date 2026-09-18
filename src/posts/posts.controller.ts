@@ -16,11 +16,18 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from '../auth/guards/optional-jwt-auth.guard';
 import { GetPostsQueryDto } from './dto/get-post-query.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 interface AuthenticatedRequest extends Request {
   user: {
+    userId: string;
+  };
+}
+
+interface MaybeAuthenticatedRequest extends Request {
+  user?: {
     userId: string;
   };
 }
@@ -50,11 +57,13 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
+  @UseGuards(OptionalJwtAuthGuard)
   @Get()
   async findMany(
+    @Req() request: MaybeAuthenticatedRequest,
     @Query() query: GetPostsQueryDto,
   ) {
-    return this.postsService.findMany(query);
+    return this.postsService.findMany(query, request.user?.userId);
   }
 
   @UseGuards(JwtAuthGuard)

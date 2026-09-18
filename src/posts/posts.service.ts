@@ -464,27 +464,54 @@ export class PostsService {
     };
   }
 
-  async findMany(query: GetPostsQueryDto) {
-    const { communityId, page, limit } = query;
+  async findMany(query: GetPostsQueryDto, userId?: string) {
+    const { communityId, page, limit, sort = 'newest' } = query;
 
     const skip = (page - 1) * limit;
+
+    const where: any = {
+      status: 'ACTIVE',
+      deletedAt: null,
+    };
+
+    if (communityId) {
+      where.communityId = communityId;
+    } else if (userId) {
+      const memberships = await this.prisma.communityMembership.findMany({
+        where: {
+          userId,
+          leftAt: null,
+        },
+        select: {
+          communityId: true,
+        },
+      });
+
+      const joinedCommunityIds = memberships.map((m) => m.communityId);
+
+      where.communityId = {
+        in: joinedCommunityIds,
+      };
+    }
+
+    let orderBy: any = [{ createdAt: 'desc' }];
+    if (sort === 'top' || sort === 'score' || sort === 'popular') {
+      orderBy = [{ score: 'desc' }, { createdAt: 'desc' }];
+    } else if (sort === 'comments' || sort === 'most_discussed') {
+      orderBy = [{ commentCount: 'desc' }, { createdAt: 'desc' }];
+    } else if (sort === 'oldest') {
+      orderBy = [{ createdAt: 'asc' }];
+    } else {
+      orderBy = [{ createdAt: 'desc' }];
+    }
 
     const [posts, total] =
       await this.prisma.$transaction([
         this.prisma.post.findMany({
-          where: {
-            communityId,
-            status: 'ACTIVE',
-            deletedAt: null,
-          },
-
-          orderBy: {
-            createdAt: 'desc',
-          },
-
+          where,
+          orderBy,
           skip,
           take: limit,
-
           select: {
             id: true,
 
@@ -548,11 +575,7 @@ export class PostsService {
         }),
 
         this.prisma.post.count({
-          where: {
-            communityId,
-            status: 'ACTIVE',
-            deletedAt: null,
-          },
+          where,
         }),
       ]);
 

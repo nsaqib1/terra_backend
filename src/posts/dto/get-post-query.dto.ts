@@ -1,4 +1,5 @@
 import {
+  IsIn,
   IsInt,
   IsOptional,
   IsUUID,
@@ -7,9 +8,12 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
+export type PostSortOption = 'newest' | 'top' | 'comments' | 'oldest';
+
 export class GetPostsQueryDto {
+  @IsOptional()
   @IsUUID()
-  communityId!: string;
+  communityId?: string;
 
   @IsOptional()
   @Type(() => Number)
@@ -23,4 +27,8 @@ export class GetPostsQueryDto {
   @Min(1)
   @Max(50)
   limit = 20;
+
+  @IsOptional()
+  @IsIn(['newest', 'top', 'comments', 'oldest', 'score', 'popular', 'most_discussed'])
+  sort?: string = 'newest';
 }
