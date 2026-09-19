@@ -311,6 +311,21 @@ export class UserService {
       }
     }
 
+    if (dto.avatarUrl) {
+      const match = dto.avatarUrl.match(/\/media\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        await this.prisma.media.updateMany({
+          where: {
+            id: match[1],
+            uploadedById: userId,
+          },
+          data: {
+            status: 'ACTIVE',
+          },
+        });
+      }
+    }
+
     const updatedUser = await this.prisma.user.update({
       where: {
         id: userId,
@@ -330,6 +345,9 @@ export class UserService {
         }),
         ...(dto.website !== undefined && {
           website: dto.website,
+        }),
+        ...(dto.avatarUrl !== undefined && {
+          avatarUrl: dto.avatarUrl,
         }),
       },
       select: {

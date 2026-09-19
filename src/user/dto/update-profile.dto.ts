@@ -68,4 +68,17 @@ export class UpdateProfileDto {
   @IsString()
   @MaxLength(500)
   website?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      const trimmed = value.trim();
+      return trimmed === '' ? null : trimmed;
+    }
+    return value;
+  })
+  @ValidateIf((_, value) => value !== null)
+  @IsString()
+  @MaxLength(2048)
+  avatarUrl?: string | null;
 }
