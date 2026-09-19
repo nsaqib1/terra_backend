@@ -617,6 +617,94 @@ export class PostsService {
     };
   }
 
+  /**
+   * Trending posts algorithm.
+   *
+   * Scoring formula (Hacker News-inspired with time decay):
+   *   trendingScore = (score * 1.5 + commentCount * 2.5) / (ageHours + 2)^1.8
+   *
+   * - score        weighted x1.5  (upvote / downvote net)
+   * - commentCount weighted x2.5  (engagement signal)
+   * - ageHours     hours since creation
+   * - gravity 1.8  (higher = faster decay, keeps feed fresh)
+   *
+   * Only considers posts from the last `windowHours` hours (default 72h).
+   */
+  async getTrending(limit = 5, windowHours = 72) {
+    const since = new Date(Date.now() - windowHours * 60 * 60 * 1000);
+
+    const posts = await this.prisma.post.findMany({
+      where: {
+        status: 'ACTIVE',
+        deletedAt: null,
+        createdAt: { gte: since },
+      },
+
+      select: {
+        id: true,
+        document: true,
+        score: true,
+        commentCount: true,
+        createdAt: true,
+
+        community: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+          },
+        },
+
+        author: {
+          select: {
+            id: true,
+            username: true,
+            displayName: true,
+            avatarUrl: true,
+          },
+        },
+
+        tags: {
+          select: {
+            tag: {
+              select: {
+                id: true,
+                name: true,
+                slug: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const now = Date.now();
+    const gravity = 1.8;
+
+    const scored = posts.map((post) => {
+      const ageHours = (now - post.createdAt.getTime()) / (1000 * 60 * 60);
+      const trendingScore =
+        (post.score * 1.5 + post.commentCount * 2.5) /
+        Math.pow(ageHours + 2, gravity);
+
+      return { ...post, trendingScore };
+    });
+
+    scored.sort((a, b) => b.trendingScore - a.trendingScore);
+
+    return scored.slice(0, limit).map((post) => ({
+      id: post.id,
+      document: post.document,
+      community: post.community,
+      author: post.author,
+      tags: post.tags.map((t) => t.tag),
+      score: post.score,
+      commentCount: post.commentCount,
+      createdAt: post.createdAt,
+      trendingScore: post.trendingScore,
+    }));
+  }
+
   async update(
     userId: string,
     postId: string,

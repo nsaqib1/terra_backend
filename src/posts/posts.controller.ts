@@ -10,6 +10,8 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { Type } from 'class-transformer';
+import { IsInt, IsOptional, Max, Min } from 'class-validator';
 
 import { PostsService } from './posts.service';
 
@@ -48,6 +50,16 @@ export class PostsController {
       request.user.userId,
       dto,
     );
+  }
+
+  @Get('trending')
+  async getTrending(
+    @Query('limit') limit?: string,
+    @Query('window_hours') windowHours?: string,
+  ) {
+    const l = limit ? Math.min(Math.max(parseInt(limit, 10) || 5, 1), 20) : 5;
+    const w = windowHours ? Math.min(Math.max(parseInt(windowHours, 10) || 72, 1), 720) : 72;
+    return this.postsService.getTrending(l, w);
   }
 
   @Get(':id')
