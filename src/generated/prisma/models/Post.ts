@@ -40,40 +40,40 @@ export type PostMinAggregateOutputType = {
   id: string | null
   communityId: string | null
   authorId: string | null
-  searchText: string | null
   score: number | null
   commentCount: number | null
   status: $Enums.PostStatus | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  searchText: string | null
 }
 
 export type PostMaxAggregateOutputType = {
   id: string | null
   communityId: string | null
   authorId: string | null
-  searchText: string | null
   score: number | null
   commentCount: number | null
   status: $Enums.PostStatus | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  searchText: string | null
 }
 
 export type PostCountAggregateOutputType = {
   id: number
   communityId: number
   authorId: number
-  document: number
-  searchText: number
   score: number
   commentCount: number
   status: number
   createdAt: number
   updatedAt: number
   deletedAt: number
+  document: number
+  searchText: number
   _all: number
 }
 
@@ -92,40 +92,40 @@ export type PostMinAggregateInputType = {
   id?: true
   communityId?: true
   authorId?: true
-  searchText?: true
   score?: true
   commentCount?: true
   status?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  searchText?: true
 }
 
 export type PostMaxAggregateInputType = {
   id?: true
   communityId?: true
   authorId?: true
-  searchText?: true
   score?: true
   commentCount?: true
   status?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  searchText?: true
 }
 
 export type PostCountAggregateInputType = {
   id?: true
   communityId?: true
   authorId?: true
-  document?: true
-  searchText?: true
   score?: true
   commentCount?: true
   status?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  document?: true
+  searchText?: true
   _all?: true
 }
 
@@ -219,14 +219,14 @@ export type PostGroupByOutputType = {
   id: string
   communityId: string
   authorId: string
-  document: runtime.JsonValue
-  searchText: string
   score: number
   commentCount: number
   status: $Enums.PostStatus
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
+  document: runtime.JsonValue
+  searchText: string
   _count: PostCountAggregateOutputType | null
   _avg: PostAvgAggregateOutputType | null
   _sum: PostSumAggregateOutputType | null
@@ -256,40 +256,40 @@ export type PostWhereInput = {
   id?: Prisma.UuidFilter<"Post"> | string
   communityId?: Prisma.UuidFilter<"Post"> | string
   authorId?: Prisma.UuidFilter<"Post"> | string
-  document?: Prisma.JsonFilter<"Post">
-  searchText?: Prisma.StringFilter<"Post"> | string
   score?: Prisma.IntFilter<"Post"> | number
   commentCount?: Prisma.IntFilter<"Post"> | number
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Post"> | Date | string | null
-  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
-  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  document?: Prisma.JsonFilter<"Post">
+  searchText?: Prisma.StringFilter<"Post"> | string
   comments?: Prisma.CommentListRelationFilter
-  votes?: Prisma.VoteListRelationFilter
-  tags?: Prisma.PostTagListRelationFilter
   media?: Prisma.MediaListRelationFilter
+  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
+  tags?: Prisma.PostTagListRelationFilter
+  votes?: Prisma.VoteListRelationFilter
 }
 
 export type PostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   communityId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-  document?: Prisma.SortOrder
-  searchText?: Prisma.SortOrder
   score?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  community?: Prisma.CommunityOrderByWithRelationInput
-  author?: Prisma.UserOrderByWithRelationInput
+  document?: Prisma.SortOrder
+  searchText?: Prisma.SortOrder
   comments?: Prisma.CommentOrderByRelationAggregateInput
-  votes?: Prisma.VoteOrderByRelationAggregateInput
-  tags?: Prisma.PostTagOrderByRelationAggregateInput
   media?: Prisma.MediaOrderByRelationAggregateInput
+  author?: Prisma.UserOrderByWithRelationInput
+  community?: Prisma.CommunityOrderByWithRelationInput
+  tags?: Prisma.PostTagOrderByRelationAggregateInput
+  votes?: Prisma.VoteOrderByRelationAggregateInput
 }
 
 export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -299,34 +299,34 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
   communityId?: Prisma.UuidFilter<"Post"> | string
   authorId?: Prisma.UuidFilter<"Post"> | string
-  document?: Prisma.JsonFilter<"Post">
-  searchText?: Prisma.StringFilter<"Post"> | string
   score?: Prisma.IntFilter<"Post"> | number
   commentCount?: Prisma.IntFilter<"Post"> | number
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Post"> | Date | string | null
-  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
-  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  document?: Prisma.JsonFilter<"Post">
+  searchText?: Prisma.StringFilter<"Post"> | string
   comments?: Prisma.CommentListRelationFilter
-  votes?: Prisma.VoteListRelationFilter
-  tags?: Prisma.PostTagListRelationFilter
   media?: Prisma.MediaListRelationFilter
+  author?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
+  tags?: Prisma.PostTagListRelationFilter
+  votes?: Prisma.VoteListRelationFilter
 }, "id">
 
 export type PostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   communityId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-  document?: Prisma.SortOrder
-  searchText?: Prisma.SortOrder
   score?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  document?: Prisma.SortOrder
+  searchText?: Prisma.SortOrder
   _count?: Prisma.PostCountOrderByAggregateInput
   _avg?: Prisma.PostAvgOrderByAggregateInput
   _max?: Prisma.PostMaxOrderByAggregateInput
@@ -341,126 +341,126 @@ export type PostScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"Post"> | string
   communityId?: Prisma.UuidWithAggregatesFilter<"Post"> | string
   authorId?: Prisma.UuidWithAggregatesFilter<"Post"> | string
-  document?: Prisma.JsonWithAggregatesFilter<"Post">
-  searchText?: Prisma.StringWithAggregatesFilter<"Post"> | string
   score?: Prisma.IntWithAggregatesFilter<"Post"> | number
   commentCount?: Prisma.IntWithAggregatesFilter<"Post"> | number
   status?: Prisma.EnumPostStatusWithAggregatesFilter<"Post"> | $Enums.PostStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Post"> | Date | string | null
+  document?: Prisma.JsonWithAggregatesFilter<"Post">
+  searchText?: Prisma.StringWithAggregatesFilter<"Post"> | string
 }
 
 export type PostCreateInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateManyInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
 }
 
 export type PostUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PostUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PostListRelationFilter = {
@@ -477,14 +477,14 @@ export type PostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   communityId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-  document?: Prisma.SortOrder
-  searchText?: Prisma.SortOrder
   score?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  document?: Prisma.SortOrder
+  searchText?: Prisma.SortOrder
 }
 
 export type PostAvgOrderByAggregateInput = {
@@ -496,26 +496,26 @@ export type PostMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   communityId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-  searchText?: Prisma.SortOrder
   score?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  searchText?: Prisma.SortOrder
 }
 
 export type PostMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   communityId?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
-  searchText?: Prisma.SortOrder
   score?: Prisma.SortOrder
   commentCount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  searchText?: Prisma.SortOrder
 }
 
 export type PostSumOrderByAggregateInput = {
@@ -683,36 +683,36 @@ export type PostUpdateOneWithoutVotesNestedInput = {
 
 export type PostCreateWithoutAuthorInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutAuthorInput = {
   id?: string
   communityId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutAuthorInput = {
@@ -748,48 +748,48 @@ export type PostScalarWhereInput = {
   id?: Prisma.UuidFilter<"Post"> | string
   communityId?: Prisma.UuidFilter<"Post"> | string
   authorId?: Prisma.UuidFilter<"Post"> | string
-  document?: Prisma.JsonFilter<"Post">
-  searchText?: Prisma.StringFilter<"Post"> | string
   score?: Prisma.IntFilter<"Post"> | number
   commentCount?: Prisma.IntFilter<"Post"> | number
   status?: Prisma.EnumPostStatusFilter<"Post"> | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Post"> | Date | string | null
+  document?: Prisma.JsonFilter<"Post">
+  searchText?: Prisma.StringFilter<"Post"> | string
 }
 
 export type PostCreateWithoutCommunityInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutCommunityInput = {
   id?: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutCommunityInput = {
@@ -820,36 +820,36 @@ export type PostUpdateManyWithWhereWithoutCommunityInput = {
 
 export type PostCreateWithoutCommentsInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutCommentsInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutCommentsInput = {
@@ -870,70 +870,70 @@ export type PostUpdateToOneWithWhereWithoutCommentsInput = {
 
 export type PostUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutTagsInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutTagsInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutTagsInput = {
@@ -954,70 +954,70 @@ export type PostUpdateToOneWithWhereWithoutTagsInput = {
 
 export type PostUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutTagsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutMediaInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
   tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutMediaInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
   tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutMediaInput = {
@@ -1038,70 +1038,70 @@ export type PostUpdateToOneWithWhereWithoutMediaInput = {
 
 export type PostUpdateWithoutMediaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
   tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutMediaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
   tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutVotesInput = {
   id?: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
-  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
   media?: Prisma.MediaCreateNestedManyWithoutPostInput
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  community: Prisma.CommunityCreateNestedOneWithoutPostsInput
+  tags?: Prisma.PostTagCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutVotesInput = {
   id?: string
   communityId: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
-  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutPostInput
+  tags?: Prisma.PostTagUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutVotesInput = {
@@ -1122,156 +1122,156 @@ export type PostUpdateToOneWithWhereWithoutVotesInput = {
 
 export type PostUpdateWithoutVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateManyAuthorInput = {
   id?: string
   communityId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
 }
 
 export type PostUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutPostsNestedInput
+  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateManyWithoutAuthorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   communityId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PostCreateManyCommunityInput = {
   id?: string
   authorId: string
-  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText: string
   score?: number
   commentCount?: number
   status?: $Enums.PostStatus
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  document: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText: string
 }
 
 export type PostUpdateWithoutCommunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUpdateManyWithoutPostNestedInput
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  tags?: Prisma.PostTagUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutCommunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
-  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
-  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutPostNestedInput
+  tags?: Prisma.PostTagUncheckedUpdateManyWithoutPostNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateManyWithoutCommunityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  searchText?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
   commentCount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  document?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  searchText?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -1281,16 +1281,16 @@ export type PostUncheckedUpdateManyWithoutCommunityInput = {
 
 export type PostCountOutputType = {
   comments: number
-  votes: number
-  tags: number
   media: number
+  tags: number
+  votes: number
 }
 
 export type PostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | PostCountOutputTypeCountCommentsArgs
-  votes?: boolean | PostCountOutputTypeCountVotesArgs
-  tags?: boolean | PostCountOutputTypeCountTagsArgs
   media?: boolean | PostCountOutputTypeCountMediaArgs
+  tags?: boolean | PostCountOutputTypeCountTagsArgs
+  votes?: boolean | PostCountOutputTypeCountVotesArgs
 }
 
 /**
@@ -1313,8 +1313,8 @@ export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
 /**
  * PostCountOutputType without action
  */
-export type PostCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.VoteWhereInput
+export type PostCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaWhereInput
 }
 
 /**
@@ -1327,8 +1327,8 @@ export type PostCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Exten
 /**
  * PostCountOutputType without action
  */
-export type PostCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MediaWhereInput
+export type PostCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VoteWhereInput
 }
 
 
@@ -1336,20 +1336,20 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   communityId?: boolean
   authorId?: boolean
-  document?: boolean
-  searchText?: boolean
   score?: boolean
   commentCount?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
-  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  document?: boolean
+  searchText?: boolean
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
-  votes?: boolean | Prisma.Post$votesArgs<ExtArgs>
-  tags?: boolean | Prisma.Post$tagsArgs<ExtArgs>
   media?: boolean | Prisma.Post$mediaArgs<ExtArgs>
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  tags?: boolean | Prisma.Post$tagsArgs<ExtArgs>
+  votes?: boolean | Prisma.Post$votesArgs<ExtArgs>
   _count?: boolean | Prisma.PostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
 
@@ -1357,89 +1357,89 @@ export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   communityId?: boolean
   authorId?: boolean
-  document?: boolean
-  searchText?: boolean
   score?: boolean
   commentCount?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  document?: boolean
+  searchText?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
 
 export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   communityId?: boolean
   authorId?: boolean
-  document?: boolean
-  searchText?: boolean
   score?: boolean
   commentCount?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  document?: boolean
+  searchText?: boolean
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
 
 export type PostSelectScalar = {
   id?: boolean
   communityId?: boolean
   authorId?: boolean
-  document?: boolean
-  searchText?: boolean
   score?: boolean
   commentCount?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  document?: boolean
+  searchText?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "communityId" | "authorId" | "document" | "searchText" | "score" | "commentCount" | "status" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "communityId" | "authorId" | "score" | "commentCount" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "document" | "searchText", ExtArgs["result"]["post"]>
 export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
-  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
-  votes?: boolean | Prisma.Post$votesArgs<ExtArgs>
-  tags?: boolean | Prisma.Post$tagsArgs<ExtArgs>
   media?: boolean | Prisma.Post$mediaArgs<ExtArgs>
+  author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  tags?: boolean | Prisma.Post$tagsArgs<ExtArgs>
+  votes?: boolean | Prisma.Post$votesArgs<ExtArgs>
   _count?: boolean | Prisma.PostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
 }
 export type PostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
 }
 
 export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Post"
   objects: {
-    community: Prisma.$CommunityPayload<ExtArgs>
-    author: Prisma.$UserPayload<ExtArgs>
     comments: Prisma.$CommentPayload<ExtArgs>[]
-    votes: Prisma.$VotePayload<ExtArgs>[]
-    tags: Prisma.$PostTagPayload<ExtArgs>[]
     media: Prisma.$MediaPayload<ExtArgs>[]
+    author: Prisma.$UserPayload<ExtArgs>
+    community: Prisma.$CommunityPayload<ExtArgs>
+    tags: Prisma.$PostTagPayload<ExtArgs>[]
+    votes: Prisma.$VotePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     communityId: string
     authorId: string
-    document: runtime.JsonValue
-    searchText: string
     score: number
     commentCount: number
     status: $Enums.PostStatus
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
+    document: runtime.JsonValue
+    searchText: string
   }, ExtArgs["result"]["post"]>
   composites: {}
 }
@@ -1834,12 +1834,12 @@ readonly fields: PostFieldRefs;
  */
 export interface Prisma__PostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  community<T extends Prisma.CommunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityDefaultArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   comments<T extends Prisma.Post$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  votes<T extends Prisma.Post$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  tags<T extends Prisma.Post$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   media<T extends Prisma.Post$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  author<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  community<T extends Prisma.CommunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityDefaultArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tags<T extends Prisma.Post$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  votes<T extends Prisma.Post$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1872,14 +1872,14 @@ export interface PostFieldRefs {
   readonly id: Prisma.FieldRef<"Post", 'String'>
   readonly communityId: Prisma.FieldRef<"Post", 'String'>
   readonly authorId: Prisma.FieldRef<"Post", 'String'>
-  readonly document: Prisma.FieldRef<"Post", 'Json'>
-  readonly searchText: Prisma.FieldRef<"Post", 'String'>
   readonly score: Prisma.FieldRef<"Post", 'Int'>
   readonly commentCount: Prisma.FieldRef<"Post", 'Int'>
   readonly status: Prisma.FieldRef<"Post", 'PostStatus'>
   readonly createdAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Post", 'DateTime'>
+  readonly document: Prisma.FieldRef<"Post", 'Json'>
+  readonly searchText: Prisma.FieldRef<"Post", 'String'>
 }
     
 
@@ -2305,27 +2305,27 @@ export type Post$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Post.votes
+ * Post.media
  */
-export type Post$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Post$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Vote
+   * Select specific fields to fetch from the Media
    */
-  select?: Prisma.VoteSelect<ExtArgs> | null
+  select?: Prisma.MediaSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Vote
+   * Omit specific fields from the Media
    */
-  omit?: Prisma.VoteOmit<ExtArgs> | null
+  omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.VoteInclude<ExtArgs> | null
-  where?: Prisma.VoteWhereInput
-  orderBy?: Prisma.VoteOrderByWithRelationInput | Prisma.VoteOrderByWithRelationInput[]
-  cursor?: Prisma.VoteWhereUniqueInput
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  where?: Prisma.MediaWhereInput
+  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
+  cursor?: Prisma.MediaWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.VoteScalarFieldEnum | Prisma.VoteScalarFieldEnum[]
+  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
 }
 
 /**
@@ -2353,27 +2353,27 @@ export type Post$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 }
 
 /**
- * Post.media
+ * Post.votes
  */
-export type Post$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Post$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Media
+   * Select specific fields to fetch from the Vote
    */
-  select?: Prisma.MediaSelect<ExtArgs> | null
+  select?: Prisma.VoteSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Media
+   * Omit specific fields from the Vote
    */
-  omit?: Prisma.MediaOmit<ExtArgs> | null
+  omit?: Prisma.VoteOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MediaInclude<ExtArgs> | null
-  where?: Prisma.MediaWhereInput
-  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
-  cursor?: Prisma.MediaWhereUniqueInput
+  include?: Prisma.VoteInclude<ExtArgs> | null
+  where?: Prisma.VoteWhereInput
+  orderBy?: Prisma.VoteOrderByWithRelationInput | Prisma.VoteOrderByWithRelationInput[]
+  cursor?: Prisma.VoteWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
+  distinct?: Prisma.VoteScalarFieldEnum | Prisma.VoteScalarFieldEnum[]
 }
 
 /**

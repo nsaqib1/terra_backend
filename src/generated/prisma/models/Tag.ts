@@ -248,8 +248,8 @@ export type TagWhereInput = {
   usageCount?: Prisma.IntFilter<"Tag"> | number
   createdAt?: Prisma.DateTimeFilter<"Tag"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tag"> | Date | string
-  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
   posts?: Prisma.PostTagListRelationFilter
+  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
 }
 
 export type TagOrderByWithRelationInput = {
@@ -262,8 +262,8 @@ export type TagOrderByWithRelationInput = {
   usageCount?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  community?: Prisma.CommunityOrderByWithRelationInput
   posts?: Prisma.PostTagOrderByRelationAggregateInput
+  community?: Prisma.CommunityOrderByWithRelationInput
 }
 
 export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -280,8 +280,8 @@ export type TagWhereUniqueInput = Prisma.AtLeast<{
   usageCount?: Prisma.IntFilter<"Tag"> | number
   createdAt?: Prisma.DateTimeFilter<"Tag"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tag"> | Date | string
-  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
   posts?: Prisma.PostTagListRelationFilter
+  community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
 }, "id" | "communityId_slug">
 
 export type TagOrderByWithAggregationInput = {
@@ -325,8 +325,8 @@ export type TagCreateInput = {
   usageCount?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  community: Prisma.CommunityCreateNestedOneWithoutTagsInput
   posts?: Prisma.PostTagCreateNestedManyWithoutTagInput
+  community: Prisma.CommunityCreateNestedOneWithoutTagsInput
 }
 
 export type TagUncheckedCreateInput = {
@@ -351,8 +351,8 @@ export type TagUpdateInput = {
   usageCount?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  community?: Prisma.CommunityUpdateOneRequiredWithoutTagsNestedInput
   posts?: Prisma.PostTagUpdateManyWithoutTagNestedInput
+  community?: Prisma.CommunityUpdateOneRequiredWithoutTagsNestedInput
 }
 
 export type TagUncheckedUpdateInput = {
@@ -743,8 +743,8 @@ export type TagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   usageCount?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   posts?: boolean | Prisma.Tag$postsArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tag"]>
 
@@ -788,8 +788,8 @@ export type TagSelectScalar = {
 
 export type TagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "communityId" | "name" | "slug" | "description" | "status" | "usageCount" | "createdAt" | "updatedAt", ExtArgs["result"]["tag"]>
 export type TagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   posts?: boolean | Prisma.Tag$postsArgs<ExtArgs>
+  community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TagCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TagIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -802,8 +802,8 @@ export type TagIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type $TagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Tag"
   objects: {
-    community: Prisma.$CommunityPayload<ExtArgs>
     posts: Prisma.$PostTagPayload<ExtArgs>[]
+    community: Prisma.$CommunityPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1209,8 +1209,8 @@ readonly fields: TagFieldRefs;
  */
 export interface Prisma__TagClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  community<T extends Prisma.CommunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityDefaultArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   posts<T extends Prisma.Tag$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  community<T extends Prisma.CommunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityDefaultArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

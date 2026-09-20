@@ -190,8 +190,8 @@ export type CommunityMembershipWhereInput = {
   role?: Prisma.EnumCommunityMemberRoleFilter<"CommunityMembership"> | $Enums.CommunityMemberRole
   joinedAt?: Prisma.DateTimeFilter<"CommunityMembership"> | Date | string
   leftAt?: Prisma.DateTimeNullableFilter<"CommunityMembership"> | Date | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type CommunityMembershipOrderByWithRelationInput = {
@@ -201,8 +201,8 @@ export type CommunityMembershipOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   leftAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
   community?: Prisma.CommunityOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type CommunityMembershipWhereUniqueInput = Prisma.AtLeast<{
@@ -216,8 +216,8 @@ export type CommunityMembershipWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumCommunityMemberRoleFilter<"CommunityMembership"> | $Enums.CommunityMemberRole
   joinedAt?: Prisma.DateTimeFilter<"CommunityMembership"> | Date | string
   leftAt?: Prisma.DateTimeNullableFilter<"CommunityMembership"> | Date | string | null
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   community?: Prisma.XOR<Prisma.CommunityScalarRelationFilter, Prisma.CommunityWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_communityId">
 
 export type CommunityMembershipOrderByWithAggregationInput = {
@@ -249,8 +249,8 @@ export type CommunityMembershipCreateInput = {
   role?: $Enums.CommunityMemberRole
   joinedAt?: Date | string
   leftAt?: Date | string | null
-  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
   community: Prisma.CommunityCreateNestedOneWithoutMembershipsInput
+  user: Prisma.UserCreateNestedOneWithoutMembershipsInput
 }
 
 export type CommunityMembershipUncheckedCreateInput = {
@@ -267,8 +267,8 @@ export type CommunityMembershipUpdateInput = {
   role?: Prisma.EnumCommunityMemberRoleFieldUpdateOperationsInput | $Enums.CommunityMemberRole
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leftAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
   community?: Prisma.CommunityUpdateOneRequiredWithoutMembershipsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutMembershipsNestedInput
 }
 
 export type CommunityMembershipUncheckedUpdateInput = {
@@ -604,8 +604,8 @@ export type CommunityMembershipSelect<ExtArgs extends runtime.Types.Extensions.I
   role?: boolean
   joinedAt?: boolean
   leftAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["communityMembership"]>
 
 export type CommunityMembershipSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -615,8 +615,8 @@ export type CommunityMembershipSelectCreateManyAndReturn<ExtArgs extends runtime
   role?: boolean
   joinedAt?: boolean
   leftAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["communityMembership"]>
 
 export type CommunityMembershipSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -626,8 +626,8 @@ export type CommunityMembershipSelectUpdateManyAndReturn<ExtArgs extends runtime
   role?: boolean
   joinedAt?: boolean
   leftAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["communityMembership"]>
 
 export type CommunityMembershipSelectScalar = {
@@ -641,23 +641,23 @@ export type CommunityMembershipSelectScalar = {
 
 export type CommunityMembershipOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "communityId" | "role" | "joinedAt" | "leftAt", ExtArgs["result"]["communityMembership"]>
 export type CommunityMembershipInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CommunityMembershipIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type CommunityMembershipIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   community?: boolean | Prisma.CommunityDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $CommunityMembershipPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CommunityMembership"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
     community: Prisma.$CommunityPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1060,8 +1060,8 @@ readonly fields: CommunityMembershipFieldRefs;
  */
 export interface Prisma__CommunityMembershipClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   community<T extends Prisma.CommunityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityDefaultArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

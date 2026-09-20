@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.9.1
- * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
+ * Prisma Client JS version: 7.10.0
+ * Query Engine version: 0edf323efd1d98336f3f0a68684b56f689b900d3
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.9.1",
-  engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
+  client: "7.10.0",
+  engine: "0edf323efd1d98336f3f0a68684b56f689b900d3"
 }
 
 /**
@@ -409,7 +409,9 @@ export const ModelName = {
   Vote: 'Vote',
   PointEvent: 'PointEvent',
   DailyVisit: 'DailyVisit',
-  RefreshSession: 'RefreshSession'
+  RefreshSession: 'RefreshSession',
+  Invite: 'Invite',
+  InviteUsage: 'InviteUsage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "media" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession"
+    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "media" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession" | "invite" | "inviteUsage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1391,6 +1393,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Invite: {
+      payload: Prisma.$InvitePayload<ExtArgs>
+      fields: Prisma.InviteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InviteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InviteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        findFirst: {
+          args: Prisma.InviteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InviteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        findMany: {
+          args: Prisma.InviteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        create: {
+          args: Prisma.InviteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        createMany: {
+          args: Prisma.InviteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InviteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        delete: {
+          args: Prisma.InviteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        update: {
+          args: Prisma.InviteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        deleteMany: {
+          args: Prisma.InviteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InviteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InviteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>[]
+        }
+        upsert: {
+          args: Prisma.InviteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InvitePayload>
+        }
+        aggregate: {
+          args: Prisma.InviteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInvite>
+        }
+        groupBy: {
+          args: Prisma.InviteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InviteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteCountAggregateOutputType> | number
+        }
+      }
+    }
+    InviteUsage: {
+      payload: Prisma.$InviteUsagePayload<ExtArgs>
+      fields: Prisma.InviteUsageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InviteUsageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InviteUsageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        findFirst: {
+          args: Prisma.InviteUsageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InviteUsageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        findMany: {
+          args: Prisma.InviteUsageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>[]
+        }
+        create: {
+          args: Prisma.InviteUsageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        createMany: {
+          args: Prisma.InviteUsageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InviteUsageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>[]
+        }
+        delete: {
+          args: Prisma.InviteUsageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        update: {
+          args: Prisma.InviteUsageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        deleteMany: {
+          args: Prisma.InviteUsageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InviteUsageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InviteUsageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>[]
+        }
+        upsert: {
+          args: Prisma.InviteUsageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InviteUsagePayload>
+        }
+        aggregate: {
+          args: Prisma.InviteUsageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInviteUsage>
+        }
+        groupBy: {
+          args: Prisma.InviteUsageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteUsageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InviteUsageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InviteUsageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1438,14 +1588,14 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarUrl: 'avatarUrl',
   bio: 'bio',
-  location: 'location',
-  website: 'website',
-  points: 'points',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
-  role: 'role'
+  role: 'role',
+  points: 'points',
+  location: 'location',
+  website: 'website'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1502,14 +1652,14 @@ export const PostScalarFieldEnum = {
   id: 'id',
   communityId: 'communityId',
   authorId: 'authorId',
-  document: 'document',
-  searchText: 'searchText',
   score: 'score',
   commentCount: 'commentCount',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  document: 'document',
+  searchText: 'searchText'
 } as const
 
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -1565,10 +1715,10 @@ export const MediaScalarFieldEnum = {
   height: 'height',
   size: 'size',
   altText: 'altText',
-  originalFilename: 'originalFilename',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  originalFilename: 'originalFilename'
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
@@ -1622,6 +1772,32 @@ export const RefreshSessionScalarFieldEnum = {
 } as const
 
 export type RefreshSessionScalarFieldEnum = (typeof RefreshSessionScalarFieldEnum)[keyof typeof RefreshSessionScalarFieldEnum]
+
+
+export const InviteScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  label: 'label',
+  maxUses: 'maxUses',
+  usedCount: 'usedCount',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
+
+
+export const InviteUsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  usedAt: 'usedAt',
+  inviteId: 'inviteId'
+} as const
+
+export type InviteUsageScalarFieldEnum = (typeof InviteUsageScalarFieldEnum)[keyof typeof InviteUsageScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1685,20 +1861,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
  * Reference to a field of type 'UserStatus'
  */
 export type EnumUserStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserStatus'>
@@ -1737,6 +1899,20 @@ export type EnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'UserRole[]'
  */
 export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -1811,20 +1987,6 @@ export type ListEnumCommunityMemberRoleFieldRefInput<$PrismaModel> = FieldRefInp
 
 
 /**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
  * Reference to a field of type 'PostStatus'
  */
 export type EnumPostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostStatus'>
@@ -1835,6 +1997,20 @@ export type EnumPostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'PostStatus[]'
  */
 export type ListEnumPostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -1919,6 +2095,13 @@ export type EnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'PointSourceType[]'
  */
 export type ListEnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointSourceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -2099,6 +2282,8 @@ export type GlobalOmitConfig = {
   pointEvent?: Prisma.PointEventOmit
   dailyVisit?: Prisma.DailyVisitOmit
   refreshSession?: Prisma.RefreshSessionOmit
+  invite?: Prisma.InviteOmit
+  inviteUsage?: Prisma.InviteUsageOmit
 }
 
 /* Types for Logging */

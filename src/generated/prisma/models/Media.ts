@@ -50,10 +50,10 @@ export type MediaMinAggregateOutputType = {
   height: number | null
   size: number | null
   altText: string | null
-  originalFilename: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  originalFilename: string | null
 }
 
 export type MediaMaxAggregateOutputType = {
@@ -68,10 +68,10 @@ export type MediaMaxAggregateOutputType = {
   height: number | null
   size: number | null
   altText: string | null
-  originalFilename: string | null
   createdAt: Date | null
   updatedAt: Date | null
   deletedAt: Date | null
+  originalFilename: string | null
 }
 
 export type MediaCountAggregateOutputType = {
@@ -86,10 +86,10 @@ export type MediaCountAggregateOutputType = {
   height: number
   size: number
   altText: number
-  originalFilename: number
   createdAt: number
   updatedAt: number
   deletedAt: number
+  originalFilename: number
   _all: number
 }
 
@@ -118,10 +118,10 @@ export type MediaMinAggregateInputType = {
   height?: true
   size?: true
   altText?: true
-  originalFilename?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  originalFilename?: true
 }
 
 export type MediaMaxAggregateInputType = {
@@ -136,10 +136,10 @@ export type MediaMaxAggregateInputType = {
   height?: true
   size?: true
   altText?: true
-  originalFilename?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  originalFilename?: true
 }
 
 export type MediaCountAggregateInputType = {
@@ -154,10 +154,10 @@ export type MediaCountAggregateInputType = {
   height?: true
   size?: true
   altText?: true
-  originalFilename?: true
   createdAt?: true
   updatedAt?: true
   deletedAt?: true
+  originalFilename?: true
   _all?: true
 }
 
@@ -259,10 +259,10 @@ export type MediaGroupByOutputType = {
   height: number | null
   size: number | null
   altText: string | null
-  originalFilename: string | null
   createdAt: Date
   updatedAt: Date
   deletedAt: Date | null
+  originalFilename: string | null
   _count: MediaCountAggregateOutputType | null
   _avg: MediaAvgAggregateOutputType | null
   _sum: MediaSumAggregateOutputType | null
@@ -300,12 +300,12 @@ export type MediaWhereInput = {
   height?: Prisma.IntNullableFilter<"Media"> | number | null
   size?: Prisma.IntNullableFilter<"Media"> | number | null
   altText?: Prisma.StringNullableFilter<"Media"> | string | null
-  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
-  uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
   post?: Prisma.XOR<Prisma.PostNullableScalarRelationFilter, Prisma.PostWhereInput> | null
+  uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type MediaOrderByWithRelationInput = {
@@ -320,12 +320,12 @@ export type MediaOrderByWithRelationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
-  originalFilename?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  uploadedBy?: Prisma.UserOrderByWithRelationInput
+  originalFilename?: Prisma.SortOrderInput | Prisma.SortOrder
   post?: Prisma.PostOrderByWithRelationInput
+  uploadedBy?: Prisma.UserOrderByWithRelationInput
 }
 
 export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -343,12 +343,12 @@ export type MediaWhereUniqueInput = Prisma.AtLeast<{
   height?: Prisma.IntNullableFilter<"Media"> | number | null
   size?: Prisma.IntNullableFilter<"Media"> | number | null
   altText?: Prisma.StringNullableFilter<"Media"> | string | null
-  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
-  uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
   post?: Prisma.XOR<Prisma.PostNullableScalarRelationFilter, Prisma.PostWhereInput> | null
+  uploadedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type MediaOrderByWithAggregationInput = {
@@ -363,10 +363,10 @@ export type MediaOrderByWithAggregationInput = {
   height?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
   altText?: Prisma.SortOrderInput | Prisma.SortOrder
-  originalFilename?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  originalFilename?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MediaCountOrderByAggregateInput
   _avg?: Prisma.MediaAvgOrderByAggregateInput
   _max?: Prisma.MediaMaxOrderByAggregateInput
@@ -389,10 +389,10 @@ export type MediaScalarWhereWithAggregatesInput = {
   height?: Prisma.IntNullableWithAggregatesFilter<"Media"> | number | null
   size?: Prisma.IntNullableWithAggregatesFilter<"Media"> | number | null
   altText?: Prisma.StringNullableWithAggregatesFilter<"Media"> | string | null
-  originalFilename?: Prisma.StringNullableWithAggregatesFilter<"Media"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Media"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Media"> | Date | string | null
+  originalFilename?: Prisma.StringNullableWithAggregatesFilter<"Media"> | string | null
 }
 
 export type MediaCreateInput = {
@@ -405,12 +405,12 @@ export type MediaCreateInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  uploadedBy: Prisma.UserCreateNestedOneWithoutMediaInput
+  originalFilename?: string | null
   post?: Prisma.PostCreateNestedOneWithoutMediaInput
+  uploadedBy: Prisma.UserCreateNestedOneWithoutMediaInput
 }
 
 export type MediaUncheckedCreateInput = {
@@ -425,10 +425,10 @@ export type MediaUncheckedCreateInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaUpdateInput = {
@@ -441,12 +441,12 @@ export type MediaUpdateInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  uploadedBy?: Prisma.UserUpdateOneRequiredWithoutMediaNestedInput
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   post?: Prisma.PostUpdateOneWithoutMediaNestedInput
+  uploadedBy?: Prisma.UserUpdateOneRequiredWithoutMediaNestedInput
 }
 
 export type MediaUncheckedUpdateInput = {
@@ -461,10 +461,10 @@ export type MediaUncheckedUpdateInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaCreateManyInput = {
@@ -479,10 +479,10 @@ export type MediaCreateManyInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaUpdateManyMutationInput = {
@@ -495,10 +495,10 @@ export type MediaUpdateManyMutationInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaUncheckedUpdateManyInput = {
@@ -513,10 +513,10 @@ export type MediaUncheckedUpdateManyInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaListRelationFilter = {
@@ -541,10 +541,10 @@ export type MediaCountOrderByAggregateInput = {
   height?: Prisma.SortOrder
   size?: Prisma.SortOrder
   altText?: Prisma.SortOrder
-  originalFilename?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  originalFilename?: Prisma.SortOrder
 }
 
 export type MediaAvgOrderByAggregateInput = {
@@ -565,10 +565,10 @@ export type MediaMaxOrderByAggregateInput = {
   height?: Prisma.SortOrder
   size?: Prisma.SortOrder
   altText?: Prisma.SortOrder
-  originalFilename?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  originalFilename?: Prisma.SortOrder
 }
 
 export type MediaMinOrderByAggregateInput = {
@@ -583,10 +583,10 @@ export type MediaMinOrderByAggregateInput = {
   height?: Prisma.SortOrder
   size?: Prisma.SortOrder
   altText?: Prisma.SortOrder
-  originalFilename?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
+  originalFilename?: Prisma.SortOrder
 }
 
 export type MediaSumOrderByAggregateInput = {
@@ -705,10 +705,10 @@ export type MediaCreateWithoutUploadedByInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
   post?: Prisma.PostCreateNestedOneWithoutMediaInput
 }
 
@@ -723,10 +723,10 @@ export type MediaUncheckedCreateWithoutUploadedByInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaCreateOrConnectWithoutUploadedByInput = {
@@ -770,10 +770,10 @@ export type MediaScalarWhereInput = {
   height?: Prisma.IntNullableFilter<"Media"> | number | null
   size?: Prisma.IntNullableFilter<"Media"> | number | null
   altText?: Prisma.StringNullableFilter<"Media"> | string | null
-  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
+  originalFilename?: Prisma.StringNullableFilter<"Media"> | string | null
 }
 
 export type MediaCreateWithoutPostInput = {
@@ -786,10 +786,10 @@ export type MediaCreateWithoutPostInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
   uploadedBy: Prisma.UserCreateNestedOneWithoutMediaInput
 }
 
@@ -804,10 +804,10 @@ export type MediaUncheckedCreateWithoutPostInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaCreateOrConnectWithoutPostInput = {
@@ -847,10 +847,10 @@ export type MediaCreateManyUploadedByInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaUpdateWithoutUploadedByInput = {
@@ -863,10 +863,10 @@ export type MediaUpdateWithoutUploadedByInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   post?: Prisma.PostUpdateOneWithoutMediaNestedInput
 }
 
@@ -881,10 +881,10 @@ export type MediaUncheckedUpdateWithoutUploadedByInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaUncheckedUpdateManyWithoutUploadedByInput = {
@@ -898,10 +898,10 @@ export type MediaUncheckedUpdateManyWithoutUploadedByInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaCreateManyPostInput = {
@@ -915,10 +915,10 @@ export type MediaCreateManyPostInput = {
   height?: number | null
   size?: number | null
   altText?: string | null
-  originalFilename?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  originalFilename?: string | null
 }
 
 export type MediaUpdateWithoutPostInput = {
@@ -931,10 +931,10 @@ export type MediaUpdateWithoutPostInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   uploadedBy?: Prisma.UserUpdateOneRequiredWithoutMediaNestedInput
 }
 
@@ -949,10 +949,10 @@ export type MediaUncheckedUpdateWithoutPostInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MediaUncheckedUpdateManyWithoutPostInput = {
@@ -966,10 +966,10 @@ export type MediaUncheckedUpdateManyWithoutPostInput = {
   height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   altText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  originalFilename?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -986,12 +986,12 @@ export type MediaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   height?: boolean
   size?: boolean
   altText?: boolean
-  originalFilename?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  originalFilename?: boolean
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
 export type MediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1006,12 +1006,12 @@ export type MediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   height?: boolean
   size?: boolean
   altText?: boolean
-  originalFilename?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  originalFilename?: boolean
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
 export type MediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1026,12 +1026,12 @@ export type MediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   height?: boolean
   size?: boolean
   altText?: boolean
-  originalFilename?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  originalFilename?: boolean
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
 export type MediaSelectScalar = {
@@ -1046,31 +1046,31 @@ export type MediaSelectScalar = {
   height?: boolean
   size?: boolean
   altText?: boolean
-  originalFilename?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
+  originalFilename?: boolean
 }
 
-export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uploadedById" | "postId" | "type" | "status" | "storageKey" | "mimeType" | "width" | "height" | "size" | "altText" | "originalFilename" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["media"]>
+export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "uploadedById" | "postId" | "type" | "status" | "storageKey" | "mimeType" | "width" | "height" | "size" | "altText" | "createdAt" | "updatedAt" | "deletedAt" | "originalFilename", ExtArgs["result"]["media"]>
 export type MediaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type MediaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type MediaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Media$postArgs<ExtArgs>
+  uploadedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Media"
   objects: {
-    uploadedBy: Prisma.$UserPayload<ExtArgs>
     post: Prisma.$PostPayload<ExtArgs> | null
+    uploadedBy: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1084,10 +1084,10 @@ export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     height: number | null
     size: number | null
     altText: string | null
-    originalFilename: string | null
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
+    originalFilename: string | null
   }, ExtArgs["result"]["media"]>
   composites: {}
 }
@@ -1482,8 +1482,8 @@ readonly fields: MediaFieldRefs;
  */
 export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  uploadedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   post<T extends Prisma.Media$postArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$postArgs<ExtArgs>>): Prisma.Prisma__PostClient<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  uploadedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,10 +1524,10 @@ export interface MediaFieldRefs {
   readonly height: Prisma.FieldRef<"Media", 'Int'>
   readonly size: Prisma.FieldRef<"Media", 'Int'>
   readonly altText: Prisma.FieldRef<"Media", 'String'>
-  readonly originalFilename: Prisma.FieldRef<"Media", 'String'>
   readonly createdAt: Prisma.FieldRef<"Media", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Media", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Media", 'DateTime'>
+  readonly originalFilename: Prisma.FieldRef<"Media", 'String'>
 }
     
 

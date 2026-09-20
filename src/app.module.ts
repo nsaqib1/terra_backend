@@ -13,6 +13,7 @@ import { CommentModule } from './comment/comment.module';
 import { VoteModule } from './vote/vote.module';
 import { PointModule } from './point/point.module';
 import { UserModule } from './user/user.module';
+import { InvitesModule } from './invites/invites.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module';
     VoteModule,
     PointModule,
     UserModule,
+    InvitesModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

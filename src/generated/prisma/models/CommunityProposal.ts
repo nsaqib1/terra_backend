@@ -246,9 +246,9 @@ export type CommunityProposalWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CommunityProposal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CommunityProposal"> | Date | string
   communityId?: Prisma.UuidNullableFilter<"CommunityProposal"> | string | null
+  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   proposedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
 }
 
 export type CommunityProposalOrderByWithRelationInput = {
@@ -265,9 +265,9 @@ export type CommunityProposalOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   communityId?: Prisma.SortOrderInput | Prisma.SortOrder
+  community?: Prisma.CommunityOrderByWithRelationInput
   proposedBy?: Prisma.UserOrderByWithRelationInput
   reviewedBy?: Prisma.UserOrderByWithRelationInput
-  community?: Prisma.CommunityOrderByWithRelationInput
 }
 
 export type CommunityProposalWhereUniqueInput = Prisma.AtLeast<{
@@ -287,9 +287,9 @@ export type CommunityProposalWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CommunityProposal"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CommunityProposal"> | Date | string
   communityId?: Prisma.UuidNullableFilter<"CommunityProposal"> | string | null
+  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   proposedBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   reviewedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
 }, "id">
 
 export type CommunityProposalOrderByWithAggregationInput = {
@@ -341,9 +341,9 @@ export type CommunityProposalCreateInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  community?: Prisma.CommunityCreateNestedOneWithoutProposalsInput
   proposedBy: Prisma.UserCreateNestedOneWithoutProposalsInput
   reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedProposalsInput
-  community?: Prisma.CommunityCreateNestedOneWithoutProposalsInput
 }
 
 export type CommunityProposalUncheckedCreateInput = {
@@ -373,9 +373,9 @@ export type CommunityProposalUpdateInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  community?: Prisma.CommunityUpdateOneWithoutProposalsNestedInput
   proposedBy?: Prisma.UserUpdateOneRequiredWithoutProposalsNestedInput
   reviewedBy?: Prisma.UserUpdateOneWithoutReviewedProposalsNestedInput
-  community?: Prisma.CommunityUpdateOneWithoutProposalsNestedInput
 }
 
 export type CommunityProposalUncheckedUpdateInput = {
@@ -638,8 +638,8 @@ export type CommunityProposalCreateWithoutProposedByInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedProposalsInput
   community?: Prisma.CommunityCreateNestedOneWithoutProposalsInput
+  reviewedBy?: Prisma.UserCreateNestedOneWithoutReviewedProposalsInput
 }
 
 export type CommunityProposalUncheckedCreateWithoutProposedByInput = {
@@ -678,8 +678,8 @@ export type CommunityProposalCreateWithoutReviewedByInput = {
   reviewedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  proposedBy: Prisma.UserCreateNestedOneWithoutProposalsInput
   community?: Prisma.CommunityCreateNestedOneWithoutProposalsInput
+  proposedBy: Prisma.UserCreateNestedOneWithoutProposalsInput
 }
 
 export type CommunityProposalUncheckedCreateWithoutReviewedByInput = {
@@ -855,8 +855,8 @@ export type CommunityProposalUpdateWithoutProposedByInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedProposalsNestedInput
   community?: Prisma.CommunityUpdateOneWithoutProposalsNestedInput
+  reviewedBy?: Prisma.UserUpdateOneWithoutReviewedProposalsNestedInput
 }
 
 export type CommunityProposalUncheckedUpdateWithoutProposedByInput = {
@@ -900,8 +900,8 @@ export type CommunityProposalUpdateWithoutReviewedByInput = {
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  proposedBy?: Prisma.UserUpdateOneRequiredWithoutProposalsNestedInput
   community?: Prisma.CommunityUpdateOneWithoutProposalsNestedInput
+  proposedBy?: Prisma.UserUpdateOneRequiredWithoutProposalsNestedInput
 }
 
 export type CommunityProposalUncheckedUpdateWithoutReviewedByInput = {
@@ -1010,9 +1010,9 @@ export type CommunityProposalSelect<ExtArgs extends runtime.Types.Extensions.Int
   createdAt?: boolean
   updatedAt?: boolean
   communityId?: boolean
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }, ExtArgs["result"]["communityProposal"]>
 
 export type CommunityProposalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1029,9 +1029,9 @@ export type CommunityProposalSelectCreateManyAndReturn<ExtArgs extends runtime.T
   createdAt?: boolean
   updatedAt?: boolean
   communityId?: boolean
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }, ExtArgs["result"]["communityProposal"]>
 
 export type CommunityProposalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1048,9 +1048,9 @@ export type CommunityProposalSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   createdAt?: boolean
   updatedAt?: boolean
   communityId?: boolean
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }, ExtArgs["result"]["communityProposal"]>
 
 export type CommunityProposalSelectScalar = {
@@ -1071,27 +1071,27 @@ export type CommunityProposalSelectScalar = {
 
 export type CommunityProposalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "proposedName" | "proposedSlug" | "description" | "reason" | "status" | "proposedById" | "reviewedById" | "reviewReason" | "reviewedAt" | "createdAt" | "updatedAt" | "communityId", ExtArgs["result"]["communityProposal"]>
 export type CommunityProposalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }
 export type CommunityProposalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }
 export type CommunityProposalIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
   proposedBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.CommunityProposal$reviewedByArgs<ExtArgs>
-  community?: boolean | Prisma.CommunityProposal$communityArgs<ExtArgs>
 }
 
 export type $CommunityProposalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CommunityProposal"
   objects: {
+    community: Prisma.$CommunityPayload<ExtArgs> | null
     proposedBy: Prisma.$UserPayload<ExtArgs>
     reviewedBy: Prisma.$UserPayload<ExtArgs> | null
-    community: Prisma.$CommunityPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1501,9 +1501,9 @@ readonly fields: CommunityProposalFieldRefs;
  */
 export interface Prisma__CommunityProposalClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  community<T extends Prisma.CommunityProposal$communityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityProposal$communityArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   proposedBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviewedBy<T extends Prisma.CommunityProposal$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityProposal$reviewedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  community<T extends Prisma.CommunityProposal$communityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommunityProposal$communityArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1947,25 +1947,6 @@ export type CommunityProposalDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * CommunityProposal.reviewedBy
- */
-export type CommunityProposal$reviewedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * CommunityProposal.community
  */
 export type CommunityProposal$communityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1982,6 +1963,25 @@ export type CommunityProposal$communityArgs<ExtArgs extends runtime.Types.Extens
    */
   include?: Prisma.CommunityInclude<ExtArgs> | null
   where?: Prisma.CommunityWhereInput
+}
+
+/**
+ * CommunityProposal.reviewedBy
+ */
+export type CommunityProposal$reviewedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

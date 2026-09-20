@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   UnauthorizedException,
@@ -8,6 +9,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../database/prisma.service';
+import { InvitesService } from '../invites/invites.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { hashToken } from './auth-token.util';
@@ -22,9 +24,22 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwt: JwtService,
     private readonly config: ConfigService,
+    private readonly invitesService: InvitesService,
   ) { }
 
   async register(dto: RegisterDto) {
+    const isInviteOnly = this.invitesService.isInviteOnlyEnabled();
+
+    if (isInviteOnly && !dto.inviteCode?.trim()) {
+      throw new BadRequestException(
+        'An invite code is required to sign up during the beta testing phase.',
+      );
+    }
+
+    if (dto.inviteCode?.trim()) {
+      await this.invitesService.validateInviteCode(dto.inviteCode.trim());
+    }
+
     const username = dto.username.trim().toLowerCase();
     const email = dto.email.trim().toLowerCase();
 
@@ -49,23 +64,35 @@ export class AuthService {
 
     const passwordHash = await bcrypt.hash(dto.password, 12);
 
-    const user = await this.prisma.user.create({
-      data: {
-        username,
-        displayName: dto.displayName.trim(),
-        email,
-        passwordHash,
-      },
-      select: {
-        id: true,
-        username: true,
-        displayName: true,
-        email: true,
-        avatarUrl: true,
-        points: true,
-        role: true,
-        createdAt: true,
-      },
+    const user = await this.prisma.$transaction(async (tx) => {
+      const newUser = await tx.user.create({
+        data: {
+          username,
+          displayName: dto.displayName.trim(),
+          email,
+          passwordHash,
+        },
+        select: {
+          id: true,
+          username: true,
+          displayName: true,
+          email: true,
+          avatarUrl: true,
+          points: true,
+          role: true,
+          createdAt: true,
+        },
+      });
+
+      if (dto.inviteCode?.trim()) {
+        await this.invitesService.redeemInviteInTransaction(
+          dto.inviteCode.trim(),
+          newUser.id,
+          tx,
+        );
+      }
+
+      return newUser;
     });
 
     const tokens = await this.createTokenPair(user.id);

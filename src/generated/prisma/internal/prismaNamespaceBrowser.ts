@@ -63,7 +63,9 @@ export const ModelName = {
   Vote: 'Vote',
   PointEvent: 'PointEvent',
   DailyVisit: 'DailyVisit',
-  RefreshSession: 'RefreshSession'
+  RefreshSession: 'RefreshSession',
+  Invite: 'Invite',
+  InviteUsage: 'InviteUsage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,14 +92,14 @@ export const UserScalarFieldEnum = {
   passwordHash: 'passwordHash',
   avatarUrl: 'avatarUrl',
   bio: 'bio',
-  location: 'location',
-  website: 'website',
-  points: 'points',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
-  role: 'role'
+  role: 'role',
+  points: 'points',
+  location: 'location',
+  website: 'website'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -154,14 +156,14 @@ export const PostScalarFieldEnum = {
   id: 'id',
   communityId: 'communityId',
   authorId: 'authorId',
-  document: 'document',
-  searchText: 'searchText',
   score: 'score',
   commentCount: 'commentCount',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  document: 'document',
+  searchText: 'searchText'
 } as const
 
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
@@ -217,10 +219,10 @@ export const MediaScalarFieldEnum = {
   height: 'height',
   size: 'size',
   altText: 'altText',
-  originalFilename: 'originalFilename',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  originalFilename: 'originalFilename'
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
@@ -274,6 +276,32 @@ export const RefreshSessionScalarFieldEnum = {
 } as const
 
 export type RefreshSessionScalarFieldEnum = (typeof RefreshSessionScalarFieldEnum)[keyof typeof RefreshSessionScalarFieldEnum]
+
+
+export const InviteScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  label: 'label',
+  maxUses: 'maxUses',
+  usedCount: 'usedCount',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
+
+
+export const InviteUsageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  usedAt: 'usedAt',
+  inviteId: 'inviteId'
+} as const
+
+export type InviteUsageScalarFieldEnum = (typeof InviteUsageScalarFieldEnum)[keyof typeof InviteUsageScalarFieldEnum]
 
 
 export const SortOrder = {

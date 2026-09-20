@@ -125,9 +125,9 @@ export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
 
 export const MediaStatus = {
-  TEMPORARY: 'TEMPORARY',
   ACTIVE: 'ACTIVE',
-  DELETED: 'DELETED'
+  DELETED: 'DELETED',
+  TEMPORARY: 'TEMPORARY'
 } as const
 
 export type MediaStatus = (typeof MediaStatus)[keyof typeof MediaStatus]

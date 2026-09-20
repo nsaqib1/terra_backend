@@ -104,3 +104,13 @@ export type DailyVisit = Prisma.DailyVisitModel
  * 
  */
 export type RefreshSession = Prisma.RefreshSessionModel
+/**
+ * Model Invite
+ * 
+ */
+export type Invite = Prisma.InviteModel
+/**
+ * Model InviteUsage
+ * 
+ */
+export type InviteUsage = Prisma.InviteUsageModel
