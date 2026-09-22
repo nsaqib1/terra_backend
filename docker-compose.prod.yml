@@ -4,18 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: community_api
+    container_name: terra_api
     restart: unless-stopped
-    ports:
-      - "3001:3000"
     env_file:
       - .env
     volumes:
-      - ./storage/media:/app/storage/media
-    environment:
-      DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/community?schema=public"
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      - /srv/terra/storage/media:/app/storage/media
+    expose:
+      - "3000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -24,33 +20,27 @@ services:
 
   postgres:
     image: postgres:17-alpine
-    container_name: community_postgres
+    container_name: terra_postgres
     restart: unless-stopped
-    environment:
-      POSTGRES_DB: community
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d community" ]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 10
 
   redis:
     image: redis:8-alpine
-    container_name: community_redis
+    container_name: terra_redis
     restart: unless-stopped
-    ports:
-      - "6379:6379"
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 5s
       retries: 10

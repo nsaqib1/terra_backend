@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -9,9 +9,26 @@ RUN npm ci
 COPY . .
 
 RUN npx prisma generate
-
 RUN npm run build
+
+
+FROM node:22-alpine AS production
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY package*.json ./
+
+RUN npm ci --omit=dev
+
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder /app/src/generated ./src/generated
+
+RUN mkdir -p /app/storage/media
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:dev"]
+CMD ["node", "dist/src/main.js"]
