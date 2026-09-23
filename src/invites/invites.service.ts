@@ -16,7 +16,7 @@ export class InvitesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
-  ) {}
+  ) { }
 
   /**
    * Check if invite-only signup mode is currently enabled
@@ -103,6 +103,7 @@ export class InvitesService {
     tx: any,
   ) {
     const code = rawCode.trim().toUpperCase();
+    const now = new Date();
 
     const invite = await tx.invite.findUnique({
       where: { code },
@@ -116,19 +117,28 @@ export class InvitesService {
       throw new BadRequestException('This invite link has been disabled');
     }
 
-    if (invite.expiresAt && new Date(invite.expiresAt) < new Date()) {
+    if (invite.expiresAt && invite.expiresAt < now) {
       throw new BadRequestException('This invite link has expired');
     }
 
-    if (invite.usedCount >= invite.maxUses) {
-      throw new BadRequestException(
-        'This invite code has reached its maximum redemptions',
-      );
-    }
-
-    // Increment usage count
-    await tx.invite.update({
-      where: { id: invite.id },
+    const updated = await tx.invite.updateMany({
+      where: {
+        id: invite.id,
+        isActive: true,
+        usedCount: {
+          lt: invite.maxUses,
+        },
+        OR: [
+          {
+            expiresAt: null,
+          },
+          {
+            expiresAt: {
+              gt: now,
+            },
+          },
+        ],
+      },
       data: {
         usedCount: {
           increment: 1,
@@ -136,7 +146,12 @@ export class InvitesService {
       },
     });
 
-    // Create InviteUsage record
+    if (updated.count !== 1) {
+      throw new BadRequestException(
+        'This invite code has reached its maximum redemptions',
+      );
+    }
+
     await tx.inviteUsage.create({
       data: {
         inviteId: invite.id,
@@ -287,8 +302,8 @@ export class InvitesService {
       query.status === InviteStatusFilter.DEPLETED
         ? formattedItems.filter((i) => i.status === 'depleted')
         : query.status === InviteStatusFilter.ACTIVE
-        ? formattedItems.filter((i) => i.status === 'active')
-        : formattedItems;
+          ? formattedItems.filter((i) => i.status === 'active')
+          : formattedItems;
 
     return {
       items: filtered,

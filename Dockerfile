@@ -27,7 +27,10 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/src/generated ./src/generated
 
-RUN mkdir -p /app/storage/media
+RUN mkdir -p /app/storage/media \
+    && chown -R node:node /app
+
+USER node
 
 EXPOSE 3000
 

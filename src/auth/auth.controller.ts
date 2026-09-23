@@ -9,6 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -24,6 +25,7 @@ interface AuthenticatedRequest extends Request {
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
   @Post('register')
   async register(
     @Body() dto: RegisterDto,
@@ -39,6 +41,7 @@ export class AuthController {
     };
   }
 
+  @Throttle({ default: { limit: 10, ttl: 60_000 } })
   @Post('login')
   async login(
     @Body() dto: LoginDto,
@@ -54,6 +57,7 @@ export class AuthController {
     };
   }
 
+  @Throttle({ default: { limit: 30, ttl: 60_000 } })
   @Post('refresh')
   async refresh(
     @Req() request: Request,
@@ -118,7 +122,7 @@ export class AuthController {
     response.cookie('refresh_token', token, {
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      sameSite: 'lax',
       path: '/api/v1/auth',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
@@ -130,7 +134,7 @@ export class AuthController {
     response.clearCookie('refresh_token', {
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      sameSite: 'lax',
       path: '/api/v1/auth',
     });
   }
