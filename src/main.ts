@@ -12,8 +12,13 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api/v1');
 
-  app.use(helmet());
-
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: {
+        policy: 'cross-origin',
+      },
+    }),
+  );
   app.enableCors({
     origin: config.getOrThrow<string>('FRONTEND_URL'),
     credentials: true,
