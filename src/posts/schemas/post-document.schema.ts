@@ -80,6 +80,13 @@ const imageSchema = z.object({
   altText: z.string().max(500).optional(),
 });
 
+const youtubeSchema = z.object({
+  type: z.literal('youtube'),
+  videoId: z
+    .string()
+    .regex(/^[A-Za-z0-9_-]{11}$/),
+});
+
 const documentNodeSchema = z.discriminatedUnion('type', [
   paragraphSchema,
   headingSchema,
@@ -88,6 +95,7 @@ const documentNodeSchema = z.discriminatedUnion('type', [
   blockquoteSchema,
   codeBlockSchema,
   imageSchema,
+  youtubeSchema,
 ]);
 
 export const postDocumentSchema = z.object({

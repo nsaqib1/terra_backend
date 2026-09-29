@@ -34,6 +34,9 @@ export function extractPostSearchText(
           parts.push(node.altText);
         }
         break;
+
+      case 'youtube':
+        break;
     }
   }
 
