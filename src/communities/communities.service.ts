@@ -33,6 +33,7 @@ export class CommunitiesService {
           select: {
             memberships: true,
             posts: true,
+            resources: true,
           },
         },
       },
@@ -98,6 +99,7 @@ export class CommunitiesService {
           select: {
             memberships: true,
             posts: true,
+            resources: true,
           },
         },
       },

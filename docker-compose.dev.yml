@@ -16,6 +16,8 @@ services:
       REDIS_PORT: 6379
     volumes:
       - ./storage/media:/app/storage/media
+      - ./storage/resources:/app/storage/resources
+      - ./storage/resource-temp:/app/storage/resource-temp
       - .:/app
       - /app/node_modules
     depends_on:

@@ -96,3 +96,23 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## Resource storage configuration
+
+Resources use a separate storage root from post media. Add these variables to the backend `.env`:
+
+```env
+RESOURCE_STORAGE_PATH=/app/storage/resources
+RESOURCE_TEMP_PATH=/app/storage/resource-temp
+RESOURCE_MAX_FILE_SIZE=104857600
+```
+
+For production, the Docker Compose configuration mounts:
+
+```text
+/srv/terra/storage/resources -> /app/storage/resources
+/srv/terra/storage/resource-temp -> /app/storage/resource-temp
+```
+
+Apply the resource migration with the normal Prisma migration workflow before starting the new API build.

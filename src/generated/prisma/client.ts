@@ -80,6 +80,21 @@ export type Tag = Prisma.TagModel
  */
 export type PostTag = Prisma.PostTagModel
 /**
+ * Model Resource
+ * 
+ */
+export type Resource = Prisma.ResourceModel
+/**
+ * Model ResourceTagDefinition
+ * 
+ */
+export type ResourceTagDefinition = Prisma.ResourceTagDefinitionModel
+/**
+ * Model ResourceTag
+ * 
+ */
+export type ResourceTag = Prisma.ResourceTagModel
+/**
  * Model Media
  * 
  */

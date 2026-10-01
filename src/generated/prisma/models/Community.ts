@@ -226,6 +226,8 @@ export type CommunityWhereInput = {
   proposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
   tags?: Prisma.TagListRelationFilter
+  resources?: Prisma.ResourceListRelationFilter
+  resourceTags?: Prisma.ResourceTagDefinitionListRelationFilter
 }
 
 export type CommunityOrderByWithRelationInput = {
@@ -243,6 +245,8 @@ export type CommunityOrderByWithRelationInput = {
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   tags?: Prisma.TagOrderByRelationAggregateInput
+  resources?: Prisma.ResourceOrderByRelationAggregateInput
+  resourceTags?: Prisma.ResourceTagDefinitionOrderByRelationAggregateInput
 }
 
 export type CommunityWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +267,8 @@ export type CommunityWhereUniqueInput = Prisma.AtLeast<{
   proposals?: Prisma.CommunityProposalListRelationFilter
   posts?: Prisma.PostListRelationFilter
   tags?: Prisma.TagListRelationFilter
+  resources?: Prisma.ResourceListRelationFilter
+  resourceTags?: Prisma.ResourceTagDefinitionListRelationFilter
 }, "id" | "slug">
 
 export type CommunityOrderByWithAggregationInput = {
@@ -312,6 +318,8 @@ export type CommunityCreateInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateInput = {
@@ -329,6 +337,8 @@ export type CommunityUncheckedCreateInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUpdateInput = {
@@ -346,6 +356,8 @@ export type CommunityUpdateInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateInput = {
@@ -363,6 +375,8 @@ export type CommunityUncheckedUpdateInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateManyInput = {
@@ -523,6 +537,34 @@ export type CommunityUpdateOneRequiredWithoutTagsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutTagsInput, Prisma.CommunityUpdateWithoutTagsInput>, Prisma.CommunityUncheckedUpdateWithoutTagsInput>
 }
 
+export type CommunityCreateNestedOneWithoutResourcesInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutResourcesInput, Prisma.CommunityUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutResourcesInput
+  connect?: Prisma.CommunityWhereUniqueInput
+}
+
+export type CommunityUpdateOneRequiredWithoutResourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutResourcesInput, Prisma.CommunityUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutResourcesInput
+  upsert?: Prisma.CommunityUpsertWithoutResourcesInput
+  connect?: Prisma.CommunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutResourcesInput, Prisma.CommunityUpdateWithoutResourcesInput>, Prisma.CommunityUncheckedUpdateWithoutResourcesInput>
+}
+
+export type CommunityCreateNestedOneWithoutResourceTagsInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutResourceTagsInput, Prisma.CommunityUncheckedCreateWithoutResourceTagsInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutResourceTagsInput
+  connect?: Prisma.CommunityWhereUniqueInput
+}
+
+export type CommunityUpdateOneRequiredWithoutResourceTagsNestedInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutResourceTagsInput, Prisma.CommunityUncheckedCreateWithoutResourceTagsInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutResourceTagsInput
+  upsert?: Prisma.CommunityUpsertWithoutResourceTagsInput
+  connect?: Prisma.CommunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutResourceTagsInput, Prisma.CommunityUpdateWithoutResourceTagsInput>, Prisma.CommunityUncheckedUpdateWithoutResourceTagsInput>
+}
+
 export type CommunityCreateWithoutProposalsInput = {
   id?: string
   name: string
@@ -537,6 +579,8 @@ export type CommunityCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutProposalsInput = {
@@ -553,6 +597,8 @@ export type CommunityUncheckedCreateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutProposalsInput = {
@@ -585,6 +631,8 @@ export type CommunityUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutProposalsInput = {
@@ -601,6 +649,8 @@ export type CommunityUncheckedUpdateWithoutProposalsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutMembershipsInput = {
@@ -617,6 +667,8 @@ export type CommunityCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutMembershipsInput = {
@@ -633,6 +685,8 @@ export type CommunityUncheckedCreateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutMembershipsInput = {
@@ -665,6 +719,8 @@ export type CommunityUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutMembershipsInput = {
@@ -681,6 +737,8 @@ export type CommunityUncheckedUpdateWithoutMembershipsInput = {
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutPostsInput = {
@@ -697,6 +755,8 @@ export type CommunityCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutPostsInput = {
@@ -713,6 +773,8 @@ export type CommunityUncheckedCreateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutPostsInput = {
@@ -745,6 +807,8 @@ export type CommunityUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutPostsInput = {
@@ -761,6 +825,8 @@ export type CommunityUncheckedUpdateWithoutPostsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutTagsInput = {
@@ -777,6 +843,8 @@ export type CommunityCreateWithoutTagsInput = {
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutTagsInput = {
@@ -793,6 +861,8 @@ export type CommunityUncheckedCreateWithoutTagsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutTagsInput = {
@@ -825,6 +895,8 @@ export type CommunityUpdateWithoutTagsInput = {
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutTagsInput = {
@@ -841,6 +913,184 @@ export type CommunityUncheckedUpdateWithoutTagsInput = {
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityCreateWithoutResourcesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityUncheckedCreateWithoutResourcesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityCreateOrConnectWithoutResourcesInput = {
+  where: Prisma.CommunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutResourcesInput, Prisma.CommunityUncheckedCreateWithoutResourcesInput>
+}
+
+export type CommunityUpsertWithoutResourcesInput = {
+  update: Prisma.XOR<Prisma.CommunityUpdateWithoutResourcesInput, Prisma.CommunityUncheckedUpdateWithoutResourcesInput>
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutResourcesInput, Prisma.CommunityUncheckedCreateWithoutResourcesInput>
+  where?: Prisma.CommunityWhereInput
+}
+
+export type CommunityUpdateToOneWithWhereWithoutResourcesInput = {
+  where?: Prisma.CommunityWhereInput
+  data: Prisma.XOR<Prisma.CommunityUpdateWithoutResourcesInput, Prisma.CommunityUncheckedUpdateWithoutResourcesInput>
+}
+
+export type CommunityUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityUncheckedUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityCreateWithoutResourceTagsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityUncheckedCreateWithoutResourceTagsInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityCreateOrConnectWithoutResourceTagsInput = {
+  where: Prisma.CommunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutResourceTagsInput, Prisma.CommunityUncheckedCreateWithoutResourceTagsInput>
+}
+
+export type CommunityUpsertWithoutResourceTagsInput = {
+  update: Prisma.XOR<Prisma.CommunityUpdateWithoutResourceTagsInput, Prisma.CommunityUncheckedUpdateWithoutResourceTagsInput>
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutResourceTagsInput, Prisma.CommunityUncheckedCreateWithoutResourceTagsInput>
+  where?: Prisma.CommunityWhereInput
+}
+
+export type CommunityUpdateToOneWithWhereWithoutResourceTagsInput = {
+  where?: Prisma.CommunityWhereInput
+  data: Prisma.XOR<Prisma.CommunityUpdateWithoutResourceTagsInput, Prisma.CommunityUncheckedUpdateWithoutResourceTagsInput>
+}
+
+export type CommunityUpdateWithoutResourceTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityUncheckedUpdateWithoutResourceTagsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 
@@ -853,6 +1103,8 @@ export type CommunityCountOutputType = {
   proposals: number
   posts: number
   tags: number
+  resources: number
+  resourceTags: number
 }
 
 export type CommunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -860,6 +1112,8 @@ export type CommunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   proposals?: boolean | CommunityCountOutputTypeCountProposalsArgs
   posts?: boolean | CommunityCountOutputTypeCountPostsArgs
   tags?: boolean | CommunityCountOutputTypeCountTagsArgs
+  resources?: boolean | CommunityCountOutputTypeCountResourcesArgs
+  resourceTags?: boolean | CommunityCountOutputTypeCountResourceTagsArgs
 }
 
 /**
@@ -900,6 +1154,20 @@ export type CommunityCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.TagWhereInput
 }
 
+/**
+ * CommunityCountOutputType without action
+ */
+export type CommunityCountOutputTypeCountResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResourceWhereInput
+}
+
+/**
+ * CommunityCountOutputType without action
+ */
+export type CommunityCountOutputTypeCountResourceTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResourceTagDefinitionWhereInput
+}
+
 
 export type CommunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -916,6 +1184,8 @@ export type CommunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   proposals?: boolean | Prisma.Community$proposalsArgs<ExtArgs>
   posts?: boolean | Prisma.Community$postsArgs<ExtArgs>
   tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
+  resources?: boolean | Prisma.Community$resourcesArgs<ExtArgs>
+  resourceTags?: boolean | Prisma.Community$resourceTagsArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["community"]>
 
@@ -964,6 +1234,8 @@ export type CommunityInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   proposals?: boolean | Prisma.Community$proposalsArgs<ExtArgs>
   posts?: boolean | Prisma.Community$postsArgs<ExtArgs>
   tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
+  resources?: boolean | Prisma.Community$resourcesArgs<ExtArgs>
+  resourceTags?: boolean | Prisma.Community$resourceTagsArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CommunityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -976,6 +1248,8 @@ export type $CommunityPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     proposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     tags: Prisma.$TagPayload<ExtArgs>[]
+    resources: Prisma.$ResourcePayload<ExtArgs>[]
+    resourceTags: Prisma.$ResourceTagDefinitionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1386,6 +1660,8 @@ export interface Prisma__CommunityClient<T, Null = never, ExtArgs extends runtim
   proposals<T extends Prisma.Community$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.Community$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tags<T extends Prisma.Community$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resources<T extends Prisma.Community$resourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resourceTags<T extends Prisma.Community$resourceTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$resourceTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResourceTagDefinitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1911,6 +2187,54 @@ export type Community$tagsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
+}
+
+/**
+ * Community.resources
+ */
+export type Community$resourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Resource
+   */
+  select?: Prisma.ResourceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Resource
+   */
+  omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  where?: Prisma.ResourceWhereInput
+  orderBy?: Prisma.ResourceOrderByWithRelationInput | Prisma.ResourceOrderByWithRelationInput[]
+  cursor?: Prisma.ResourceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResourceScalarFieldEnum | Prisma.ResourceScalarFieldEnum[]
+}
+
+/**
+ * Community.resourceTags
+ */
+export type Community$resourceTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResourceTagDefinition
+   */
+  select?: Prisma.ResourceTagDefinitionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResourceTagDefinition
+   */
+  omit?: Prisma.ResourceTagDefinitionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceTagDefinitionInclude<ExtArgs> | null
+  where?: Prisma.ResourceTagDefinitionWhereInput
+  orderBy?: Prisma.ResourceTagDefinitionOrderByWithRelationInput | Prisma.ResourceTagDefinitionOrderByWithRelationInput[]
+  cursor?: Prisma.ResourceTagDefinitionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResourceTagDefinitionScalarFieldEnum | Prisma.ResourceTagDefinitionScalarFieldEnum[]
 }
 
 /**

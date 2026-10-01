@@ -32,6 +32,7 @@ model User {
   createdInvites    Invite[]              @relation("CreatedInvites")
   inviteUsage       InviteUsage?
   media             Media[]
+  resources         Resource[]
   pointEvents       PointEvent[]
   posts             Post[]
   refreshSessions   RefreshSession[]
@@ -56,6 +57,8 @@ model Community {
   proposals      CommunityProposal[]
   posts          Post[]
   tags           Tag[]
+  resources      Resource[]
+  resourceTags   ResourceTagDefinition[]
 
   @@index([status])
   @@index([maturity])
@@ -176,6 +179,63 @@ model PostTag {
   tag    Tag    @relation(fields: [tagId], references: [id])
 
   @@id([postId, tagId])
+  @@index([tagId])
+}
+
+model Resource {
+  id                String         @id @default(uuid()) @db.Uuid
+  communityId       String         @db.Uuid
+  uploadedById      String         @db.Uuid
+  title             String         @db.VarChar(200)
+  description       String?
+  originalFilename  String         @db.VarChar(255)
+  storageKey        String
+  mimeType          String         @db.VarChar(150)
+  size              BigInt
+  status            ResourceStatus @default(PUBLISHED)
+  downloadCount     Int            @default(0)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  publishedAt       DateTime?
+  deletedAt         DateTime?
+  community         Community      @relation(fields: [communityId], references: [id])
+  uploadedBy        User           @relation(fields: [uploadedById], references: [id])
+  tags              ResourceTag[]
+
+  @@index([communityId, createdAt])
+  @@index([communityId, status, createdAt])
+  @@index([communityId, downloadCount])
+  @@index([uploadedById])
+  @@index([status])
+  @@index([deletedAt])
+}
+
+model ResourceTagDefinition {
+  id          String         @id @default(uuid()) @db.Uuid
+  communityId String         @db.Uuid
+  name        String         @db.VarChar(100)
+  slug        String         @db.VarChar(100)
+  description String?
+  status      TagStatus      @default(ACTIVE)
+  usageCount  Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  community   Community      @relation(fields: [communityId], references: [id])
+  resources   ResourceTag[]
+
+  @@unique([communityId, slug])
+  @@index([communityId])
+  @@index([communityId, status])
+  @@index([communityId, usageCount])
+}
+
+model ResourceTag {
+  resourceId String                  @db.Uuid
+  tagId      String                  @db.Uuid
+  resource   Resource                @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  tag        ResourceTagDefinition   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([resourceId, tagId])
   @@index([tagId])
 }
 
@@ -368,6 +428,11 @@ enum TagStatus {
   ARCHIVED
 
   @@map("TagStatus")
+}
+
+enum ResourceStatus {
+  PUBLISHED
+  ARCHIVED
 }
 
 enum MediaType {

@@ -304,6 +304,7 @@ export type UserWhereInput = {
   createdInvites?: Prisma.InviteListRelationFilter
   inviteUsage?: Prisma.XOR<Prisma.InviteUsageNullableScalarRelationFilter, Prisma.InviteUsageWhereInput> | null
   media?: Prisma.MediaListRelationFilter
+  resources?: Prisma.ResourceListRelationFilter
   pointEvents?: Prisma.PointEventListRelationFilter
   posts?: Prisma.PostListRelationFilter
   refreshSessions?: Prisma.RefreshSessionListRelationFilter
@@ -334,6 +335,7 @@ export type UserOrderByWithRelationInput = {
   createdInvites?: Prisma.InviteOrderByRelationAggregateInput
   inviteUsage?: Prisma.InviteUsageOrderByWithRelationInput
   media?: Prisma.MediaOrderByRelationAggregateInput
+  resources?: Prisma.ResourceOrderByRelationAggregateInput
   pointEvents?: Prisma.PointEventOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   refreshSessions?: Prisma.RefreshSessionOrderByRelationAggregateInput
@@ -367,6 +369,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdInvites?: Prisma.InviteListRelationFilter
   inviteUsage?: Prisma.XOR<Prisma.InviteUsageNullableScalarRelationFilter, Prisma.InviteUsageWhereInput> | null
   media?: Prisma.MediaListRelationFilter
+  resources?: Prisma.ResourceListRelationFilter
   pointEvents?: Prisma.PointEventListRelationFilter
   posts?: Prisma.PostListRelationFilter
   refreshSessions?: Prisma.RefreshSessionListRelationFilter
@@ -441,6 +444,7 @@ export type UserCreateInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -471,6 +475,7 @@ export type UserUncheckedCreateInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -501,6 +506,7 @@ export type UserUpdateInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -531,6 +537,7 @@ export type UserUncheckedUpdateInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -767,6 +774,20 @@ export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCommentsInput, Prisma.UserUpdateWithoutCommentsInput>, Prisma.UserUncheckedUpdateWithoutCommentsInput>
 }
 
+export type UserCreateNestedOneWithoutResourcesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResourcesInput, Prisma.UserUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResourcesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutResourcesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutResourcesInput, Prisma.UserUncheckedCreateWithoutResourcesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutResourcesInput
+  upsert?: Prisma.UserUpsertWithoutResourcesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResourcesInput, Prisma.UserUpdateWithoutResourcesInput>, Prisma.UserUncheckedUpdateWithoutResourcesInput>
+}
+
 export type UserCreateNestedOneWithoutMediaInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutMediaInput, Prisma.UserUncheckedCreateWithoutMediaInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaInput
@@ -890,6 +911,7 @@ export type UserCreateWithoutProposalsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -919,6 +941,7 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -953,6 +976,7 @@ export type UserCreateWithoutReviewedProposalsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -982,6 +1006,7 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1027,6 +1052,7 @@ export type UserUpdateWithoutProposalsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1056,6 +1082,7 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1096,6 +1123,7 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1125,6 +1153,7 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1154,6 +1183,7 @@ export type UserCreateWithoutMembershipsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1183,6 +1213,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1228,6 +1259,7 @@ export type UserUpdateWithoutMembershipsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1257,6 +1289,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1287,6 +1320,7 @@ export type UserCreateWithoutPostsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
@@ -1316,6 +1350,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
@@ -1361,6 +1396,7 @@ export type UserUpdateWithoutPostsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
@@ -1390,6 +1426,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
@@ -1418,6 +1455,7 @@ export type UserCreateWithoutCommentsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1447,6 +1485,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1492,6 +1531,7 @@ export type UserUpdateWithoutCommentsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1514,6 +1554,143 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutResourcesInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutResourcesInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutResourcesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutResourcesInput, Prisma.UserUncheckedCreateWithoutResourcesInput>
+}
+
+export type UserUpsertWithoutResourcesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutResourcesInput, Prisma.UserUncheckedUpdateWithoutResourcesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutResourcesInput, Prisma.UserUncheckedCreateWithoutResourcesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutResourcesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutResourcesInput, Prisma.UserUncheckedUpdateWithoutResourcesInput>
+}
+
+export type UserUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutResourcesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1550,6 +1727,7 @@ export type UserCreateWithoutMediaInput = {
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1579,6 +1757,7 @@ export type UserUncheckedCreateWithoutMediaInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1624,6 +1803,7 @@ export type UserUpdateWithoutMediaInput = {
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1653,6 +1833,7 @@ export type UserUncheckedUpdateWithoutMediaInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1683,6 +1864,7 @@ export type UserCreateWithoutVotesInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1712,6 +1894,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -1757,6 +1940,7 @@ export type UserUpdateWithoutVotesInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -1786,6 +1970,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1815,6 +2000,7 @@ export type UserCreateWithoutPointEventsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
@@ -1844,6 +2030,7 @@ export type UserUncheckedCreateWithoutPointEventsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
@@ -1889,6 +2076,7 @@ export type UserUpdateWithoutPointEventsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
@@ -1918,6 +2106,7 @@ export type UserUncheckedUpdateWithoutPointEventsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
@@ -1946,6 +2135,7 @@ export type UserCreateWithoutDailyVisitsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -1975,6 +2165,7 @@ export type UserUncheckedCreateWithoutDailyVisitsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -2020,6 +2211,7 @@ export type UserUpdateWithoutDailyVisitsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -2049,6 +2241,7 @@ export type UserUncheckedUpdateWithoutDailyVisitsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2079,6 +2272,7 @@ export type UserCreateWithoutRefreshSessionsInput = {
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteCreateNestedManyWithoutUserInput
@@ -2108,6 +2302,7 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
@@ -2153,6 +2348,7 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
@@ -2182,6 +2378,7 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
@@ -2210,6 +2407,7 @@ export type UserCreateWithoutCreatedInvitesInput = {
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -2239,6 +2437,7 @@ export type UserUncheckedCreateWithoutCreatedInvitesInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -2284,6 +2483,7 @@ export type UserUpdateWithoutCreatedInvitesInput = {
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -2313,6 +2513,7 @@ export type UserUncheckedUpdateWithoutCreatedInvitesInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2342,6 +2543,7 @@ export type UserCreateWithoutInviteUsageInput = {
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
   createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
   media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
@@ -2371,6 +2573,7 @@ export type UserUncheckedCreateWithoutInviteUsageInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
   createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
   media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
   pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
@@ -2416,6 +2619,7 @@ export type UserUpdateWithoutInviteUsageInput = {
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
   createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
   media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
@@ -2445,6 +2649,7 @@ export type UserUncheckedUpdateWithoutInviteUsageInput = {
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2464,6 +2669,7 @@ export type UserCountOutputType = {
   dailyVisits: number
   createdInvites: number
   media: number
+  resources: number
   pointEvents: number
   posts: number
   refreshSessions: number
@@ -2478,6 +2684,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   dailyVisits?: boolean | UserCountOutputTypeCountDailyVisitsArgs
   createdInvites?: boolean | UserCountOutputTypeCountCreatedInvitesArgs
   media?: boolean | UserCountOutputTypeCountMediaArgs
+  resources?: boolean | UserCountOutputTypeCountResourcesArgs
   pointEvents?: boolean | UserCountOutputTypeCountPointEventsArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   refreshSessions?: boolean | UserCountOutputTypeCountRefreshSessionsArgs
@@ -2546,6 +2753,13 @@ export type UserCountOutputTypeCountMediaArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountResourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResourceWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountPointEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PointEventWhereInput
 }
@@ -2596,6 +2810,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdInvites?: boolean | Prisma.User$createdInvitesArgs<ExtArgs>
   inviteUsage?: boolean | Prisma.User$inviteUsageArgs<ExtArgs>
   media?: boolean | Prisma.User$mediaArgs<ExtArgs>
+  resources?: boolean | Prisma.User$resourcesArgs<ExtArgs>
   pointEvents?: boolean | Prisma.User$pointEventsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   refreshSessions?: boolean | Prisma.User$refreshSessionsArgs<ExtArgs>
@@ -2667,6 +2882,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdInvites?: boolean | Prisma.User$createdInvitesArgs<ExtArgs>
   inviteUsage?: boolean | Prisma.User$inviteUsageArgs<ExtArgs>
   media?: boolean | Prisma.User$mediaArgs<ExtArgs>
+  resources?: boolean | Prisma.User$resourcesArgs<ExtArgs>
   pointEvents?: boolean | Prisma.User$pointEventsArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   refreshSessions?: boolean | Prisma.User$refreshSessionsArgs<ExtArgs>
@@ -2687,6 +2903,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdInvites: Prisma.$InvitePayload<ExtArgs>[]
     inviteUsage: Prisma.$InviteUsagePayload<ExtArgs> | null
     media: Prisma.$MediaPayload<ExtArgs>[]
+    resources: Prisma.$ResourcePayload<ExtArgs>[]
     pointEvents: Prisma.$PointEventPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     refreshSessions: Prisma.$RefreshSessionPayload<ExtArgs>[]
@@ -3110,6 +3327,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdInvites<T extends Prisma.User$createdInvitesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdInvitesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inviteUsage<T extends Prisma.User$inviteUsageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inviteUsageArgs<ExtArgs>>): Prisma.Prisma__InviteUsageClient<runtime.Types.Result.GetResult<Prisma.$InviteUsagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   media<T extends Prisma.User$mediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  resources<T extends Prisma.User$resourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pointEvents<T extends Prisma.User$pointEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pointEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PointEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   refreshSessions<T extends Prisma.User$refreshSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3735,6 +3953,30 @@ export type User$mediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
+}
+
+/**
+ * User.resources
+ */
+export type User$resourcesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Resource
+   */
+  select?: Prisma.ResourceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Resource
+   */
+  omit?: Prisma.ResourceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResourceInclude<ExtArgs> | null
+  where?: Prisma.ResourceWhereInput
+  orderBy?: Prisma.ResourceOrderByWithRelationInput | Prisma.ResourceOrderByWithRelationInput[]
+  cursor?: Prisma.ResourceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResourceScalarFieldEnum | Prisma.ResourceScalarFieldEnum[]
 }
 
 /**

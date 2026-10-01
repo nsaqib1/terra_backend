@@ -16,6 +16,7 @@ import { VoteModule } from './vote/vote.module';
 import { PointModule } from './point/point.module';
 import { UserModule } from './user/user.module';
 import { InvitesModule } from './invites/invites.module';
+import { ResourcesModule } from './resources/resources.module';
 import { z } from 'zod';
 
 const envSchema = z.object({
@@ -39,6 +40,9 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRES_IN: z.string().min(1).default('30d'),
 
   MEDIA_STORAGE_PATH: z.string().min(1),
+  RESOURCE_STORAGE_PATH: z.string().min(1),
+  RESOURCE_TEMP_PATH: z.string().min(1),
+  RESOURCE_MAX_FILE_SIZE: z.coerce.number().int().positive(),
 
   MEDIA_MAX_FILE_SIZE: z.coerce.number().int().positive(),
   MEDIA_MAX_IMAGE_WIDTH: z.coerce.number().int().positive(),
@@ -79,6 +83,7 @@ const envSchema = z.object({
     PointModule,
     UserModule,
     InvitesModule,
+    ResourcesModule,
   ],
 
   providers: [

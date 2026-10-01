@@ -59,6 +59,9 @@ export const ModelName = {
   Comment: 'Comment',
   Tag: 'Tag',
   PostTag: 'PostTag',
+  Resource: 'Resource',
+  ResourceTagDefinition: 'ResourceTagDefinition',
+  ResourceTag: 'ResourceTag',
   Media: 'Media',
   Vote: 'Vote',
   PointEvent: 'PointEvent',
@@ -205,6 +208,50 @@ export const PostTagScalarFieldEnum = {
 } as const
 
 export type PostTagScalarFieldEnum = (typeof PostTagScalarFieldEnum)[keyof typeof PostTagScalarFieldEnum]
+
+
+export const ResourceScalarFieldEnum = {
+  id: 'id',
+  communityId: 'communityId',
+  uploadedById: 'uploadedById',
+  title: 'title',
+  description: 'description',
+  originalFilename: 'originalFilename',
+  storageKey: 'storageKey',
+  mimeType: 'mimeType',
+  size: 'size',
+  status: 'status',
+  downloadCount: 'downloadCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ResourceScalarFieldEnum = (typeof ResourceScalarFieldEnum)[keyof typeof ResourceScalarFieldEnum]
+
+
+export const ResourceTagDefinitionScalarFieldEnum = {
+  id: 'id',
+  communityId: 'communityId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  status: 'status',
+  usageCount: 'usageCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResourceTagDefinitionScalarFieldEnum = (typeof ResourceTagDefinitionScalarFieldEnum)[keyof typeof ResourceTagDefinitionScalarFieldEnum]
+
+
+export const ResourceTagScalarFieldEnum = {
+  resourceId: 'resourceId',
+  tagId: 'tagId'
+} as const
+
+export type ResourceTagScalarFieldEnum = (typeof ResourceTagScalarFieldEnum)[keyof typeof ResourceTagScalarFieldEnum]
 
 
 export const MediaScalarFieldEnum = {
