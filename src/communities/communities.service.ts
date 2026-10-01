@@ -33,7 +33,9 @@ export class CommunitiesService {
           select: {
             memberships: true,
             posts: true,
-            resources: true,
+            resources: {
+              where: { status: 'PUBLISHED', deletedAt: null },
+            },
           },
         },
       },
@@ -99,7 +101,9 @@ export class CommunitiesService {
           select: {
             memberships: true,
             posts: true,
-            resources: true,
+            resources: {
+              where: { status: 'PUBLISHED', deletedAt: null },
+            },
           },
         },
       },

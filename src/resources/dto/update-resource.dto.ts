@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString, IsUUID, Length } from 'class-validator';
+import { IsArray, IsIn, IsOptional, IsString, IsUUID, Length } from 'class-validator';
 
 export class UpdateResourceDto {
   @IsOptional()
@@ -15,4 +15,8 @@ export class UpdateResourceDto {
   @IsArray()
   @IsUUID('4', { each: true })
   tagIds?: string[];
+
+  @IsOptional()
+  @IsIn(['PUBLISHED', 'UNPUBLISHED'])
+  status?: 'PUBLISHED' | 'UNPUBLISHED';
 }

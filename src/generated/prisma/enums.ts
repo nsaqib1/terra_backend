@@ -118,7 +118,7 @@ export type TagStatus = (typeof TagStatus)[keyof typeof TagStatus]
 
 export const ResourceStatus = {
   PUBLISHED: 'PUBLISHED',
-  ARCHIVED: 'ARCHIVED'
+  UNPUBLISHED: 'UNPUBLISHED'
 } as const
 
 export type ResourceStatus = (typeof ResourceStatus)[keyof typeof ResourceStatus]

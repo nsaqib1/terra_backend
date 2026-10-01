@@ -15,7 +15,7 @@ export class ResourcesService {
     private readonly storage: ResourceStorageService,
   ) {}
 
-  async list(dto: ListResourcesDto, includeArchived = false) {
+  async list(dto: ListResourcesDto, includeUnpublished = false) {
     const community = await this.prisma.community.findFirst({
       where: { id: dto.communityId, status: 'ACTIVE', deletedAt: null },
       select: { id: true },
@@ -25,7 +25,7 @@ export class ResourcesService {
     const tagIds = dto.tagIds?.split(',').map((id) => id.trim()).filter(Boolean) ?? [];
     const where = {
       communityId: dto.communityId,
-      ...(includeArchived ? {} : { status: 'PUBLISHED' as const, deletedAt: null }),
+      ...(includeUnpublished ? { deletedAt: null } : { status: 'PUBLISHED' as const, deletedAt: null }),
       ...(dto.q
         ? {
             OR: [
@@ -254,33 +254,65 @@ export class ResourcesService {
     });
   }
 
-  async archive(id: string) {
+  async unpublish(id: string) {
     const resource = await this.prisma.resource.findFirst({
       where: { id, deletedAt: null },
-      select: { id: true },
+      select: { id: true, status: true },
     });
     if (!resource) throw new NotFoundException('Resource not found');
-    return this.prisma.$transaction(async (tx) => {
+    if (resource.status === 'UNPUBLISHED') throw new BadRequestException('Resource is already unpublished');
+
+    const updated = await this.prisma.resource.update({
+      where: { id },
+      data: { status: 'UNPUBLISHED' },
+      select: this.resourceSelect(),
+    });
+    return this.serializeResource(updated);
+  }
+
+  async publish(id: string) {
+    const resource = await this.prisma.resource.findFirst({
+      where: { id, deletedAt: null },
+      select: { id: true, status: true },
+    });
+    if (!resource) throw new NotFoundException('Resource not found');
+    if (resource.status === 'PUBLISHED') throw new BadRequestException('Resource is already published');
+
+    const updated = await this.prisma.resource.update({
+      where: { id },
+      data: { status: 'PUBLISHED', publishedAt: new Date() },
+      select: this.resourceSelect(),
+    });
+    return this.serializeResource(updated);
+  }
+
+  async hardDelete(id: string) {
+    const resource = await this.prisma.resource.findFirst({
+      where: { id, deletedAt: null },
+      select: { id: true, storageKey: true },
+    });
+    if (!resource) throw new NotFoundException('Resource not found');
+
+    await this.prisma.$transaction(async (tx) => {
+      // Decrement tag usage counts before deleting
       const tags = await tx.resourceTag.findMany({
         where: { resourceId: id },
         select: { tagId: true },
       });
-
-      const archived = await tx.resource.update({
-        where: { id },
-        data: { status: 'ARCHIVED', deletedAt: new Date() },
-        select: { id: true, status: true, deletedAt: true },
-      });
-
       for (const tag of tags) {
         await tx.resourceTagDefinition.update({
           where: { id: tag.tagId },
           data: { usageCount: { decrement: 1 } },
         });
       }
-
-      return archived;
+      // Permanently delete the record (cascade deletes resource tags)
+      await tx.resource.delete({ where: { id } });
     });
+
+    // Delete the stored file after DB cleanup
+    await this.storage.delete(resource.storageKey);
+
+    return { id, deleted: true };
   }
 
   private serializeResource<T extends { size: bigint }>(resource: T) {

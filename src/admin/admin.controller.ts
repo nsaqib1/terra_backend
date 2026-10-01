@@ -183,8 +183,18 @@ export class AdminController {
   }
 
   @Delete('resources/:id')
-  async archiveResource(@Param('id') id: string) {
-    return this.resourcesService.archive(id);
+  async deleteResource(@Param('id') id: string) {
+    return this.resourcesService.hardDelete(id);
+  }
+
+  @Post('resources/:id/publish')
+  async publishResource(@Param('id') id: string) {
+    return this.resourcesService.publish(id);
+  }
+
+  @Post('resources/:id/unpublish')
+  async unpublishResource(@Param('id') id: string) {
+    return this.resourcesService.unpublish(id);
   }
 
   @Get('resource-tags')
