@@ -8,6 +8,7 @@ import {
   StreamableFile,
 } from '@nestjs/common';
 import type { Response } from 'express';
+
 import { ResourcesService } from './resources.service';
 import { ResourceTagsService } from './resource-tags.service';
 import { ListResourcesDto } from './dto/list-resources.dto';
@@ -17,7 +18,7 @@ export class ResourcesController {
   constructor(
     private readonly resources: ResourcesService,
     private readonly resourceTags: ResourceTagsService,
-  ) {}
+  ) { }
 
   @Get()
   list(@Query() dto: ListResourcesDto) {
@@ -25,10 +26,14 @@ export class ResourcesController {
   }
 
   @Get('tags')
-  tags(@Query('communityId') communityId: string, @Query('q') q?: string) {
+  tags(
+    @Query('communityId') communityId: string,
+    @Query('q') q?: string,
+  ) {
     if (!communityId) {
       throw new BadRequestException('communityId is required');
     }
+
     return this.resourceTags.list(communityId, q);
   }
 
@@ -44,15 +49,32 @@ export class ResourcesController {
     @Res({ passthrough: true }) response: Response,
   ) {
     const increment = download === 'true' || download === '1';
+
     const result = await this.resources.getFile(id, increment);
+
+    const isPdf = result.resource.mimeType === 'application/pdf';
+    const isInline = !increment && isPdf;
+
+    // PDFs are intentionally allowed to be embedded by the frontend.
+    // Helmet normally adds X-Frame-Options: SAMEORIGIN, which blocks
+    // localhost:3000 from embedding a PDF served by localhost:3001.
+    if (isInline) {
+      response.removeHeader('X-Frame-Options');
+      response.removeHeader('Content-Security-Policy');
+    }
 
     response.set({
       'Content-Type': result.resource.mimeType,
       'Content-Length': result.resource.size.toString(),
-      'Content-Disposition': increment || result.resource.mimeType !== 'application/pdf'
-        ? `attachment; filename*=UTF-8''${encodeURIComponent(result.resource.originalFilename)}`
-        : 'inline',
+
+      'Content-Disposition': isInline
+        ? 'inline'
+        : `attachment; filename*=UTF-8''${encodeURIComponent(
+          result.resource.originalFilename,
+        )}`,
+
       'Cache-Control': 'public, max-age=3600',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
     });
 
     return new StreamableFile(result.stream);
