@@ -221,4 +221,60 @@ export class GameService {
 			updatedAt: game.updatedAt,
 		};
 	}
+
+	async endSession(sessionId: string) {
+		const session = await this.prisma.gameSession.findUnique({
+			where: {
+				id: sessionId,
+			},
+			select: {
+				id: true,
+				status: true,
+				endedAt: true,
+			},
+		});
+
+		if (!session) {
+			throw new NotFoundException('Game session not found');
+		}
+
+		if (session.status === 'COMPLETED') {
+			return {
+				sessionId: session.id,
+				status: session.status,
+				endedAt: session.endedAt,
+			};
+		}
+
+		if (session.status === 'EXPIRED') {
+			return {
+				sessionId: session.id,
+				status: session.status,
+				endedAt: session.endedAt,
+			};
+		}
+
+		const endedAt = new Date();
+
+		const updated = await this.prisma.gameSession.update({
+			where: {
+				id: session.id,
+			},
+			data: {
+				status: 'COMPLETED',
+				endedAt,
+			},
+			select: {
+				id: true,
+				status: true,
+				endedAt: true,
+			},
+		});
+
+		return {
+			sessionId: updated.id,
+			status: updated.status,
+			endedAt: updated.endedAt,
+		};
+	}
 }

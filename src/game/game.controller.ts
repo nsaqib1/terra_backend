@@ -31,16 +31,12 @@ export class GameController {
     return this.gameService.list(dto);
   }
 
-  @Post(':slug/session')
-  @UseGuards(OptionalJwtAuthGuard)
-  async startSession(
-    @Param('slug') slug: string,
-    @Req() request: OptionalAuthenticatedRequest,
+  @Post('session/end')
+  @UseGuards(GameSessionGuard)
+  async endSession(
+    @GameSession() session: GameSessionContext,
   ) {
-    return this.gameService.startSession(
-      slug,
-      request.user?.userId,
-    );
+    return this.gameService.endSession(session.sessionId);
   }
 
   @Get('session/current')
@@ -57,12 +53,20 @@ export class GameController {
     };
   }
 
+  @Post(':slug/session')
+  @UseGuards(OptionalJwtAuthGuard)
+  async startSession(
+    @Param('slug') slug: string,
+    @Req() request: OptionalAuthenticatedRequest,
+  ) {
+    return this.gameService.startSession(
+      slug,
+      request.user?.userId,
+    );
+  }
+
   @Get(':slug')
   async findBySlug(@Param('slug') slug: string) {
     return this.gameService.findBySlug(slug);
   }
-
-
-
-
 }
