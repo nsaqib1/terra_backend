@@ -408,6 +408,11 @@ export const ModelName = {
   Resource: 'Resource',
   ResourceTagDefinition: 'ResourceTagDefinition',
   ResourceTag: 'ResourceTag',
+  Game: 'Game',
+  GameVersion: 'GameVersion',
+  GameCommunity: 'GameCommunity',
+  GameSession: 'GameSession',
+  GameScore: 'GameScore',
   Media: 'Media',
   Vote: 'Vote',
   PointEvent: 'PointEvent',
@@ -430,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "resource" | "resourceTagDefinition" | "resourceTag" | "media" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession" | "invite" | "inviteUsage"
+    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "resource" | "resourceTagDefinition" | "resourceTag" | "game" | "gameVersion" | "gameCommunity" | "gameSession" | "gameScore" | "media" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession" | "invite" | "inviteUsage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1248,6 +1253,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Game: {
+      payload: Prisma.$GamePayload<ExtArgs>
+      fields: Prisma.GameFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        findFirst: {
+          args: Prisma.GameFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        findMany: {
+          args: Prisma.GameFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>[]
+        }
+        create: {
+          args: Prisma.GameCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        createMany: {
+          args: Prisma.GameCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>[]
+        }
+        delete: {
+          args: Prisma.GameDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        update: {
+          args: Prisma.GameUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        deleteMany: {
+          args: Prisma.GameDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>[]
+        }
+        upsert: {
+          args: Prisma.GameUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GamePayload>
+        }
+        aggregate: {
+          args: Prisma.GameAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGame>
+        }
+        groupBy: {
+          args: Prisma.GameGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameCountAggregateOutputType> | number
+        }
+      }
+    }
+    GameVersion: {
+      payload: Prisma.$GameVersionPayload<ExtArgs>
+      fields: Prisma.GameVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.GameVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        findMany: {
+          args: Prisma.GameVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>[]
+        }
+        create: {
+          args: Prisma.GameVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        createMany: {
+          args: Prisma.GameVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.GameVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        update: {
+          args: Prisma.GameVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.GameVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameVersion>
+        }
+        groupBy: {
+          args: Prisma.GameVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    GameCommunity: {
+      payload: Prisma.$GameCommunityPayload<ExtArgs>
+      fields: Prisma.GameCommunityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameCommunityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameCommunityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        findFirst: {
+          args: Prisma.GameCommunityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameCommunityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        findMany: {
+          args: Prisma.GameCommunityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>[]
+        }
+        create: {
+          args: Prisma.GameCommunityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        createMany: {
+          args: Prisma.GameCommunityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameCommunityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>[]
+        }
+        delete: {
+          args: Prisma.GameCommunityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        update: {
+          args: Prisma.GameCommunityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameCommunityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameCommunityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameCommunityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameCommunityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameCommunityPayload>
+        }
+        aggregate: {
+          args: Prisma.GameCommunityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameCommunity>
+        }
+        groupBy: {
+          args: Prisma.GameCommunityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameCommunityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameCommunityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameCommunityCountAggregateOutputType> | number
+        }
+      }
+    }
+    GameSession: {
+      payload: Prisma.$GameSessionPayload<ExtArgs>
+      fields: Prisma.GameSessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameSessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameSessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        findFirst: {
+          args: Prisma.GameSessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameSessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        findMany: {
+          args: Prisma.GameSessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
+        }
+        create: {
+          args: Prisma.GameSessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        createMany: {
+          args: Prisma.GameSessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameSessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
+        }
+        delete: {
+          args: Prisma.GameSessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        update: {
+          args: Prisma.GameSessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameSessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameSessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameSessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameSessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameSessionPayload>
+        }
+        aggregate: {
+          args: Prisma.GameSessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameSession>
+        }
+        groupBy: {
+          args: Prisma.GameSessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameSessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameSessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    GameScore: {
+      payload: Prisma.$GameScorePayload<ExtArgs>
+      fields: Prisma.GameScoreFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameScoreFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameScoreFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        findFirst: {
+          args: Prisma.GameScoreFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameScoreFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        findMany: {
+          args: Prisma.GameScoreFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>[]
+        }
+        create: {
+          args: Prisma.GameScoreCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        createMany: {
+          args: Prisma.GameScoreCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameScoreCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>[]
+        }
+        delete: {
+          args: Prisma.GameScoreDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        update: {
+          args: Prisma.GameScoreUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        deleteMany: {
+          args: Prisma.GameScoreDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameScoreUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameScoreUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>[]
+        }
+        upsert: {
+          args: Prisma.GameScoreUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameScorePayload>
+        }
+        aggregate: {
+          args: Prisma.GameScoreAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameScore>
+        }
+        groupBy: {
+          args: Prisma.GameScoreGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameScoreGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameScoreCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameScoreCountAggregateOutputType> | number
+        }
+      }
+    }
     Media: {
       payload: Prisma.$MediaPayload<ExtArgs>
       fields: Prisma.MediaFieldRefs
@@ -1972,6 +2347,80 @@ export const ResourceTagScalarFieldEnum = {
 export type ResourceTagScalarFieldEnum = (typeof ResourceTagScalarFieldEnum)[keyof typeof ResourceTagScalarFieldEnum]
 
 
+export const GameScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  thumbnailUrl: 'thumbnailUrl',
+  category: 'category',
+  type: 'type',
+  status: 'status',
+  scoreEnabled: 'scoreEnabled',
+  leaderboardEnabled: 'leaderboardEnabled',
+  currentVersionId: 'currentVersionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const GameVersionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  version: 'version',
+  buildPath: 'buildPath',
+  status: 'status',
+  releaseNotes: 'releaseNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt'
+} as const
+
+export type GameVersionScalarFieldEnum = (typeof GameVersionScalarFieldEnum)[keyof typeof GameVersionScalarFieldEnum]
+
+
+export const GameCommunityScalarFieldEnum = {
+  gameId: 'gameId',
+  communityId: 'communityId',
+  createdAt: 'createdAt'
+} as const
+
+export type GameCommunityScalarFieldEnum = (typeof GameCommunityScalarFieldEnum)[keyof typeof GameCommunityScalarFieldEnum]
+
+
+export const GameSessionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  gameVersionId: 'gameVersionId',
+  userId: 'userId',
+  startedAt: 'startedAt',
+  expiresAt: 'expiresAt',
+  endedAt: 'endedAt',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type GameSessionScalarFieldEnum = (typeof GameSessionScalarFieldEnum)[keyof typeof GameSessionScalarFieldEnum]
+
+
+export const GameScoreScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  gameVersionId: 'gameVersionId',
+  gameSessionId: 'gameSessionId',
+  userId: 'userId',
+  score: 'score',
+  periodType: 'periodType',
+  periodKey: 'periodKey',
+  createdAt: 'createdAt'
+} as const
+
+export type GameScoreScalarFieldEnum = (typeof GameScoreScalarFieldEnum)[keyof typeof GameScoreScalarFieldEnum]
+
+
 export const MediaScalarFieldEnum = {
   id: 'id',
   uploadedById: 'uploadedById',
@@ -2326,6 +2775,97 @@ export type ListEnumResourceStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'GameCategory'
+ */
+export type EnumGameCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'GameCategory[]'
+ */
+export type ListEnumGameCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GameType'
+ */
+export type EnumGameTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameType'>
+    
+
+
+/**
+ * Reference to a field of type 'GameType[]'
+ */
+export type ListEnumGameTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GameStatus'
+ */
+export type EnumGameStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GameStatus[]'
+ */
+export type ListEnumGameStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'GameVersionStatus'
+ */
+export type EnumGameVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameVersionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GameVersionStatus[]'
+ */
+export type ListEnumGameVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameVersionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GameSessionStatus'
+ */
+export type EnumGameSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameSessionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GameSessionStatus[]'
+ */
+export type ListEnumGameSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameSessionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GameScorePeriod'
+ */
+export type EnumGameScorePeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameScorePeriod'>
+    
+
+
+/**
+ * Reference to a field of type 'GameScorePeriod[]'
+ */
+export type ListEnumGameScorePeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameScorePeriod[]'>
+    
+
+
+/**
  * Reference to a field of type 'MediaType'
  */
 export type EnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType'>
@@ -2392,13 +2932,6 @@ export type EnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'PointSourceType[]'
  */
 export type ListEnumPointSourceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PointSourceType[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -2577,6 +3110,11 @@ export type GlobalOmitConfig = {
   resource?: Prisma.ResourceOmit
   resourceTagDefinition?: Prisma.ResourceTagDefinitionOmit
   resourceTag?: Prisma.ResourceTagOmit
+  game?: Prisma.GameOmit
+  gameVersion?: Prisma.GameVersionOmit
+  gameCommunity?: Prisma.GameCommunityOmit
+  gameSession?: Prisma.GameSessionOmit
+  gameScore?: Prisma.GameScoreOmit
   media?: Prisma.MediaOmit
   vote?: Prisma.VoteOmit
   pointEvent?: Prisma.PointEventOmit

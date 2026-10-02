@@ -62,6 +62,11 @@ export const ModelName = {
   Resource: 'Resource',
   ResourceTagDefinition: 'ResourceTagDefinition',
   ResourceTag: 'ResourceTag',
+  Game: 'Game',
+  GameVersion: 'GameVersion',
+  GameCommunity: 'GameCommunity',
+  GameSession: 'GameSession',
+  GameScore: 'GameScore',
   Media: 'Media',
   Vote: 'Vote',
   PointEvent: 'PointEvent',
@@ -252,6 +257,80 @@ export const ResourceTagScalarFieldEnum = {
 } as const
 
 export type ResourceTagScalarFieldEnum = (typeof ResourceTagScalarFieldEnum)[keyof typeof ResourceTagScalarFieldEnum]
+
+
+export const GameScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  thumbnailUrl: 'thumbnailUrl',
+  category: 'category',
+  type: 'type',
+  status: 'status',
+  scoreEnabled: 'scoreEnabled',
+  leaderboardEnabled: 'leaderboardEnabled',
+  currentVersionId: 'currentVersionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+
+
+export const GameVersionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  version: 'version',
+  buildPath: 'buildPath',
+  status: 'status',
+  releaseNotes: 'releaseNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt'
+} as const
+
+export type GameVersionScalarFieldEnum = (typeof GameVersionScalarFieldEnum)[keyof typeof GameVersionScalarFieldEnum]
+
+
+export const GameCommunityScalarFieldEnum = {
+  gameId: 'gameId',
+  communityId: 'communityId',
+  createdAt: 'createdAt'
+} as const
+
+export type GameCommunityScalarFieldEnum = (typeof GameCommunityScalarFieldEnum)[keyof typeof GameCommunityScalarFieldEnum]
+
+
+export const GameSessionScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  gameVersionId: 'gameVersionId',
+  userId: 'userId',
+  startedAt: 'startedAt',
+  expiresAt: 'expiresAt',
+  endedAt: 'endedAt',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type GameSessionScalarFieldEnum = (typeof GameSessionScalarFieldEnum)[keyof typeof GameSessionScalarFieldEnum]
+
+
+export const GameScoreScalarFieldEnum = {
+  id: 'id',
+  gameId: 'gameId',
+  gameVersionId: 'gameVersionId',
+  gameSessionId: 'gameSessionId',
+  userId: 'userId',
+  score: 'score',
+  periodType: 'periodType',
+  periodKey: 'periodKey',
+  createdAt: 'createdAt'
+} as const
+
+export type GameScoreScalarFieldEnum = (typeof GameScoreScalarFieldEnum)[keyof typeof GameScoreScalarFieldEnum]
 
 
 export const MediaScalarFieldEnum = {

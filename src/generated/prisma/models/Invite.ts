@@ -531,10 +531,6 @@ export type InviteUncheckedUpdateManyWithoutCreatedByNestedInput = {
   deleteMany?: Prisma.InviteScalarWhereInput | Prisma.InviteScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type InviteCreateNestedOneWithoutUsagesInput = {
   create?: Prisma.XOR<Prisma.InviteCreateWithoutUsagesInput, Prisma.InviteUncheckedCreateWithoutUsagesInput>
   connectOrCreate?: Prisma.InviteCreateOrConnectWithoutUsagesInput

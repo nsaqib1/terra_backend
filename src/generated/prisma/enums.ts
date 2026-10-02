@@ -124,6 +124,60 @@ export const ResourceStatus = {
 export type ResourceStatus = (typeof ResourceStatus)[keyof typeof ResourceStatus]
 
 
+export const GameCategory = {
+  ENTERTAINMENT: 'ENTERTAINMENT',
+  LEARNING: 'LEARNING',
+  SIMULATION: 'SIMULATION'
+} as const
+
+export type GameCategory = (typeof GameCategory)[keyof typeof GameCategory]
+
+
+export const GameType = {
+  SINGLE_PLAYER: 'SINGLE_PLAYER',
+  MULTIPLAYER: 'MULTIPLAYER'
+} as const
+
+export type GameType = (typeof GameType)[keyof typeof GameType]
+
+
+export const GameStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  UNPUBLISHED: 'UNPUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type GameStatus = (typeof GameStatus)[keyof typeof GameStatus]
+
+
+export const GameVersionStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type GameVersionStatus = (typeof GameVersionStatus)[keyof typeof GameVersionStatus]
+
+
+export const GameSessionStatus = {
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  EXPIRED: 'EXPIRED',
+  ABANDONED: 'ABANDONED'
+} as const
+
+export type GameSessionStatus = (typeof GameSessionStatus)[keyof typeof GameSessionStatus]
+
+
+export const GameScorePeriod = {
+  WEEK: 'WEEK',
+  MONTH: 'MONTH'
+} as const
+
+export type GameScorePeriod = (typeof GameScorePeriod)[keyof typeof GameScorePeriod]
+
+
 export const MediaType = {
   IMAGE: 'IMAGE',
   VIDEO: 'VIDEO'

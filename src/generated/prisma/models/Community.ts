@@ -228,6 +228,7 @@ export type CommunityWhereInput = {
   tags?: Prisma.TagListRelationFilter
   resources?: Prisma.ResourceListRelationFilter
   resourceTags?: Prisma.ResourceTagDefinitionListRelationFilter
+  games?: Prisma.GameCommunityListRelationFilter
 }
 
 export type CommunityOrderByWithRelationInput = {
@@ -247,6 +248,7 @@ export type CommunityOrderByWithRelationInput = {
   tags?: Prisma.TagOrderByRelationAggregateInput
   resources?: Prisma.ResourceOrderByRelationAggregateInput
   resourceTags?: Prisma.ResourceTagDefinitionOrderByRelationAggregateInput
+  games?: Prisma.GameCommunityOrderByRelationAggregateInput
 }
 
 export type CommunityWhereUniqueInput = Prisma.AtLeast<{
@@ -269,6 +271,7 @@ export type CommunityWhereUniqueInput = Prisma.AtLeast<{
   tags?: Prisma.TagListRelationFilter
   resources?: Prisma.ResourceListRelationFilter
   resourceTags?: Prisma.ResourceTagDefinitionListRelationFilter
+  games?: Prisma.GameCommunityListRelationFilter
 }, "id" | "slug">
 
 export type CommunityOrderByWithAggregationInput = {
@@ -320,6 +323,7 @@ export type CommunityCreateInput = {
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateInput = {
@@ -339,6 +343,7 @@ export type CommunityUncheckedCreateInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUpdateInput = {
@@ -358,6 +363,7 @@ export type CommunityUpdateInput = {
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateInput = {
@@ -377,6 +383,7 @@ export type CommunityUncheckedUpdateInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateManyInput = {
@@ -565,6 +572,20 @@ export type CommunityUpdateOneRequiredWithoutResourceTagsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutResourceTagsInput, Prisma.CommunityUpdateWithoutResourceTagsInput>, Prisma.CommunityUncheckedUpdateWithoutResourceTagsInput>
 }
 
+export type CommunityCreateNestedOneWithoutGamesInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutGamesInput, Prisma.CommunityUncheckedCreateWithoutGamesInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutGamesInput
+  connect?: Prisma.CommunityWhereUniqueInput
+}
+
+export type CommunityUpdateOneRequiredWithoutGamesNestedInput = {
+  create?: Prisma.XOR<Prisma.CommunityCreateWithoutGamesInput, Prisma.CommunityUncheckedCreateWithoutGamesInput>
+  connectOrCreate?: Prisma.CommunityCreateOrConnectWithoutGamesInput
+  upsert?: Prisma.CommunityUpsertWithoutGamesInput
+  connect?: Prisma.CommunityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommunityUpdateToOneWithWhereWithoutGamesInput, Prisma.CommunityUpdateWithoutGamesInput>, Prisma.CommunityUncheckedUpdateWithoutGamesInput>
+}
+
 export type CommunityCreateWithoutProposalsInput = {
   id?: string
   name: string
@@ -581,6 +602,7 @@ export type CommunityCreateWithoutProposalsInput = {
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutProposalsInput = {
@@ -599,6 +621,7 @@ export type CommunityUncheckedCreateWithoutProposalsInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutProposalsInput = {
@@ -633,6 +656,7 @@ export type CommunityUpdateWithoutProposalsInput = {
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutProposalsInput = {
@@ -651,6 +675,7 @@ export type CommunityUncheckedUpdateWithoutProposalsInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutMembershipsInput = {
@@ -669,6 +694,7 @@ export type CommunityCreateWithoutMembershipsInput = {
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutMembershipsInput = {
@@ -687,6 +713,7 @@ export type CommunityUncheckedCreateWithoutMembershipsInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutMembershipsInput = {
@@ -721,6 +748,7 @@ export type CommunityUpdateWithoutMembershipsInput = {
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutMembershipsInput = {
@@ -739,6 +767,7 @@ export type CommunityUncheckedUpdateWithoutMembershipsInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutPostsInput = {
@@ -757,6 +786,7 @@ export type CommunityCreateWithoutPostsInput = {
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutPostsInput = {
@@ -775,6 +805,7 @@ export type CommunityUncheckedCreateWithoutPostsInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutPostsInput = {
@@ -809,6 +840,7 @@ export type CommunityUpdateWithoutPostsInput = {
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutPostsInput = {
@@ -827,6 +859,7 @@ export type CommunityUncheckedUpdateWithoutPostsInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutTagsInput = {
@@ -845,6 +878,7 @@ export type CommunityCreateWithoutTagsInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutTagsInput = {
@@ -863,6 +897,7 @@ export type CommunityUncheckedCreateWithoutTagsInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutTagsInput = {
@@ -897,6 +932,7 @@ export type CommunityUpdateWithoutTagsInput = {
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutTagsInput = {
@@ -915,6 +951,7 @@ export type CommunityUncheckedUpdateWithoutTagsInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutResourcesInput = {
@@ -933,6 +970,7 @@ export type CommunityCreateWithoutResourcesInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutResourcesInput = {
@@ -951,6 +989,7 @@ export type CommunityUncheckedCreateWithoutResourcesInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutResourcesInput = {
@@ -985,6 +1024,7 @@ export type CommunityUpdateWithoutResourcesInput = {
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutResourcesInput = {
@@ -1003,6 +1043,7 @@ export type CommunityUncheckedUpdateWithoutResourcesInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityCreateWithoutResourceTagsInput = {
@@ -1021,6 +1062,7 @@ export type CommunityCreateWithoutResourceTagsInput = {
   posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityUncheckedCreateWithoutResourceTagsInput = {
@@ -1039,6 +1081,7 @@ export type CommunityUncheckedCreateWithoutResourceTagsInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
   resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  games?: Prisma.GameCommunityUncheckedCreateNestedManyWithoutCommunityInput
 }
 
 export type CommunityCreateOrConnectWithoutResourceTagsInput = {
@@ -1073,6 +1116,7 @@ export type CommunityUpdateWithoutResourceTagsInput = {
   posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUpdateManyWithoutCommunityNestedInput
 }
 
 export type CommunityUncheckedUpdateWithoutResourceTagsInput = {
@@ -1091,6 +1135,99 @@ export type CommunityUncheckedUpdateWithoutResourceTagsInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  games?: Prisma.GameCommunityUncheckedUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityCreateWithoutGamesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityUncheckedCreateWithoutGamesInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  status?: $Enums.CommunityStatus
+  maturity?: $Enums.CommunityMaturity
+  governanceMode?: $Enums.GovernanceMode
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutCommunityInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutCommunityInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutCommunityInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutCommunityInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutCommunityInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedCreateNestedManyWithoutCommunityInput
+}
+
+export type CommunityCreateOrConnectWithoutGamesInput = {
+  where: Prisma.CommunityWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutGamesInput, Prisma.CommunityUncheckedCreateWithoutGamesInput>
+}
+
+export type CommunityUpsertWithoutGamesInput = {
+  update: Prisma.XOR<Prisma.CommunityUpdateWithoutGamesInput, Prisma.CommunityUncheckedUpdateWithoutGamesInput>
+  create: Prisma.XOR<Prisma.CommunityCreateWithoutGamesInput, Prisma.CommunityUncheckedCreateWithoutGamesInput>
+  where?: Prisma.CommunityWhereInput
+}
+
+export type CommunityUpdateToOneWithWhereWithoutGamesInput = {
+  where?: Prisma.CommunityWhereInput
+  data: Prisma.XOR<Prisma.CommunityUpdateWithoutGamesInput, Prisma.CommunityUncheckedUpdateWithoutGamesInput>
+}
+
+export type CommunityUpdateWithoutGamesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUpdateManyWithoutCommunityNestedInput
+}
+
+export type CommunityUncheckedUpdateWithoutGamesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCommunityStatusFieldUpdateOperationsInput | $Enums.CommunityStatus
+  maturity?: Prisma.EnumCommunityMaturityFieldUpdateOperationsInput | $Enums.CommunityMaturity
+  governanceMode?: Prisma.EnumGovernanceModeFieldUpdateOperationsInput | $Enums.GovernanceMode
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutCommunityNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutCommunityNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutCommunityNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutCommunityNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutCommunityNestedInput
+  resourceTags?: Prisma.ResourceTagDefinitionUncheckedUpdateManyWithoutCommunityNestedInput
 }
 
 
@@ -1105,6 +1242,7 @@ export type CommunityCountOutputType = {
   tags: number
   resources: number
   resourceTags: number
+  games: number
 }
 
 export type CommunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1114,6 +1252,7 @@ export type CommunityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensi
   tags?: boolean | CommunityCountOutputTypeCountTagsArgs
   resources?: boolean | CommunityCountOutputTypeCountResourcesArgs
   resourceTags?: boolean | CommunityCountOutputTypeCountResourceTagsArgs
+  games?: boolean | CommunityCountOutputTypeCountGamesArgs
 }
 
 /**
@@ -1168,6 +1307,13 @@ export type CommunityCountOutputTypeCountResourceTagsArgs<ExtArgs extends runtim
   where?: Prisma.ResourceTagDefinitionWhereInput
 }
 
+/**
+ * CommunityCountOutputType without action
+ */
+export type CommunityCountOutputTypeCountGamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GameCommunityWhereInput
+}
+
 
 export type CommunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1186,6 +1332,7 @@ export type CommunitySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
   resources?: boolean | Prisma.Community$resourcesArgs<ExtArgs>
   resourceTags?: boolean | Prisma.Community$resourceTagsArgs<ExtArgs>
+  games?: boolean | Prisma.Community$gamesArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["community"]>
 
@@ -1236,6 +1383,7 @@ export type CommunityInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   tags?: boolean | Prisma.Community$tagsArgs<ExtArgs>
   resources?: boolean | Prisma.Community$resourcesArgs<ExtArgs>
   resourceTags?: boolean | Prisma.Community$resourceTagsArgs<ExtArgs>
+  games?: boolean | Prisma.Community$gamesArgs<ExtArgs>
   _count?: boolean | Prisma.CommunityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CommunityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1250,6 +1398,7 @@ export type $CommunityPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     tags: Prisma.$TagPayload<ExtArgs>[]
     resources: Prisma.$ResourcePayload<ExtArgs>[]
     resourceTags: Prisma.$ResourceTagDefinitionPayload<ExtArgs>[]
+    games: Prisma.$GameCommunityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1662,6 +1811,7 @@ export interface Prisma__CommunityClient<T, Null = never, ExtArgs extends runtim
   tags<T extends Prisma.Community$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resources<T extends Prisma.Community$resourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$resourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   resourceTags<T extends Prisma.Community$resourceTagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$resourceTagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResourceTagDefinitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  games<T extends Prisma.Community$gamesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Community$gamesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GameCommunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2235,6 +2385,30 @@ export type Community$resourceTagsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.ResourceTagDefinitionScalarFieldEnum | Prisma.ResourceTagDefinitionScalarFieldEnum[]
+}
+
+/**
+ * Community.games
+ */
+export type Community$gamesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GameCommunity
+   */
+  select?: Prisma.GameCommunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GameCommunity
+   */
+  omit?: Prisma.GameCommunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GameCommunityInclude<ExtArgs> | null
+  where?: Prisma.GameCommunityWhereInput
+  orderBy?: Prisma.GameCommunityOrderByWithRelationInput | Prisma.GameCommunityOrderByWithRelationInput[]
+  cursor?: Prisma.GameCommunityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GameCommunityScalarFieldEnum | Prisma.GameCommunityScalarFieldEnum[]
 }
 
 /**

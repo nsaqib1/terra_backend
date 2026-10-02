@@ -95,6 +95,31 @@ export type ResourceTagDefinition = Prisma.ResourceTagDefinitionModel
  */
 export type ResourceTag = Prisma.ResourceTagModel
 /**
+ * Model Game
+ * 
+ */
+export type Game = Prisma.GameModel
+/**
+ * Model GameVersion
+ * 
+ */
+export type GameVersion = Prisma.GameVersionModel
+/**
+ * Model GameCommunity
+ * 
+ */
+export type GameCommunity = Prisma.GameCommunityModel
+/**
+ * Model GameSession
+ * 
+ */
+export type GameSession = Prisma.GameSessionModel
+/**
+ * Model GameScore
+ * 
+ */
+export type GameScore = Prisma.GameScoreModel
+/**
  * Model Media
  * 
  */

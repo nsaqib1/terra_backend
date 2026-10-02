@@ -37,21 +37,23 @@ model User {
   posts             Post[]
   refreshSessions   RefreshSession[]
   votes             Vote[]
+  gameSessions      GameSession[]
+  gameScores        GameScore[]
 
   @@index([status])
   @@index([deletedAt])
 }
 
 model Community {
-  id             String                @id @default(uuid()) @db.Uuid
-  name           String                @db.VarChar(100)
-  slug           String                @unique @db.VarChar(100)
+  id             String                  @id @default(uuid()) @db.Uuid
+  name           String                  @db.VarChar(100)
+  slug           String                  @unique @db.VarChar(100)
   description    String?
-  status         CommunityStatus       @default(ACTIVE)
-  maturity       CommunityMaturity     @default(NEW)
-  governanceMode GovernanceMode        @default(PLATFORM_MANAGED)
-  createdAt      DateTime              @default(now())
-  updatedAt      DateTime              @updatedAt
+  status         CommunityStatus         @default(ACTIVE)
+  maturity       CommunityMaturity       @default(NEW)
+  governanceMode GovernanceMode          @default(PLATFORM_MANAGED)
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
   deletedAt      DateTime?
   memberships    CommunityMembership[]
   proposals      CommunityProposal[]
@@ -59,6 +61,7 @@ model Community {
   tags           Tag[]
   resources      Resource[]
   resourceTags   ResourceTagDefinition[]
+  games          GameCommunity[]
 
   @@index([status])
   @@index([maturity])
@@ -183,24 +186,24 @@ model PostTag {
 }
 
 model Resource {
-  id                String         @id @default(uuid()) @db.Uuid
-  communityId       String         @db.Uuid
-  uploadedById      String         @db.Uuid
-  title             String         @db.VarChar(200)
-  description       String?
-  originalFilename  String         @db.VarChar(255)
-  storageKey        String
-  mimeType          String         @db.VarChar(150)
-  size              BigInt
-  status            ResourceStatus @default(PUBLISHED)
-  downloadCount     Int            @default(0)
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt
-  publishedAt       DateTime?
-  deletedAt         DateTime?
-  community         Community      @relation(fields: [communityId], references: [id])
-  uploadedBy        User           @relation(fields: [uploadedById], references: [id])
-  tags              ResourceTag[]
+  id               String         @id @default(uuid()) @db.Uuid
+  communityId      String         @db.Uuid
+  uploadedById     String         @db.Uuid
+  title            String         @db.VarChar(200)
+  description      String?
+  originalFilename String         @db.VarChar(255)
+  storageKey       String
+  mimeType         String         @db.VarChar(150)
+  size             BigInt
+  status           ResourceStatus @default(PUBLISHED)
+  downloadCount    Int            @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  publishedAt      DateTime?
+  deletedAt        DateTime?
+  community        Community      @relation(fields: [communityId], references: [id])
+  uploadedBy       User           @relation(fields: [uploadedById], references: [id])
+  tags             ResourceTag[]
 
   @@index([communityId, createdAt])
   @@index([communityId, status, createdAt])
@@ -211,16 +214,16 @@ model Resource {
 }
 
 model ResourceTagDefinition {
-  id          String         @id @default(uuid()) @db.Uuid
-  communityId String         @db.Uuid
-  name        String         @db.VarChar(100)
-  slug        String         @db.VarChar(100)
+  id          String        @id @default(uuid()) @db.Uuid
+  communityId String        @db.Uuid
+  name        String        @db.VarChar(100)
+  slug        String        @db.VarChar(100)
   description String?
-  status      TagStatus      @default(ACTIVE)
-  usageCount  Int            @default(0)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  community   Community      @relation(fields: [communityId], references: [id])
+  status      TagStatus     @default(ACTIVE)
+  usageCount  Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  community   Community     @relation(fields: [communityId], references: [id])
   resources   ResourceTag[]
 
   @@unique([communityId, slug])
@@ -230,13 +233,118 @@ model ResourceTagDefinition {
 }
 
 model ResourceTag {
-  resourceId String                  @db.Uuid
-  tagId      String                  @db.Uuid
-  resource   Resource                @relation(fields: [resourceId], references: [id], onDelete: Cascade)
-  tag        ResourceTagDefinition   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  resourceId String                @db.Uuid
+  tagId      String                @db.Uuid
+  resource   Resource              @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  tag        ResourceTagDefinition @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([resourceId, tagId])
   @@index([tagId])
+}
+
+model Game {
+  id                 String       @id @default(uuid()) @db.Uuid
+  slug               String       @unique @db.VarChar(100)
+  title              String       @db.VarChar(150)
+  description        String?
+  thumbnailUrl       String?
+  category           GameCategory @default(ENTERTAINMENT)
+  type               GameType     @default(SINGLE_PLAYER)
+  status             GameStatus   @default(DRAFT)
+  scoreEnabled       Boolean      @default(false)
+  leaderboardEnabled Boolean      @default(false)
+  currentVersionId   String?      @db.Uuid
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  deletedAt          DateTime?
+
+  versions    GameVersion[]   @relation("GameVersions")
+  communities GameCommunity[]
+  sessions    GameSession[]
+  scores      GameScore[]
+
+  @@index([status])
+  @@index([category, status])
+  @@index([type, status])
+  @@index([deletedAt])
+}
+
+model GameVersion {
+  id           String            @id @default(uuid()) @db.Uuid
+  gameId       String            @db.Uuid
+  version      String            @db.VarChar(50)
+  buildPath    String
+  status       GameVersionStatus @default(DRAFT)
+  releaseNotes String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  publishedAt  DateTime?
+
+  game Game @relation("GameVersions", fields: [gameId], references: [id], onDelete: Cascade)
+
+  sessions GameSession[]
+  scores   GameScore[]
+
+  @@unique([gameId, version])
+  @@index([gameId, status])
+  @@index([gameId, createdAt])
+}
+
+model GameCommunity {
+  gameId      String   @db.Uuid
+  communityId String   @db.Uuid
+  createdAt   DateTime @default(now())
+
+  game      Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  community Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, communityId])
+  @@index([communityId])
+}
+
+model GameSession {
+  id            String            @id @default(uuid()) @db.Uuid
+  gameId        String            @db.Uuid
+  gameVersionId String            @db.Uuid
+  userId        String?           @db.Uuid
+  startedAt     DateTime          @default(now())
+  expiresAt     DateTime
+  endedAt       DateTime?
+  status        GameSessionStatus @default(ACTIVE)
+  createdAt     DateTime          @default(now())
+
+  game        Game        @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameVersion GameVersion @relation(fields: [gameVersionId], references: [id])
+  user        User?       @relation(fields: [userId], references: [id])
+
+  score GameScore?
+
+  @@index([gameId, createdAt])
+  @@index([gameVersionId])
+  @@index([userId, createdAt])
+  @@index([status, expiresAt])
+}
+
+model GameScore {
+  id            String          @id @default(uuid()) @db.Uuid
+  gameId        String          @db.Uuid
+  gameVersionId String          @db.Uuid
+  gameSessionId String          @unique @db.Uuid
+  userId        String          @db.Uuid
+  score         Int
+  periodType    GameScorePeriod
+  periodKey     String          @db.VarChar(20)
+  createdAt     DateTime        @default(now())
+
+  game        Game        @relation(fields: [gameId], references: [id])
+  gameVersion GameVersion @relation(fields: [gameVersionId], references: [id])
+  gameSession GameSession @relation(fields: [gameSessionId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+
+  @@index([gameId, periodType, periodKey, score])
+  @@index([gameId, userId, score])
+  @@index([gameSessionId])
+  @@index([userId, createdAt])
 }
 
 model Media {
@@ -433,6 +541,42 @@ enum TagStatus {
 enum ResourceStatus {
   PUBLISHED
   UNPUBLISHED
+}
+
+enum GameCategory {
+  ENTERTAINMENT
+  LEARNING
+  SIMULATION
+}
+
+enum GameType {
+  SINGLE_PLAYER
+  MULTIPLAYER
+}
+
+enum GameStatus {
+  DRAFT
+  PUBLISHED
+  UNPUBLISHED
+  ARCHIVED
+}
+
+enum GameVersionStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum GameSessionStatus {
+  ACTIVE
+  COMPLETED
+  EXPIRED
+  ABANDONED
+}
+
+enum GameScorePeriod {
+  WEEK
+  MONTH
 }
 
 enum MediaType {
