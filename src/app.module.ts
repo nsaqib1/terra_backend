@@ -40,6 +40,9 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string().min(32),
   JWT_REFRESH_EXPIRES_IN: z.string().min(1).default('30d'),
 
+  GAME_SESSION_SECRET: z.string().min(32),
+  GAME_SESSION_EXPIRES_IN: z.string().min(1).default('30m'),
+
   MEDIA_STORAGE_PATH: z.string().min(1),
   RESOURCE_STORAGE_PATH: z.string().min(1),
   RESOURCE_TEMP_PATH: z.string().min(1),

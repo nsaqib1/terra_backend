@@ -2,12 +2,13 @@ import {
 	Injectable,
 	NotFoundException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../database/prisma.service';
 import { ListGamesDto } from './dto/list-games.dto';
 
 @Injectable()
 export class GameService {
-	constructor(private readonly prisma: PrismaService) { }
+	constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService,) { }
 
 	async list(dto: ListGamesDto) {
 		const where = {
@@ -82,6 +83,91 @@ export class GameService {
 		}
 
 		return this.serializeGame(game);
+	}
+
+	async startSession(slug: string, userId?: string) {
+		const game = await this.prisma.game.findFirst({
+			where: {
+				slug: slug.toLowerCase(),
+				status: 'PUBLISHED',
+				deletedAt: null,
+			},
+			select: {
+				id: true,
+				slug: true,
+				title: true,
+				currentVersionId: true,
+				scoreEnabled: true,
+				leaderboardEnabled: true,
+			},
+		});
+
+		if (!game) {
+			throw new NotFoundException('Game not found');
+		}
+
+		if (!game.currentVersionId) {
+			throw new NotFoundException(
+				'This game does not have a published version',
+			);
+		}
+
+		const gameVersion = await this.prisma.gameVersion.findFirst({
+			where: {
+				id: game.currentVersionId,
+				gameId: game.id,
+				status: 'PUBLISHED',
+			},
+			select: {
+				id: true,
+				version: true,
+				buildPath: true,
+			},
+		});
+
+		if (!gameVersion) {
+			throw new NotFoundException(
+				'This game does not have a valid published version',
+			);
+		}
+
+		const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+
+		const session = await this.prisma.gameSession.create({
+			data: {
+				gameId: game.id,
+				gameVersionId: gameVersion.id,
+				userId: userId ?? null,
+				expiresAt,
+				status: 'ACTIVE',
+			},
+		});
+
+		const token = await this.jwtService.signAsync({
+			sub: session.id,
+			gameId: game.id,
+			gameVersionId: gameVersion.id,
+			...(userId ? { userId } : {}),
+			type: 'game-session',
+		});
+
+		return {
+			sessionId: session.id,
+			token,
+			expiresAt,
+			game: {
+				id: game.id,
+				slug: game.slug,
+				title: game.title,
+				scoreEnabled: game.scoreEnabled,
+				leaderboardEnabled: game.leaderboardEnabled,
+			},
+			version: {
+				id: gameVersion.id,
+				version: gameVersion.version,
+				buildPath: gameVersion.buildPath,
+			},
+		};
 	}
 
 	private gameSelect() {
