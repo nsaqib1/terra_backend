@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+
 import { GameController } from './game.controller';
 import { GameService } from './game.service';
+import { GameSessionGuard } from './guards/game-session.guard';
 
 @Module({
   imports: [
@@ -24,7 +26,15 @@ import { GameService } from './game.service';
   ],
 
   controllers: [GameController],
-  providers: [GameService],
-  exports: [GameService],
+
+  providers: [
+    GameService,
+    GameSessionGuard,
+  ],
+
+  exports: [
+    GameService,
+    GameSessionGuard,
+  ],
 })
 export class GameModule { }

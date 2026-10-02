@@ -12,6 +12,10 @@ import { OptionalJwtAuthGuard } from '../auth/guards/optional-jwt-auth.guard';
 import { GameService } from './game.service';
 import { ListGamesDto } from './dto/list-games.dto';
 
+import { GameSessionGuard } from './guards/game-session.guard';
+import type { GameSessionContext } from './types/game-session.types';
+import { GameSession } from './decorators/game-session.decorator';
+
 interface OptionalAuthenticatedRequest extends Request {
   user?: {
     userId: string;
@@ -27,11 +31,6 @@ export class GameController {
     return this.gameService.list(dto);
   }
 
-  @Get(':slug')
-  async findBySlug(@Param('slug') slug: string) {
-    return this.gameService.findBySlug(slug);
-  }
-
   @Post(':slug/session')
   @UseGuards(OptionalJwtAuthGuard)
   async startSession(
@@ -43,4 +42,27 @@ export class GameController {
       request.user?.userId,
     );
   }
+
+  @Get('session/current')
+  @UseGuards(GameSessionGuard)
+  async getCurrentSession(
+    @GameSession() session: GameSessionContext,
+  ) {
+    return {
+      sessionId: session.sessionId,
+      gameId: session.gameId,
+      gameVersionId: session.gameVersionId,
+      userId: session.userId,
+      expiresAt: session.expiresAt,
+    };
+  }
+
+  @Get(':slug')
+  async findBySlug(@Param('slug') slug: string) {
+    return this.gameService.findBySlug(slug);
+  }
+
+
+
+
 }
