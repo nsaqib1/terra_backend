@@ -1,7 +1,11 @@
 import {
+	BadRequestException,
+	ConflictException,
 	Injectable,
 	NotFoundException,
+	UnauthorizedException,
 } from '@nestjs/common';
+import { Prisma } from '../generated/prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../database/prisma.service';
 import { ListGamesDto } from './dto/list-games.dto';
@@ -276,5 +280,161 @@ export class GameService {
 			status: updated.status,
 			endedAt: updated.endedAt,
 		};
+	}
+
+	async submitScore(
+		sessionId: string,
+		gameId: string,
+		gameVersionId: string,
+		userId: string | null,
+		score: number,
+	) {
+		if (!userId) {
+			throw new UnauthorizedException(
+				'You must be signed in to submit a score',
+			);
+		}
+
+		const game = await this.prisma.game.findFirst({
+			where: {
+				id: gameId,
+				status: 'PUBLISHED',
+				deletedAt: null,
+			},
+			select: {
+				id: true,
+				scoreEnabled: true,
+			},
+		});
+
+		if (!game) {
+			throw new NotFoundException('Game not found');
+		}
+
+		if (!game.scoreEnabled) {
+			throw new BadRequestException(
+				'Score submission is not enabled for this game',
+			);
+		}
+
+		const session = await this.prisma.gameSession.findUnique({
+			where: {
+				id: sessionId,
+			},
+			select: {
+				id: true,
+				gameId: true,
+				gameVersionId: true,
+				userId: true,
+				startedAt: true,
+				expiresAt: true,
+				status: true,
+				score: {
+					select: {
+						id: true,
+						score: true,
+					},
+				},
+			},
+		});
+
+		if (!session) {
+			throw new NotFoundException('Game session not found');
+		}
+
+		if (session.gameId !== gameId) {
+			throw new UnauthorizedException(
+				'Game session does not belong to this game',
+			);
+		}
+
+		if (session.gameVersionId !== gameVersionId) {
+			throw new UnauthorizedException(
+				'Game session does not belong to this game version',
+			);
+		}
+
+		if (session.userId !== userId) {
+			throw new UnauthorizedException(
+				'Game session does not belong to this user',
+			);
+		}
+
+		if (session.status !== 'ACTIVE') {
+			throw new BadRequestException(
+				'This game session is no longer active',
+			);
+		}
+
+		const now = new Date();
+
+		if (session.expiresAt <= now) {
+			await this.prisma.gameSession.update({
+				where: {
+					id: session.id,
+				},
+				data: {
+					status: 'EXPIRED',
+				},
+			});
+
+			throw new BadRequestException(
+				'This game session has expired',
+			);
+		}
+
+		if (session.score) {
+			throw new ConflictException(
+				'A score has already been submitted for this session',
+			);
+		}
+
+		try {
+			const result = await this.prisma.$transaction(async (tx) => {
+				const createdScore = await tx.gameScore.create({
+					data: {
+						gameId: session.gameId,
+						gameVersionId: session.gameVersionId,
+						gameSessionId: session.id,
+						userId,
+						score,
+					},
+					select: {
+						id: true,
+						score: true,
+						createdAt: true,
+					},
+				});
+
+				await tx.gameSession.update({
+					where: {
+						id: session.id,
+					},
+					data: {
+						status: 'COMPLETED',
+						endedAt: now,
+					},
+				});
+
+				return createdScore;
+			});
+
+			return {
+				scoreId: result.id,
+				score: result.score,
+				submittedAt: result.createdAt,
+			};
+		} catch (error) {
+			if (
+				error instanceof Prisma.PrismaClientKnownRequestError &&
+				error.code === 'P2002'
+			) {
+				throw new ConflictException(
+					'A score has already been submitted for this session',
+				);
+			}
+
+			throw error;
+		}
 	}
 }

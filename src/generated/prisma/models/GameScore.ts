@@ -41,8 +41,6 @@ export type GameScoreMinAggregateOutputType = {
   gameSessionId: string | null
   userId: string | null
   score: number | null
-  periodType: $Enums.GameScorePeriod | null
-  periodKey: string | null
   createdAt: Date | null
 }
 
@@ -53,8 +51,6 @@ export type GameScoreMaxAggregateOutputType = {
   gameSessionId: string | null
   userId: string | null
   score: number | null
-  periodType: $Enums.GameScorePeriod | null
-  periodKey: string | null
   createdAt: Date | null
 }
 
@@ -65,8 +61,6 @@ export type GameScoreCountAggregateOutputType = {
   gameSessionId: number
   userId: number
   score: number
-  periodType: number
-  periodKey: number
   createdAt: number
   _all: number
 }
@@ -87,8 +81,6 @@ export type GameScoreMinAggregateInputType = {
   gameSessionId?: true
   userId?: true
   score?: true
-  periodType?: true
-  periodKey?: true
   createdAt?: true
 }
 
@@ -99,8 +91,6 @@ export type GameScoreMaxAggregateInputType = {
   gameSessionId?: true
   userId?: true
   score?: true
-  periodType?: true
-  periodKey?: true
   createdAt?: true
 }
 
@@ -111,8 +101,6 @@ export type GameScoreCountAggregateInputType = {
   gameSessionId?: true
   userId?: true
   score?: true
-  periodType?: true
-  periodKey?: true
   createdAt?: true
   _all?: true
 }
@@ -210,8 +198,6 @@ export type GameScoreGroupByOutputType = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt: Date
   _count: GameScoreCountAggregateOutputType | null
   _avg: GameScoreAvgAggregateOutputType | null
@@ -245,8 +231,6 @@ export type GameScoreWhereInput = {
   gameSessionId?: Prisma.UuidFilter<"GameScore"> | string
   userId?: Prisma.UuidFilter<"GameScore"> | string
   score?: Prisma.IntFilter<"GameScore"> | number
-  periodType?: Prisma.EnumGameScorePeriodFilter<"GameScore"> | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFilter<"GameScore"> | string
   createdAt?: Prisma.DateTimeFilter<"GameScore"> | Date | string
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
   gameVersion?: Prisma.XOR<Prisma.GameVersionScalarRelationFilter, Prisma.GameVersionWhereInput>
@@ -261,8 +245,6 @@ export type GameScoreOrderByWithRelationInput = {
   gameSessionId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   score?: Prisma.SortOrder
-  periodType?: Prisma.SortOrder
-  periodKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   game?: Prisma.GameOrderByWithRelationInput
   gameVersion?: Prisma.GameVersionOrderByWithRelationInput
@@ -280,8 +262,6 @@ export type GameScoreWhereUniqueInput = Prisma.AtLeast<{
   gameVersionId?: Prisma.UuidFilter<"GameScore"> | string
   userId?: Prisma.UuidFilter<"GameScore"> | string
   score?: Prisma.IntFilter<"GameScore"> | number
-  periodType?: Prisma.EnumGameScorePeriodFilter<"GameScore"> | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFilter<"GameScore"> | string
   createdAt?: Prisma.DateTimeFilter<"GameScore"> | Date | string
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
   gameVersion?: Prisma.XOR<Prisma.GameVersionScalarRelationFilter, Prisma.GameVersionWhereInput>
@@ -296,8 +276,6 @@ export type GameScoreOrderByWithAggregationInput = {
   gameSessionId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   score?: Prisma.SortOrder
-  periodType?: Prisma.SortOrder
-  periodKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.GameScoreCountOrderByAggregateInput
   _avg?: Prisma.GameScoreAvgOrderByAggregateInput
@@ -316,16 +294,12 @@ export type GameScoreScalarWhereWithAggregatesInput = {
   gameSessionId?: Prisma.UuidWithAggregatesFilter<"GameScore"> | string
   userId?: Prisma.UuidWithAggregatesFilter<"GameScore"> | string
   score?: Prisma.IntWithAggregatesFilter<"GameScore"> | number
-  periodType?: Prisma.EnumGameScorePeriodWithAggregatesFilter<"GameScore"> | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringWithAggregatesFilter<"GameScore"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GameScore"> | Date | string
 }
 
 export type GameScoreCreateInput = {
   id?: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
   game: Prisma.GameCreateNestedOneWithoutScoresInput
   gameVersion: Prisma.GameVersionCreateNestedOneWithoutScoresInput
@@ -340,16 +314,12 @@ export type GameScoreUncheckedCreateInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
 export type GameScoreUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
   gameVersion?: Prisma.GameVersionUpdateOneRequiredWithoutScoresNestedInput
@@ -364,8 +334,6 @@ export type GameScoreUncheckedUpdateInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -376,16 +344,12 @@ export type GameScoreCreateManyInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
 export type GameScoreUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -396,8 +360,6 @@ export type GameScoreUncheckedUpdateManyInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -423,8 +385,6 @@ export type GameScoreCountOrderByAggregateInput = {
   gameSessionId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   score?: Prisma.SortOrder
-  periodType?: Prisma.SortOrder
-  periodKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -439,8 +399,6 @@ export type GameScoreMaxOrderByAggregateInput = {
   gameSessionId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   score?: Prisma.SortOrder
-  periodType?: Prisma.SortOrder
-  periodKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -451,8 +409,6 @@ export type GameScoreMinOrderByAggregateInput = {
   gameSessionId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   score?: Prisma.SortOrder
-  periodType?: Prisma.SortOrder
-  periodKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -618,15 +574,9 @@ export type GameScoreUncheckedUpdateOneWithoutGameSessionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GameScoreUpdateToOneWithWhereWithoutGameSessionInput, Prisma.GameScoreUpdateWithoutGameSessionInput>, Prisma.GameScoreUncheckedUpdateWithoutGameSessionInput>
 }
 
-export type EnumGameScorePeriodFieldUpdateOperationsInput = {
-  set?: $Enums.GameScorePeriod
-}
-
 export type GameScoreCreateWithoutUserInput = {
   id?: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
   game: Prisma.GameCreateNestedOneWithoutScoresInput
   gameVersion: Prisma.GameVersionCreateNestedOneWithoutScoresInput
@@ -639,8 +589,6 @@ export type GameScoreUncheckedCreateWithoutUserInput = {
   gameVersionId: string
   gameSessionId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
@@ -680,16 +628,12 @@ export type GameScoreScalarWhereInput = {
   gameSessionId?: Prisma.UuidFilter<"GameScore"> | string
   userId?: Prisma.UuidFilter<"GameScore"> | string
   score?: Prisma.IntFilter<"GameScore"> | number
-  periodType?: Prisma.EnumGameScorePeriodFilter<"GameScore"> | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFilter<"GameScore"> | string
   createdAt?: Prisma.DateTimeFilter<"GameScore"> | Date | string
 }
 
 export type GameScoreCreateWithoutGameInput = {
   id?: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
   gameVersion: Prisma.GameVersionCreateNestedOneWithoutScoresInput
   gameSession: Prisma.GameSessionCreateNestedOneWithoutScoreInput
@@ -702,8 +646,6 @@ export type GameScoreUncheckedCreateWithoutGameInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
@@ -736,8 +678,6 @@ export type GameScoreUpdateManyWithWhereWithoutGameInput = {
 export type GameScoreCreateWithoutGameVersionInput = {
   id?: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
   game: Prisma.GameCreateNestedOneWithoutScoresInput
   gameSession: Prisma.GameSessionCreateNestedOneWithoutScoreInput
@@ -750,8 +690,6 @@ export type GameScoreUncheckedCreateWithoutGameVersionInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
@@ -784,8 +722,6 @@ export type GameScoreUpdateManyWithWhereWithoutGameVersionInput = {
 export type GameScoreCreateWithoutGameSessionInput = {
   id?: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
   game: Prisma.GameCreateNestedOneWithoutScoresInput
   gameVersion: Prisma.GameVersionCreateNestedOneWithoutScoresInput
@@ -798,8 +734,6 @@ export type GameScoreUncheckedCreateWithoutGameSessionInput = {
   gameVersionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
@@ -822,8 +756,6 @@ export type GameScoreUpdateToOneWithWhereWithoutGameSessionInput = {
 export type GameScoreUpdateWithoutGameSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
   gameVersion?: Prisma.GameVersionUpdateOneRequiredWithoutScoresNestedInput
@@ -836,8 +768,6 @@ export type GameScoreUncheckedUpdateWithoutGameSessionInput = {
   gameVersionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -847,16 +777,12 @@ export type GameScoreCreateManyUserInput = {
   gameVersionId: string
   gameSessionId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
 export type GameScoreUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
   gameVersion?: Prisma.GameVersionUpdateOneRequiredWithoutScoresNestedInput
@@ -869,8 +795,6 @@ export type GameScoreUncheckedUpdateWithoutUserInput = {
   gameVersionId?: Prisma.StringFieldUpdateOperationsInput | string
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -880,8 +804,6 @@ export type GameScoreUncheckedUpdateManyWithoutUserInput = {
   gameVersionId?: Prisma.StringFieldUpdateOperationsInput | string
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -891,16 +813,12 @@ export type GameScoreCreateManyGameInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
 export type GameScoreUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameVersion?: Prisma.GameVersionUpdateOneRequiredWithoutScoresNestedInput
   gameSession?: Prisma.GameSessionUpdateOneRequiredWithoutScoreNestedInput
@@ -913,8 +831,6 @@ export type GameScoreUncheckedUpdateWithoutGameInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -924,8 +840,6 @@ export type GameScoreUncheckedUpdateManyWithoutGameInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -935,16 +849,12 @@ export type GameScoreCreateManyGameVersionInput = {
   gameSessionId: string
   userId: string
   score: number
-  periodType: $Enums.GameScorePeriod
-  periodKey: string
   createdAt?: Date | string
 }
 
 export type GameScoreUpdateWithoutGameVersionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   game?: Prisma.GameUpdateOneRequiredWithoutScoresNestedInput
   gameSession?: Prisma.GameSessionUpdateOneRequiredWithoutScoreNestedInput
@@ -957,8 +867,6 @@ export type GameScoreUncheckedUpdateWithoutGameVersionInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -968,8 +876,6 @@ export type GameScoreUncheckedUpdateManyWithoutGameVersionInput = {
   gameSessionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   score?: Prisma.IntFieldUpdateOperationsInput | number
-  periodType?: Prisma.EnumGameScorePeriodFieldUpdateOperationsInput | $Enums.GameScorePeriod
-  periodKey?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -982,8 +888,6 @@ export type GameScoreSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   gameSessionId?: boolean
   userId?: boolean
   score?: boolean
-  periodType?: boolean
-  periodKey?: boolean
   createdAt?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   gameVersion?: boolean | Prisma.GameVersionDefaultArgs<ExtArgs>
@@ -998,8 +902,6 @@ export type GameScoreSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   gameSessionId?: boolean
   userId?: boolean
   score?: boolean
-  periodType?: boolean
-  periodKey?: boolean
   createdAt?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   gameVersion?: boolean | Prisma.GameVersionDefaultArgs<ExtArgs>
@@ -1014,8 +916,6 @@ export type GameScoreSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   gameSessionId?: boolean
   userId?: boolean
   score?: boolean
-  periodType?: boolean
-  periodKey?: boolean
   createdAt?: boolean
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   gameVersion?: boolean | Prisma.GameVersionDefaultArgs<ExtArgs>
@@ -1030,12 +930,10 @@ export type GameScoreSelectScalar = {
   gameSessionId?: boolean
   userId?: boolean
   score?: boolean
-  periodType?: boolean
-  periodKey?: boolean
   createdAt?: boolean
 }
 
-export type GameScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gameId" | "gameVersionId" | "gameSessionId" | "userId" | "score" | "periodType" | "periodKey" | "createdAt", ExtArgs["result"]["gameScore"]>
+export type GameScoreOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "gameId" | "gameVersionId" | "gameSessionId" | "userId" | "score" | "createdAt", ExtArgs["result"]["gameScore"]>
 export type GameScoreInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
   gameVersion?: boolean | Prisma.GameVersionDefaultArgs<ExtArgs>
@@ -1070,8 +968,6 @@ export type $GameScorePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     gameSessionId: string
     userId: string
     score: number
-    periodType: $Enums.GameScorePeriod
-    periodKey: string
     createdAt: Date
   }, ExtArgs["result"]["gameScore"]>
   composites: {}
@@ -1506,8 +1402,6 @@ export interface GameScoreFieldRefs {
   readonly gameSessionId: Prisma.FieldRef<"GameScore", 'String'>
   readonly userId: Prisma.FieldRef<"GameScore", 'String'>
   readonly score: Prisma.FieldRef<"GameScore", 'Int'>
-  readonly periodType: Prisma.FieldRef<"GameScore", 'GameScorePeriod'>
-  readonly periodKey: Prisma.FieldRef<"GameScore", 'String'>
   readonly createdAt: Prisma.FieldRef<"GameScore", 'DateTime'>
 }
     

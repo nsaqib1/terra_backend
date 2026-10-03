@@ -325,8 +325,6 @@ export const GameScoreScalarFieldEnum = {
   gameSessionId: 'gameSessionId',
   userId: 'userId',
   score: 'score',
-  periodType: 'periodType',
-  periodKey: 'periodKey',
   createdAt: 'createdAt'
 } as const
 

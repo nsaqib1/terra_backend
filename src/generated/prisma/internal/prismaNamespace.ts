@@ -2413,8 +2413,6 @@ export const GameScoreScalarFieldEnum = {
   gameSessionId: 'gameSessionId',
   userId: 'userId',
   score: 'score',
-  periodType: 'periodType',
-  periodKey: 'periodKey',
   createdAt: 'createdAt'
 } as const
 
@@ -2848,20 +2846,6 @@ export type EnumGameSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'GameSessionStatus[]'
  */
 export type ListEnumGameSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameSessionStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'GameScorePeriod'
- */
-export type EnumGameScorePeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameScorePeriod'>
-    
-
-
-/**
- * Reference to a field of type 'GameScorePeriod[]'
- */
-export type ListEnumGameScorePeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameScorePeriod[]'>
     
 
 

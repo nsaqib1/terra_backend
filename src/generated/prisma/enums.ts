@@ -170,14 +170,6 @@ export const GameSessionStatus = {
 export type GameSessionStatus = (typeof GameSessionStatus)[keyof typeof GameSessionStatus]
 
 
-export const GameScorePeriod = {
-  WEEK: 'WEEK',
-  MONTH: 'MONTH'
-} as const
-
-export type GameScorePeriod = (typeof GameScorePeriod)[keyof typeof GameScorePeriod]
-
-
 export const MediaType = {
   IMAGE: 'IMAGE',
   VIDEO: 'VIDEO'

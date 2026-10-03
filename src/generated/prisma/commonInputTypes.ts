@@ -562,23 +562,6 @@ export type EnumGameSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumGameSessionStatusFilter<$PrismaModel>
 }
 
-export type EnumGameScorePeriodFilter<$PrismaModel = never> = {
-  equals?: $Enums.GameScorePeriod | Prisma.EnumGameScorePeriodFieldRefInput<$PrismaModel>
-  in?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  notIn?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel> | $Enums.GameScorePeriod
-}
-
-export type EnumGameScorePeriodWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GameScorePeriod | Prisma.EnumGameScorePeriodFieldRefInput<$PrismaModel>
-  in?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  notIn?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumGameScorePeriodWithAggregatesFilter<$PrismaModel> | $Enums.GameScorePeriod
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel>
-}
-
 export type EnumMediaTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.MediaType | Prisma.EnumMediaTypeFieldRefInput<$PrismaModel>
   in?: $Enums.MediaType[] | Prisma.ListEnumMediaTypeFieldRefInput<$PrismaModel>
@@ -1219,23 +1202,6 @@ export type NestedEnumGameSessionStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumGameSessionStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumGameSessionStatusFilter<$PrismaModel>
-}
-
-export type NestedEnumGameScorePeriodFilter<$PrismaModel = never> = {
-  equals?: $Enums.GameScorePeriod | Prisma.EnumGameScorePeriodFieldRefInput<$PrismaModel>
-  in?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  notIn?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel> | $Enums.GameScorePeriod
-}
-
-export type NestedEnumGameScorePeriodWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.GameScorePeriod | Prisma.EnumGameScorePeriodFieldRefInput<$PrismaModel>
-  in?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  notIn?: $Enums.GameScorePeriod[] | Prisma.ListEnumGameScorePeriodFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumGameScorePeriodWithAggregatesFilter<$PrismaModel> | $Enums.GameScorePeriod
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumGameScorePeriodFilter<$PrismaModel>
 }
 
 export type NestedEnumMediaTypeFilter<$PrismaModel = never> = {

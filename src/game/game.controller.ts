@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
@@ -15,6 +16,7 @@ import { ListGamesDto } from './dto/list-games.dto';
 import { GameSessionGuard } from './guards/game-session.guard';
 import type { GameSessionContext } from './types/game-session.types';
 import { GameSession } from './decorators/game-session.decorator';
+import { SubmitScoreDto } from './dto/submit-score.dto';
 
 interface OptionalAuthenticatedRequest extends Request {
   user?: {
@@ -62,6 +64,21 @@ export class GameController {
     return this.gameService.startSession(
       slug,
       request.user?.userId,
+    );
+  }
+
+  @Post('session/score')
+  @UseGuards(GameSessionGuard)
+  async submitScore(
+    @GameSession() session: GameSessionContext,
+    @Body() dto: SubmitScoreDto,
+  ) {
+    return this.gameService.submitScore(
+      session.sessionId,
+      session.gameId,
+      session.gameVersionId,
+      session.userId,
+      dto.score,
     );
   }
 

@@ -326,24 +326,21 @@ model GameSession {
 }
 
 model GameScore {
-  id            String          @id @default(uuid()) @db.Uuid
-  gameId        String          @db.Uuid
-  gameVersionId String          @db.Uuid
-  gameSessionId String          @unique @db.Uuid
-  userId        String          @db.Uuid
+  id            String   @id @default(uuid()) @db.Uuid
+  gameId        String   @db.Uuid
+  gameVersionId String   @db.Uuid
+  gameSessionId String   @unique @db.Uuid
+  userId        String   @db.Uuid
   score         Int
-  periodType    GameScorePeriod
-  periodKey     String          @db.VarChar(20)
-  createdAt     DateTime        @default(now())
+  createdAt     DateTime @default(now())
 
   game        Game        @relation(fields: [gameId], references: [id])
   gameVersion GameVersion @relation(fields: [gameVersionId], references: [id])
   gameSession GameSession @relation(fields: [gameSessionId], references: [id])
   user        User        @relation(fields: [userId], references: [id])
 
-  @@index([gameId, periodType, periodKey, score])
+  @@index([gameId, createdAt, score])
   @@index([gameId, userId, score])
-  @@index([gameSessionId])
   @@index([userId, createdAt])
 }
 
@@ -572,11 +569,6 @@ enum GameSessionStatus {
   COMPLETED
   EXPIRED
   ABANDONED
-}
-
-enum GameScorePeriod {
-  WEEK
-  MONTH
 }
 
 enum MediaType {
