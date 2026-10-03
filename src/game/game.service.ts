@@ -12,6 +12,8 @@ import { ListGamesDto } from './dto/list-games.dto';
 import { AdminGameQueryDto } from './dto/admin-game-query.dto';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { CreateGameVersionDto } from './dto/create-game-version.dto';
+import { UpdateGameVersionDto } from './dto/update-game-version.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -403,6 +405,9 @@ export class GameService {
 
 	async adminCreate(dto: CreateGameDto) {
 		await this.validateCommunityIds(dto.communityIds ?? []);
+		if (dto.status === 'PUBLISHED') {
+			throw new BadRequestException('Create the game as a draft, publish a version, then publish the game');
+		}
 
 		try {
 			const game = await this.prisma.game.create({
@@ -441,6 +446,10 @@ export class GameService {
 
 	async adminUpdate(id: string, dto: UpdateGameDto) {
 		await this.ensureGameExists(id);
+
+		if (dto.status === 'PUBLISHED') {
+			await this.assertPublishableGame(id);
+		}
 
 		try {
 			await this.prisma.game.update({
@@ -505,10 +514,25 @@ export class GameService {
 	}
 
 	async adminPublish(id: string) {
-		const game = await this.ensureGameExists(id);
+		const game = await this.prisma.game.findUnique({
+			where: { id },
+			select: { id: true, deletedAt: true, currentVersionId: true },
+		});
 
+		if (!game) throw new NotFoundException('Game not found');
 		if (game.deletedAt) {
 			throw new BadRequestException('Archived games cannot be published');
+		}
+		if (!game.currentVersionId) {
+			throw new BadRequestException('Publish a game version before publishing the game');
+		}
+
+		const currentVersion = await this.prisma.gameVersion.findFirst({
+			where: { id: game.currentVersionId, gameId: id, status: 'PUBLISHED' },
+			select: { id: true, buildPath: true },
+		});
+		if (!currentVersion?.buildPath) {
+			throw new BadRequestException('The current game version does not have a playable build');
 		}
 
 		await this.prisma.game.update({
@@ -517,6 +541,130 @@ export class GameService {
 		});
 
 		return this.adminGetById(id);
+	}
+
+
+	async adminListVersions(gameId: string) {
+		await this.ensureGameExists(gameId);
+
+		return this.prisma.gameVersion.findMany({
+			where: { gameId },
+			orderBy: { createdAt: 'desc' },
+			select: {
+				id: true,
+				gameId: true,
+				version: true,
+				buildPath: true,
+				status: true,
+				releaseNotes: true,
+				createdAt: true,
+				updatedAt: true,
+				publishedAt: true,
+			},
+		});
+	}
+
+	async adminCreateVersion(gameId: string, dto: CreateGameVersionDto) {
+		await this.ensureGameExists(gameId);
+
+		try {
+			return await this.prisma.gameVersion.create({
+				data: {
+					gameId,
+					version: dto.version.trim(),
+					buildPath: dto.buildPath?.trim() || null,
+					releaseNotes: dto.releaseNotes?.trim() || null,
+				},
+				select: {
+					id: true,
+					gameId: true,
+					version: true,
+					buildPath: true,
+					status: true,
+					releaseNotes: true,
+					createdAt: true,
+					updatedAt: true,
+					publishedAt: true,
+				},
+			});
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+				throw new ConflictException('A version with this number already exists for this game');
+			}
+			throw error;
+		}
+	}
+
+	async adminUpdateVersion(gameId: string, versionId: string, dto: UpdateGameVersionDto) {
+		const version = await this.prisma.gameVersion.findFirst({ where: { id: versionId, gameId } });
+		if (!version) throw new NotFoundException('Game version not found');
+		if (version.status !== 'DRAFT') throw new BadRequestException('Only draft versions can be edited');
+
+		try {
+			return await this.prisma.gameVersion.update({
+				where: { id: versionId },
+				data: {
+					...(dto.version !== undefined ? { version: dto.version.trim() } : {}),
+					...(dto.buildPath !== undefined ? { buildPath: dto.buildPath?.trim() || null } : {}),
+					...(dto.releaseNotes !== undefined ? { releaseNotes: dto.releaseNotes?.trim() || null } : {}),
+				},
+				select: {
+					id: true, gameId: true, version: true, buildPath: true, status: true,
+					releaseNotes: true, createdAt: true, updatedAt: true, publishedAt: true,
+				},
+			});
+		} catch (error) {
+			if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+				throw new ConflictException('A version with this number already exists for this game');
+			}
+			throw error;
+		}
+	}
+
+	async adminPublishVersion(gameId: string, versionId: string) {
+		const version = await this.prisma.gameVersion.findFirst({
+			where: { id: versionId, gameId },
+			select: { id: true, buildPath: true, status: true },
+		});
+		if (!version) throw new NotFoundException('Game version not found');
+		if (!version.buildPath?.trim()) throw new BadRequestException('Upload a playable build before publishing this version');
+		if (version.status === 'ARCHIVED') throw new BadRequestException('Archived versions cannot be published');
+
+		return this.prisma.$transaction(async (tx) => {
+			await tx.gameVersion.updateMany({
+				where: { gameId, status: 'PUBLISHED', id: { not: versionId } },
+				data: { status: 'ARCHIVED' },
+			});
+
+			await tx.gameVersion.update({
+				where: { id: versionId },
+				data: { status: 'PUBLISHED', publishedAt: new Date() },
+			});
+
+			await tx.game.update({
+				where: { id: gameId },
+				data: { currentVersionId: versionId },
+			});
+
+			return tx.gameVersion.findUniqueOrThrow({
+				where: { id: versionId },
+				select: {
+					id: true, gameId: true, version: true, buildPath: true, status: true,
+					releaseNotes: true, createdAt: true, updatedAt: true, publishedAt: true,
+				},
+			});
+		});
+	}
+
+	async adminArchiveVersion(gameId: string, versionId: string) {
+		const version = await this.prisma.gameVersion.findFirst({ where: { id: versionId, gameId } });
+		if (!version) throw new NotFoundException('Game version not found');
+		if (version.status === 'ARCHIVED') return version;
+
+		const game = await this.prisma.game.findUnique({ where: { id: gameId }, select: { currentVersionId: true } });
+		if (game?.currentVersionId === versionId) throw new BadRequestException('The current game version cannot be archived');
+
+		return this.prisma.gameVersion.update({ where: { id: versionId }, data: { status: 'ARCHIVED' } });
 	}
 
 	async adminUnpublish(id: string) {
@@ -528,6 +676,25 @@ export class GameService {
 		});
 
 		return this.adminGetById(id);
+	}
+
+
+	private async assertPublishableGame(id: string) {
+		const game = await this.prisma.game.findUnique({
+			where: { id },
+			select: { currentVersionId: true },
+		});
+		if (!game) throw new NotFoundException('Game not found');
+		if (!game.currentVersionId) {
+			throw new BadRequestException('Publish a game version before publishing the game');
+		}
+		const version = await this.prisma.gameVersion.findFirst({
+			where: { id: game.currentVersionId, gameId: id, status: 'PUBLISHED' },
+			select: { buildPath: true },
+		});
+		if (!version?.buildPath) {
+			throw new BadRequestException('The current game version does not have a playable build');
+		}
 	}
 
 	private async ensureGameExists(id: string) {

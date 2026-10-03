@@ -33,6 +33,8 @@ import { GameService } from '../game/game.service';
 import { AdminGameQueryDto } from '../game/dto/admin-game-query.dto';
 import { CreateGameDto } from '../game/dto/create-game.dto';
 import { UpdateGameDto } from '../game/dto/update-game.dto';
+import { CreateGameVersionDto } from '../game/dto/create-game-version.dto';
+import { UpdateGameVersionDto } from '../game/dto/update-game-version.dto';
 import { UpdateGameCommunitiesDto } from '../game/dto/update-game-communities.dto';
 import { ResourcesService } from '../resources/resources.service';
 import { ResourceTagsService } from '../resources/resource-tags.service';
@@ -157,6 +159,45 @@ export class AdminController {
   @Delete('games/:id')
   async deleteGame(@Param('id') id: string) {
     return this.gameService.adminDelete(id);
+  }
+
+
+  @Get('games/:id/versions')
+  async getGameVersions(@Param('id') id: string) {
+    return this.gameService.adminListVersions(id);
+  }
+
+  @Post('games/:id/versions')
+  async createGameVersion(
+    @Param('id') id: string,
+    @Body() dto: CreateGameVersionDto,
+  ) {
+    return this.gameService.adminCreateVersion(id, dto);
+  }
+
+  @Patch('games/:id/versions/:versionId')
+  async updateGameVersion(
+    @Param('id') id: string,
+    @Param('versionId') versionId: string,
+    @Body() dto: UpdateGameVersionDto,
+  ) {
+    return this.gameService.adminUpdateVersion(id, versionId, dto);
+  }
+
+  @Post('games/:id/versions/:versionId/publish')
+  async publishGameVersion(
+    @Param('id') id: string,
+    @Param('versionId') versionId: string,
+  ) {
+    return this.gameService.adminPublishVersion(id, versionId);
+  }
+
+  @Post('games/:id/versions/:versionId/archive')
+  async archiveGameVersion(
+    @Param('id') id: string,
+    @Param('versionId') versionId: string,
+  ) {
+    return this.gameService.adminArchiveVersion(id, versionId);
   }
 
   @Post('games/:id/publish')

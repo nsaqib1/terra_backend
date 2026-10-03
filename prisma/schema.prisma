@@ -273,7 +273,7 @@ model GameVersion {
   id           String            @id @default(uuid()) @db.Uuid
   gameId       String            @db.Uuid
   version      String            @db.VarChar(50)
-  buildPath    String
+  buildPath    String?
   status       GameVersionStatus @default(DRAFT)
   releaseNotes String?
   createdAt    DateTime          @default(now())

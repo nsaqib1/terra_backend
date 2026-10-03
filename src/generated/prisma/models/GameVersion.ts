@@ -175,7 +175,7 @@ export type GameVersionGroupByOutputType = {
   id: string
   gameId: string
   version: string
-  buildPath: string
+  buildPath: string | null
   status: $Enums.GameVersionStatus
   releaseNotes: string | null
   createdAt: Date
@@ -208,7 +208,7 @@ export type GameVersionWhereInput = {
   id?: Prisma.UuidFilter<"GameVersion"> | string
   gameId?: Prisma.UuidFilter<"GameVersion"> | string
   version?: Prisma.StringFilter<"GameVersion"> | string
-  buildPath?: Prisma.StringFilter<"GameVersion"> | string
+  buildPath?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   status?: Prisma.EnumGameVersionStatusFilter<"GameVersion"> | $Enums.GameVersionStatus
   releaseNotes?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GameVersion"> | Date | string
@@ -223,7 +223,7 @@ export type GameVersionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  buildPath?: Prisma.SortOrder
+  buildPath?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   releaseNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -242,7 +242,7 @@ export type GameVersionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.GameVersionWhereInput | Prisma.GameVersionWhereInput[]
   gameId?: Prisma.UuidFilter<"GameVersion"> | string
   version?: Prisma.StringFilter<"GameVersion"> | string
-  buildPath?: Prisma.StringFilter<"GameVersion"> | string
+  buildPath?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   status?: Prisma.EnumGameVersionStatusFilter<"GameVersion"> | $Enums.GameVersionStatus
   releaseNotes?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GameVersion"> | Date | string
@@ -257,7 +257,7 @@ export type GameVersionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   gameId?: Prisma.SortOrder
   version?: Prisma.SortOrder
-  buildPath?: Prisma.SortOrder
+  buildPath?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   releaseNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -275,7 +275,7 @@ export type GameVersionScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"GameVersion"> | string
   gameId?: Prisma.UuidWithAggregatesFilter<"GameVersion"> | string
   version?: Prisma.StringWithAggregatesFilter<"GameVersion"> | string
-  buildPath?: Prisma.StringWithAggregatesFilter<"GameVersion"> | string
+  buildPath?: Prisma.StringNullableWithAggregatesFilter<"GameVersion"> | string | null
   status?: Prisma.EnumGameVersionStatusWithAggregatesFilter<"GameVersion"> | $Enums.GameVersionStatus
   releaseNotes?: Prisma.StringNullableWithAggregatesFilter<"GameVersion"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GameVersion"> | Date | string
@@ -286,7 +286,7 @@ export type GameVersionScalarWhereWithAggregatesInput = {
 export type GameVersionCreateInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -301,7 +301,7 @@ export type GameVersionUncheckedCreateInput = {
   id?: string
   gameId: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -314,7 +314,7 @@ export type GameVersionUncheckedCreateInput = {
 export type GameVersionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -329,7 +329,7 @@ export type GameVersionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -343,7 +343,7 @@ export type GameVersionCreateManyInput = {
   id?: string
   gameId: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -354,7 +354,7 @@ export type GameVersionCreateManyInput = {
 export type GameVersionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -366,7 +366,7 @@ export type GameVersionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -507,7 +507,7 @@ export type GameVersionUpdateOneRequiredWithoutScoresNestedInput = {
 export type GameVersionCreateWithoutGameInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -520,7 +520,7 @@ export type GameVersionCreateWithoutGameInput = {
 export type GameVersionUncheckedCreateWithoutGameInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -563,7 +563,7 @@ export type GameVersionScalarWhereInput = {
   id?: Prisma.UuidFilter<"GameVersion"> | string
   gameId?: Prisma.UuidFilter<"GameVersion"> | string
   version?: Prisma.StringFilter<"GameVersion"> | string
-  buildPath?: Prisma.StringFilter<"GameVersion"> | string
+  buildPath?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   status?: Prisma.EnumGameVersionStatusFilter<"GameVersion"> | $Enums.GameVersionStatus
   releaseNotes?: Prisma.StringNullableFilter<"GameVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"GameVersion"> | Date | string
@@ -574,7 +574,7 @@ export type GameVersionScalarWhereInput = {
 export type GameVersionCreateWithoutSessionsInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -588,7 +588,7 @@ export type GameVersionUncheckedCreateWithoutSessionsInput = {
   id?: string
   gameId: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -616,7 +616,7 @@ export type GameVersionUpdateToOneWithWhereWithoutSessionsInput = {
 export type GameVersionUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -630,7 +630,7 @@ export type GameVersionUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -642,7 +642,7 @@ export type GameVersionUncheckedUpdateWithoutSessionsInput = {
 export type GameVersionCreateWithoutScoresInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -656,7 +656,7 @@ export type GameVersionUncheckedCreateWithoutScoresInput = {
   id?: string
   gameId: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -684,7 +684,7 @@ export type GameVersionUpdateToOneWithWhereWithoutScoresInput = {
 export type GameVersionUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -698,7 +698,7 @@ export type GameVersionUncheckedUpdateWithoutScoresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   gameId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -710,7 +710,7 @@ export type GameVersionUncheckedUpdateWithoutScoresInput = {
 export type GameVersionCreateManyGameInput = {
   id?: string
   version: string
-  buildPath: string
+  buildPath?: string | null
   status?: $Enums.GameVersionStatus
   releaseNotes?: string | null
   createdAt?: Date | string
@@ -721,7 +721,7 @@ export type GameVersionCreateManyGameInput = {
 export type GameVersionUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -734,7 +734,7 @@ export type GameVersionUpdateWithoutGameInput = {
 export type GameVersionUncheckedUpdateWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,7 +747,7 @@ export type GameVersionUncheckedUpdateWithoutGameInput = {
 export type GameVersionUncheckedUpdateManyWithoutGameInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.StringFieldUpdateOperationsInput | string
-  buildPath?: Prisma.StringFieldUpdateOperationsInput | string
+  buildPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumGameVersionStatusFieldUpdateOperationsInput | $Enums.GameVersionStatus
   releaseNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -874,7 +874,7 @@ export type $GameVersionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     id: string
     gameId: string
     version: string
-    buildPath: string
+    buildPath: string | null
     status: $Enums.GameVersionStatus
     releaseNotes: string | null
     createdAt: Date
