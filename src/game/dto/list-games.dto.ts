@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString, MaxLength } from 'class-validator';
-import { GameCategory, GameStatus, GameType } from '../../generated/prisma/client';
+import { GameCategory, GameType } from '../../generated/prisma/client';
 
 export class ListGamesDto {
 	@IsOptional()
@@ -9,10 +9,6 @@ export class ListGamesDto {
 	@IsOptional()
 	@IsEnum(GameType)
 	type?: GameType;
-
-	@IsOptional()
-	@IsEnum(GameStatus)
-	status?: GameStatus;
 
 	@IsOptional()
 	@IsString()

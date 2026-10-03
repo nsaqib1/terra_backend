@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { GameSessionContext } from '../types/game-session.types';
+import type { GameSessionContext } from '../types/game-session.types';
 
 export const GameSession = createParamDecorator(
   (

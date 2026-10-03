@@ -17,8 +17,8 @@ import { GameSessionGuard } from './guards/game-session.guard';
         secret: config.getOrThrow<string>('GAME_SESSION_SECRET'),
         signOptions: {
           expiresIn: config.get<string>(
-            'GAME_SESSION_EXPIRES_IN',
-            '30m',
+            'GAME_SESSION_EXPIRES_SECONDS',
+            '1800',
           ) as any,
         },
       }),

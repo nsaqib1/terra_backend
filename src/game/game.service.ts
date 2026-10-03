@@ -9,10 +9,15 @@ import { Prisma } from '../generated/prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../database/prisma.service';
 import { ListGamesDto } from './dto/list-games.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class GameService {
-	constructor(private readonly prisma: PrismaService, private readonly jwtService: JwtService,) { }
+	constructor(
+		private readonly prisma: PrismaService,
+		private readonly jwtService: JwtService,
+		private readonly configService: ConfigService,
+	) { }
 
 	async list(dto: ListGamesDto) {
 		const where = {
@@ -135,7 +140,13 @@ export class GameService {
 			);
 		}
 
-		const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
+		const expiresInSeconds = this.configService.getOrThrow<number>(
+			'GAME_SESSION_EXPIRES_SECONDS',
+		);
+
+		const expiresAt = new Date(
+			Date.now() + expiresInSeconds * 1000,
+		);
 
 		const session = await this.prisma.gameSession.create({
 			data: {

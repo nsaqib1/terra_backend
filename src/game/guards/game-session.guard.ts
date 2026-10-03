@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
 import { PrismaService } from '../../database/prisma.service';
-import {
+import type {
   GameSessionContext,
   GameSessionTokenPayload,
 } from '../types/game-session.types';
