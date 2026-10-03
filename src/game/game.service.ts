@@ -9,6 +9,9 @@ import { Prisma } from '../generated/prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../database/prisma.service';
 import { ListGamesDto } from './dto/list-games.dto';
+import { AdminGameQueryDto } from './dto/admin-game-query.dto';
+import { CreateGameDto } from './dto/create-game.dto';
+import { UpdateGameDto } from './dto/update-game.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -235,6 +238,327 @@ export class GameService {
 			createdAt: game.createdAt,
 			updatedAt: game.updatedAt,
 		};
+	}
+
+
+	async adminList(dto: AdminGameQueryDto) {
+		const page = dto.page ?? 1;
+		const limit = dto.limit ?? 20;
+		const skip = (page - 1) * limit;
+
+		const where: any = {};
+
+		if (dto.status) where.status = dto.status;
+		if (dto.category) where.category = dto.category;
+		if (dto.type) where.type = dto.type;
+
+		if (dto.communityId) {
+			where.communities = {
+				some: {
+					communityId: dto.communityId,
+				},
+			};
+		}
+
+		if (dto.search?.trim()) {
+			const term = dto.search.trim();
+			where.OR = [
+				{ title: { contains: term, mode: 'insensitive' } },
+				{ slug: { contains: term, mode: 'insensitive' } },
+				{ description: { contains: term, mode: 'insensitive' } },
+			];
+		}
+
+		const orderBy = {
+			[dto.sortBy ?? 'createdAt']: dto.sortOrder ?? 'desc',
+		};
+
+		const [games, total] = await this.prisma.$transaction([
+			this.prisma.game.findMany({
+				where,
+				orderBy,
+				skip,
+				take: limit,
+				select: {
+					id: true,
+					slug: true,
+					title: true,
+					description: true,
+					thumbnailUrl: true,
+					category: true,
+					type: true,
+					status: true,
+					scoreEnabled: true,
+					leaderboardEnabled: true,
+					currentVersionId: true,
+					createdAt: true,
+					updatedAt: true,
+					deletedAt: true,
+					communities: {
+						select: {
+							community: {
+								select: {
+									id: true,
+									name: true,
+									slug: true,
+								},
+							},
+						},
+					},
+					versions: {
+						select: {
+							id: true,
+							version: true,
+							buildPath: true,
+							status: true,
+							publishedAt: true,
+						},
+						orderBy: { createdAt: 'desc' },
+					},
+					_count: {
+						select: {
+							sessions: true,
+							scores: true,
+						},
+					},
+				},
+			}),
+			this.prisma.game.count({ where }),
+		]);
+
+		return {
+			data: games.map((game) => ({
+				...game,
+				communities: game.communities.map((relation) => relation.community),
+			})),
+			meta: {
+				page,
+				limit,
+				total,
+				totalPages: Math.ceil(total / limit),
+			},
+		};
+	}
+
+	async adminGetById(id: string) {
+		const game = await this.prisma.game.findUnique({
+			where: { id },
+			select: {
+				id: true,
+				slug: true,
+				title: true,
+				description: true,
+				thumbnailUrl: true,
+				category: true,
+				type: true,
+				status: true,
+				scoreEnabled: true,
+				leaderboardEnabled: true,
+				currentVersionId: true,
+				createdAt: true,
+				updatedAt: true,
+				deletedAt: true,
+				communities: {
+					select: {
+						community: {
+							select: {
+								id: true,
+								name: true,
+								slug: true,
+							},
+						},
+					},
+				},
+				versions: {
+					select: {
+						id: true,
+						version: true,
+						buildPath: true,
+						status: true,
+						releaseNotes: true,
+						createdAt: true,
+						updatedAt: true,
+						publishedAt: true,
+					},
+					orderBy: { createdAt: 'desc' },
+				},
+				_count: {
+					select: {
+						sessions: true,
+						scores: true,
+					},
+				},
+			},
+		});
+
+		if (!game) {
+			throw new NotFoundException('Game not found');
+		}
+
+		return {
+			...game,
+			communities: game.communities.map((relation) => relation.community),
+		};
+	}
+
+	async adminCreate(dto: CreateGameDto) {
+		await this.validateCommunityIds(dto.communityIds ?? []);
+
+		try {
+			const game = await this.prisma.game.create({
+				data: {
+					title: dto.title.trim(),
+					slug: dto.slug.toLowerCase(),
+					description: dto.description?.trim() || null,
+					thumbnailUrl: dto.thumbnailUrl?.trim() || null,
+					category: dto.category ?? 'ENTERTAINMENT',
+					type: dto.type ?? 'SINGLE_PLAYER',
+					status: dto.status ?? 'DRAFT',
+					scoreEnabled: dto.scoreEnabled ?? false,
+					leaderboardEnabled: dto.leaderboardEnabled ?? false,
+					communities: dto.communityIds?.length
+						? {
+							create: dto.communityIds.map((communityId) => ({
+								community: { connect: { id: communityId } },
+							})),
+						}
+						: undefined,
+				},
+				select: { id: true },
+			});
+
+			return this.adminGetById(game.id);
+		} catch (error) {
+			if (
+				error instanceof Prisma.PrismaClientKnownRequestError &&
+				error.code === 'P2002'
+			) {
+				throw new ConflictException('A game with this slug already exists');
+			}
+			throw error;
+		}
+	}
+
+	async adminUpdate(id: string, dto: UpdateGameDto) {
+		await this.ensureGameExists(id);
+
+		try {
+			await this.prisma.game.update({
+				where: { id },
+				data: {
+					...(dto.title !== undefined ? { title: dto.title.trim() } : {}),
+					...(dto.slug !== undefined ? { slug: dto.slug.toLowerCase() } : {}),
+					...(dto.description !== undefined ? { description: dto.description.trim() || null } : {}),
+					...(dto.thumbnailUrl !== undefined ? { thumbnailUrl: dto.thumbnailUrl.trim() || null } : {}),
+					...(dto.category !== undefined ? { category: dto.category } : {}),
+					...(dto.type !== undefined ? { type: dto.type } : {}),
+					...(dto.status !== undefined ? { status: dto.status } : {}),
+					...(dto.scoreEnabled !== undefined ? { scoreEnabled: dto.scoreEnabled } : {}),
+					...(dto.leaderboardEnabled !== undefined ? { leaderboardEnabled: dto.leaderboardEnabled } : {}),
+				},
+			});
+		} catch (error) {
+			if (
+				error instanceof Prisma.PrismaClientKnownRequestError &&
+				error.code === 'P2002'
+			) {
+				throw new ConflictException('A game with this slug already exists');
+			}
+			throw error;
+		}
+
+		return this.adminGetById(id);
+	}
+
+	async adminUpdateCommunities(id: string, communityIds: string[]) {
+		await this.ensureGameExists(id);
+		await this.validateCommunityIds(communityIds);
+
+		await this.prisma.$transaction(async (tx) => {
+			await tx.gameCommunity.deleteMany({ where: { gameId: id } });
+
+			if (communityIds.length > 0) {
+				await tx.gameCommunity.createMany({
+					data: communityIds.map((communityId) => ({
+						gameId: id,
+						communityId,
+					})),
+				});
+			}
+		});
+
+		return this.adminGetById(id);
+	}
+
+	async adminDelete(id: string) {
+		await this.ensureGameExists(id);
+
+		await this.prisma.game.update({
+			where: { id },
+			data: {
+				status: 'ARCHIVED',
+				deletedAt: new Date(),
+			},
+		});
+
+		return this.adminGetById(id);
+	}
+
+	async adminPublish(id: string) {
+		const game = await this.ensureGameExists(id);
+
+		if (game.deletedAt) {
+			throw new BadRequestException('Archived games cannot be published');
+		}
+
+		await this.prisma.game.update({
+			where: { id },
+			data: { status: 'PUBLISHED' },
+		});
+
+		return this.adminGetById(id);
+	}
+
+	async adminUnpublish(id: string) {
+		await this.ensureGameExists(id);
+
+		await this.prisma.game.update({
+			where: { id },
+			data: { status: 'UNPUBLISHED' },
+		});
+
+		return this.adminGetById(id);
+	}
+
+	private async ensureGameExists(id: string) {
+		const game = await this.prisma.game.findUnique({
+			where: { id },
+			select: { id: true, deletedAt: true },
+		});
+
+		if (!game) {
+			throw new NotFoundException('Game not found');
+		}
+
+		return game;
+	}
+
+	private async validateCommunityIds(communityIds: string[]) {
+		if (communityIds.length === 0) return;
+
+		const count = await this.prisma.community.count({
+			where: {
+				id: { in: communityIds },
+				status: 'ACTIVE',
+				deletedAt: null,
+			},
+		});
+
+		if (count !== communityIds.length) {
+			throw new BadRequestException(
+				'One or more selected communities are invalid or inactive',
+			);
+		}
 	}
 
 	async endSession(sessionId: string) {

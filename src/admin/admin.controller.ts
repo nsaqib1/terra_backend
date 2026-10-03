@@ -11,6 +11,7 @@ import {
   ParseFilePipe,
   Patch,
   Post,
+  Put,
   Query,
   Req,
   UploadedFile,
@@ -28,6 +29,11 @@ import { CreateCommunityDto } from './dto/create-community.dto';
 import { ReviewCommunityProposalDto } from './dto/review-community-proposal.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
 import { AdminGuard } from './guards/admin.guard';
+import { GameService } from '../game/game.service';
+import { AdminGameQueryDto } from '../game/dto/admin-game-query.dto';
+import { CreateGameDto } from '../game/dto/create-game.dto';
+import { UpdateGameDto } from '../game/dto/update-game.dto';
+import { UpdateGameCommunitiesDto } from '../game/dto/update-game-communities.dto';
 import { ResourcesService } from '../resources/resources.service';
 import { ResourceTagsService } from '../resources/resource-tags.service';
 import { ListResourcesDto } from '../resources/dto/list-resources.dto';
@@ -63,7 +69,8 @@ export class AdminController {
     private readonly adminService: AdminService,
     private readonly resourcesService: ResourcesService,
     private readonly resourceTagsService: ResourceTagsService,
-  ) {}
+    private readonly gameService: GameService,
+  ) { }
 
   @Get('stats')
   async getStats() {
@@ -114,6 +121,52 @@ export class AdminController {
       proposalId,
       dto,
     );
+  }
+
+  @Get('games')
+  async getGames(@Query() query: AdminGameQueryDto) {
+    return this.gameService.adminList(query);
+  }
+
+  @Get('games/:id')
+  async getGame(@Param('id') id: string) {
+    return this.gameService.adminGetById(id);
+  }
+
+  @Post('games')
+  async createGame(@Body() dto: CreateGameDto) {
+    return this.gameService.adminCreate(dto);
+  }
+
+  @Patch('games/:id')
+  async updateGame(
+    @Param('id') id: string,
+    @Body() dto: UpdateGameDto,
+  ) {
+    return this.gameService.adminUpdate(id, dto);
+  }
+
+  @Put('games/:id/communities')
+  async updateGameCommunities(
+    @Param('id') id: string,
+    @Body() dto: UpdateGameCommunitiesDto,
+  ) {
+    return this.gameService.adminUpdateCommunities(id, dto.communityIds);
+  }
+
+  @Delete('games/:id')
+  async deleteGame(@Param('id') id: string) {
+    return this.gameService.adminDelete(id);
+  }
+
+  @Post('games/:id/publish')
+  async publishGame(@Param('id') id: string) {
+    return this.gameService.adminPublish(id);
+  }
+
+  @Post('games/:id/unpublish')
+  async unpublishGame(@Param('id') id: string) {
+    return this.gameService.adminUnpublish(id);
   }
 
   @Get('resources')
