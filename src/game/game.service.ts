@@ -446,35 +446,77 @@ export class GameService {
 		}
 	}
 
-	async adminUpdate(id: string, dto: UpdateGameDto) {
+	async adminUpdate(
+		id: string,
+		dto: UpdateGameDto,
+	) {
 		await this.ensureGameExists(id);
 
-		if (dto.status === 'PUBLISHED') {
+		const existing =
+			await this.prisma.game.findUnique({
+				where: {
+					id,
+				},
+				select: {
+					id: true,
+					slug: true,
+					currentVersionId: true,
+				},
+			});
+
+		if (!existing) {
+			throw new NotFoundException(
+				'Game not found',
+			);
+		}
+
+		const newSlug =
+			dto.slug?.trim().toLowerCase();
+
+		if (
+			newSlug &&
+			newSlug !== existing.slug &&
+			existing.currentVersionId
+		) {
+			throw new BadRequestException(
+				'The slug of a game cannot be changed after a version has been published',
+			);
+		}
+
+		if (
+			dto.status === 'PUBLISHED'
+		) {
 			await this.assertPublishableGame(id);
 		}
 
 		try {
 			await this.prisma.game.update({
-				where: { id },
+				where: {
+					id,
+				},
 				data: {
-					...(dto.title !== undefined ? { title: dto.title.trim() } : {}),
-					...(dto.slug !== undefined ? { slug: dto.slug.toLowerCase() } : {}),
-					...(dto.description !== undefined ? { description: dto.description.trim() || null } : {}),
-					...(dto.thumbnailUrl !== undefined ? { thumbnailUrl: dto.thumbnailUrl.trim() || null } : {}),
-					...(dto.category !== undefined ? { category: dto.category } : {}),
-					...(dto.type !== undefined ? { type: dto.type } : {}),
-					...(dto.status !== undefined ? { status: dto.status } : {}),
-					...(dto.scoreEnabled !== undefined ? { scoreEnabled: dto.scoreEnabled } : {}),
-					...(dto.leaderboardEnabled !== undefined ? { leaderboardEnabled: dto.leaderboardEnabled } : {}),
+					...(dto.title !== undefined ? { title: dto.title.trim(), } : {}),
+					...(dto.slug !== undefined ? { slug: dto.slug.trim().toLowerCase(), } : {}),
+					...(dto.description !== undefined ? { description: dto.description.trim() || null, } : {}),
+					...(dto.thumbnailUrl !== undefined ? { thumbnailUrl: dto.thumbnailUrl.trim() || null, } : {}),
+					...(dto.category !== undefined ? { category: dto.category, } : {}),
+					...(dto.type !== undefined ? { type: dto.type, } : {}),
+					...(dto.status !== undefined ? { status: dto.status, } : {}),
+					...(dto.scoreEnabled !== undefined ? { scoreEnabled: dto.scoreEnabled, } : {}),
+					...(dto.leaderboardEnabled !== undefined ? { leaderboardEnabled: dto.leaderboardEnabled, } : {}),
 				},
 			});
 		} catch (error) {
 			if (
-				error instanceof Prisma.PrismaClientKnownRequestError &&
+				error instanceof
+				Prisma.PrismaClientKnownRequestError &&
 				error.code === 'P2002'
 			) {
-				throw new ConflictException('A game with this slug already exists');
+				throw new ConflictException(
+					'A game with this slug already exists',
+				);
 			}
+
 			throw error;
 		}
 
@@ -621,50 +663,250 @@ export class GameService {
 		}
 	}
 
-	async adminPublishVersion(gameId: string, versionId: string) {
-		const version = await this.prisma.gameVersion.findFirst({
-			where: { id: versionId, gameId },
-			select: { id: true, buildPath: true, status: true },
-		});
-		if (!version) throw new NotFoundException('Game version not found');
-		if (!version.buildPath?.trim()) throw new BadRequestException('Upload a playable build before publishing this version');
-		if (version.status === 'ARCHIVED') throw new BadRequestException('Archived versions cannot be published');
-
-		return this.prisma.$transaction(async (tx) => {
-			await tx.gameVersion.updateMany({
-				where: { gameId, status: 'PUBLISHED', id: { not: versionId } },
-				data: { status: 'ARCHIVED' },
-			});
-
-			await tx.gameVersion.update({
-				where: { id: versionId },
-				data: { status: 'PUBLISHED', publishedAt: new Date() },
-			});
-
-			await tx.game.update({
-				where: { id: gameId },
-				data: { currentVersionId: versionId },
-			});
-
-			return tx.gameVersion.findUniqueOrThrow({
-				where: { id: versionId },
+	async adminPublishVersion(
+		gameId: string,
+		versionId: string,
+	) {
+		const game =
+			await this.prisma.game.findUnique({
+				where: {
+					id: gameId,
+				},
 				select: {
-					id: true, gameId: true, version: true, buildPath: true, status: true,
-					releaseNotes: true, createdAt: true, updatedAt: true, publishedAt: true,
+					id: true,
+					slug: true,
+					currentVersionId: true,
 				},
 			});
-		});
+
+		if (!game) {
+			throw new NotFoundException(
+				'Game not found',
+			);
+		}
+
+		const version =
+			await this.prisma.gameVersion.findFirst({
+				where: {
+					id: versionId,
+					gameId,
+				},
+				select: {
+					id: true,
+					gameId: true,
+					version: true,
+					buildPath: true,
+					status: true,
+				},
+			});
+
+		if (!version) {
+			throw new NotFoundException(
+				'Game version not found',
+			);
+		}
+
+		if (
+			version.status === 'ARCHIVED'
+		) {
+			throw new BadRequestException(
+				'Archived versions cannot be published',
+			);
+		}
+
+		if (
+			!version.buildPath
+		) {
+			throw new BadRequestException(
+				'Upload a playable build before publishing this version',
+			);
+		}
+
+		if (
+			!version.buildPath.startsWith(
+				'__staged__/',
+			)
+		) {
+			throw new BadRequestException(
+				'This version does not contain a staged build',
+			);
+		}
+
+		/*
+		 * Replace the currently live filesystem build
+		 * with this version.
+		 */
+		const promotion =
+			await this.buildStorage.publishBuild(
+				game.slug,
+				version.buildPath,
+			);
+
+		try {
+			const result =
+				await this.prisma.$transaction(
+					async (tx) => {
+						/*
+						 * Archive the previous published version.
+						 *
+						 * Its physical build has just been replaced,
+						 * so it no longer has a buildPath.
+						 */
+						if (
+							game.currentVersionId &&
+							game.currentVersionId !== versionId
+						) {
+							await tx.gameVersion.update({
+								where: {
+									id: game.currentVersionId,
+								},
+								data: {
+									status: 'ARCHIVED',
+									buildPath: null,
+								},
+							});
+						}
+
+						/*
+						 * Publish the new version.
+						 *
+						 * For a published version buildPath is now
+						 * the public game slug.
+						 */
+						await tx.gameVersion.update({
+							where: {
+								id: versionId,
+							},
+							data: {
+								status: 'PUBLISHED',
+								publishedAt: new Date(),
+								buildPath: game.slug,
+							},
+						});
+
+						await tx.game.update({
+							where: {
+								id: gameId,
+							},
+							data: {
+								currentVersionId:
+									versionId,
+							},
+						});
+
+						return tx.gameVersion.findUniqueOrThrow({
+							where: {
+								id: versionId,
+							},
+							select: {
+								id: true,
+								gameId: true,
+								version: true,
+								buildPath: true,
+								status: true,
+								releaseNotes: true,
+								createdAt: true,
+								updatedAt: true,
+								publishedAt: true,
+							},
+						});
+					},
+				);
+
+			/*
+			 * Database successfully points at the new
+			 * published version, so the previous physical
+			 * build can finally be deleted.
+			 */
+			await this.buildStorage.finalizePublishedBuild(
+				promotion,
+			);
+
+			return result;
+		} catch (error) {
+			/*
+			 * Database failed, so restore the previous
+			 * filesystem build.
+			 */
+			await this.buildStorage.rollbackPublishedBuild(
+				promotion,
+			);
+
+			throw error;
+		}
 	}
 
-	async adminArchiveVersion(gameId: string, versionId: string) {
-		const version = await this.prisma.gameVersion.findFirst({ where: { id: versionId, gameId } });
-		if (!version) throw new NotFoundException('Game version not found');
-		if (version.status === 'ARCHIVED') return version;
+	async adminArchiveVersion(
+		gameId: string,
+		versionId: string,
+	) {
+		const version =
+			await this.prisma.gameVersion.findFirst({
+				where: {
+					id: versionId,
+					gameId,
+				},
+			});
 
-		const game = await this.prisma.game.findUnique({ where: { id: gameId }, select: { currentVersionId: true } });
-		if (game?.currentVersionId === versionId) throw new BadRequestException('The current game version cannot be archived');
+		if (!version) {
+			throw new NotFoundException(
+				'Game version not found',
+			);
+		}
 
-		return this.prisma.gameVersion.update({ where: { id: versionId }, data: { status: 'ARCHIVED' } });
+		if (
+			version.status === 'ARCHIVED'
+		) {
+			return version;
+		}
+
+		const game =
+			await this.prisma.game.findUnique({
+				where: {
+					id: gameId,
+				},
+				select: {
+					currentVersionId: true,
+				},
+			});
+
+		if (
+			game?.currentVersionId ===
+			versionId
+		) {
+			throw new BadRequestException(
+				'The current game version cannot be archived',
+			);
+		}
+
+		/*
+		 * Draft builds are staged in game-temp.
+		 * Remove them when the version is archived.
+		 */
+		if (
+			version.buildPath?.startsWith(
+				'__staged__/',
+			)
+		) {
+			await this.buildStorage.deleteBuild(
+				version.buildPath,
+			);
+		}
+
+		return this.prisma.gameVersion.update({
+			where: {
+				id: versionId,
+			},
+			data: {
+				status: 'ARCHIVED',
+				buildPath:
+					version.buildPath?.startsWith(
+						'__staged__/',
+					)
+						? null
+						: version.buildPath,
+			},
+		});
 	}
 
 	async adminUnpublish(id: string) {
@@ -946,29 +1188,37 @@ export class GameService {
 		file: Express.Multer.File,
 	) {
 		if (!file?.path) {
-			throw new BadRequestException('Build ZIP file is required');
+			throw new BadRequestException(
+				'Build ZIP file is required',
+			);
 		}
 
-		const version = await this.prisma.gameVersion.findFirst({
-			where: {
-				id: versionId,
-				gameId,
-			},
-			select: {
-				id: true,
-				gameId: true,
-				version: true,
-				status: true,
-				buildPath: true,
-			},
-		});
+		const version =
+			await this.prisma.gameVersion.findFirst({
+				where: {
+					id: versionId,
+					gameId,
+				},
+				select: {
+					id: true,
+					gameId: true,
+					version: true,
+					status: true,
+					buildPath: true,
+				},
+			});
 
 		if (!version) {
 			await this.buildStorage.deleteBuild(null);
-			throw new NotFoundException('Game version not found');
+
+			throw new NotFoundException(
+				'Game version not found',
+			);
 		}
 
-		if (version.status === 'ARCHIVED') {
+		if (
+			version.status === 'ARCHIVED'
+		) {
 			throw new BadRequestException(
 				'Cannot upload a build to an archived version',
 			);
@@ -980,11 +1230,12 @@ export class GameService {
 			);
 		}
 
-		const stored = await this.buildStorage.storeBuild(
-			file.path,
-			gameId,
-			versionId,
-		);
+		const stored =
+			await this.buildStorage.storeBuild(
+				file.path,
+				gameId,
+				versionId,
+			);
 
 		try {
 			return await this.prisma.gameVersion.update({
@@ -1007,7 +1258,10 @@ export class GameService {
 				},
 			});
 		} catch (error) {
-			await this.buildStorage.deleteBuild(stored.buildPath);
+			await this.buildStorage.deleteBuild(
+				stored.buildPath,
+			);
+
 			throw error;
 		}
 	}

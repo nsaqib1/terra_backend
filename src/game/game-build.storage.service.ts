@@ -17,8 +17,15 @@ import { randomUUID } from 'crypto';
 import { join, normalize, relative, sep } from 'path';
 import * as unzipper from 'unzipper';
 
+export interface StagedGameBuild {
+  buildPath: string;
+  absolutePath: string;
+}
+
 @Injectable()
 export class GameBuildStorageService {
+  private readonly stagedPrefix = '__staged__';
+
   constructor(
     private readonly configService: ConfigService,
   ) { }
@@ -66,39 +73,59 @@ export class GameBuildStorageService {
   }
 
   private getMaxExtractedSize(): number {
-    return this.configService.get<number>(
-      'GAME_MAX_EXTRACTED_SIZE',
-      262144000,
+    return (
+      this.configService.get<number>(
+        'GAME_MAX_EXTRACTED_SIZE',
+      ) ?? 262144000
     );
   }
 
   private getMaxBuildFiles(): number {
-    return this.configService.get<number>(
-      'GAME_MAX_BUILD_FILES',
-      5000,
+    return (
+      this.configService.get<number>(
+        'GAME_MAX_BUILD_FILES',
+      ) ?? 5000
     );
   }
 
+  private getStagedPath(
+    gameId: string,
+    versionId: string,
+  ): string {
+    return join(
+      this.getTempPath(),
+      'staged',
+      gameId,
+      versionId,
+    );
+  }
+
+  private getLivePath(slug: string): string {
+    return join(
+      this.getStoragePath(),
+      slug,
+    );
+  }
+
+  /**
+   * Upload and validate a build without making it live.
+   *
+   * The extracted build stays in GAME_TEMP_PATH until
+   * the corresponding version is published.
+   */
   async storeBuild(
     tempZipPath: string,
     gameId: string,
     versionId: string,
-  ) {
-    const storageRoot = this.getStoragePath();
-
-    const finalRelativePath = join(
+  ): Promise<StagedGameBuild> {
+    const stagedPath = this.getStagedPath(
       gameId,
       versionId,
     );
 
-    const finalPath = join(
-      storageRoot,
-      finalRelativePath,
-    );
-
     const extractionPath = join(
       this.getTempPath(),
-      `${gameId}-${versionId}-${randomUUID()}`,
+      `extract-${gameId}-${versionId}-${randomUUID()}`,
     );
 
     await mkdir(extractionPath, {
@@ -111,55 +138,39 @@ export class GameBuildStorageService {
         extractionPath,
       );
 
-      const indexPath = join(
+      await this.assertValidBuild(
         extractionPath,
-        'index.html',
       );
 
-      try {
-        const indexStat = await stat(indexPath);
-
-        if (!indexStat.isFile()) {
-          throw new Error(
-            'index.html is not a file',
-          );
-        }
-      } catch {
-        throw new BadRequestException(
-          'Game build must contain an index.html file at the ZIP root',
-        );
-      }
+      // A version can only have one staged build.
+      await rm(stagedPath, {
+        recursive: true,
+        force: true,
+      });
 
       await mkdir(
-        join(storageRoot, gameId),
-        { recursive: true },
+        join(
+          this.getTempPath(),
+          'staged',
+          gameId,
+        ),
+        {
+          recursive: true,
+        },
       );
-
-      // Never overwrite an existing build.
-      try {
-        await stat(finalPath);
-
-        throw new BadRequestException(
-          'This game version already has a build',
-        );
-      } catch (error) {
-        if (error instanceof BadRequestException) {
-          throw error;
-        }
-
-        // ENOENT is expected here.
-      }
 
       try {
         await rename(
           extractionPath,
-          finalPath,
+          stagedPath,
         );
       } catch {
-        // Fallback for cross-device moves.
+        // GAME_TEMP_PATH and extractionPath normally
+        // live on the same filesystem, but keep a
+        // cross-device fallback.
         await this.copyDirectory(
           extractionPath,
-          finalPath,
+          stagedPath,
         );
 
         await rm(
@@ -172,8 +183,11 @@ export class GameBuildStorageService {
       }
 
       return {
-        buildPath: finalRelativePath,
-        absolutePath: finalPath,
+        buildPath: this.getStagedBuildPath(
+          gameId,
+          versionId,
+        ),
+        absolutePath: stagedPath,
       };
     } catch (error) {
       await rm(
@@ -190,23 +204,208 @@ export class GameBuildStorageService {
     }
   }
 
-  async deleteBuild(
-    buildPath: string | null,
+  /**
+   * Converts a database buildPath into the actual
+   * staged build directory.
+   */
+  private getStagedAbsolutePath(
+    buildPath: string,
+  ): string | null {
+    const prefix = `${this.stagedPrefix}/`;
+
+    if (!buildPath.startsWith(prefix)) {
+      return null;
+    }
+
+    const relativePath = buildPath.slice(
+      prefix.length,
+    );
+
+    const absolutePath = join(
+      this.getTempPath(),
+      'staged',
+      relativePath,
+    );
+
+    const relativePathCheck = relative(
+      join(
+        this.getTempPath(),
+        'staged',
+      ),
+      absolutePath,
+    );
+
+    if (
+      relativePathCheck === '..' ||
+      relativePathCheck.startsWith(
+        `..${sep}`,
+      ) ||
+      relativePathCheck.startsWith('/') ||
+      /^[A-Za-z]:/.test(
+        relativePathCheck,
+      )
+    ) {
+      throw new BadRequestException(
+        'Invalid staged game build path',
+      );
+    }
+
+    return absolutePath;
+  }
+
+  private getStagedBuildPath(
+    gameId: string,
+    versionId: string,
+  ): string {
+    return join(
+      this.stagedPrefix,
+      gameId,
+      versionId,
+    ).replace(/\\/g, '/');
+  }
+
+  /**
+   * Publishes a staged build to:
+   *
+   * GAME_STORAGE_PATH/<slug>/
+   *
+   * Returns information needed to roll back the
+   * filesystem operation if the database update fails.
+   */
+  async publishBuild(
+    slug: string,
+    stagedBuildPath: string,
   ) {
-    if (!buildPath) {
+    const stagedPath =
+      this.getStagedAbsolutePath(
+        stagedBuildPath,
+      );
+
+    if (!stagedPath) {
+      throw new BadRequestException(
+        'The game version does not contain a staged build',
+      );
+    }
+
+    await this.assertValidBuild(
+      stagedPath,
+    );
+
+    const livePath =
+      this.getLivePath(slug);
+
+    const backupPath = join(
+      this.getTempPath(),
+      `previous-${slug}-${randomUUID()}`,
+    );
+
+    let previousBuildMoved = false;
+    let newBuildMoved = false;
+
+    try {
+      await mkdir(
+        this.getStoragePath(),
+        {
+          recursive: true,
+        },
+      );
+
+      /*
+       * Move the currently live build out of the way.
+       *
+       * This keeps the old build available until the
+       * new build has successfully taken its place.
+       */
+      try {
+        await rename(
+          livePath,
+          backupPath,
+        );
+
+        previousBuildMoved = true;
+      } catch {
+        // No currently published build.
+      }
+
+      /*
+       * Move the staged build into its public slug path.
+       */
+      try {
+        await rename(
+          stagedPath,
+          livePath,
+        );
+
+        newBuildMoved = true;
+      } catch {
+        // Cross-device fallback.
+        await this.copyDirectory(
+          stagedPath,
+          livePath,
+        );
+
+        await rm(
+          stagedPath,
+          {
+            recursive: true,
+            force: true,
+          },
+        );
+
+        newBuildMoved = true;
+      }
+
+      return {
+        buildPath: slug,
+        livePath,
+        backupPath:
+          previousBuildMoved
+            ? backupPath
+            : null,
+        previousBuildMoved,
+        newBuildMoved,
+      };
+    } catch (error) {
+      /*
+       * Restore the previous live build if the
+       * replacement failed.
+       */
+      if (newBuildMoved) {
+        await rm(
+          livePath,
+          {
+            recursive: true,
+            force: true,
+          },
+        ).catch(() => { });
+      }
+
+      if (previousBuildMoved) {
+        await rename(
+          backupPath,
+          livePath,
+        ).catch(() => { });
+      }
+
+      throw error;
+    }
+  }
+
+  /**
+   * Final cleanup after the database transaction
+   * has successfully committed.
+   */
+  async finalizePublishedBuild(
+    promotion: {
+      backupPath: string | null;
+    },
+  ) {
+    if (!promotion.backupPath) {
       return;
     }
 
-    const storageRoot =
-      this.getStoragePath();
-
-    const absolutePath = join(
-      storageRoot,
-      buildPath,
-    );
-
     await rm(
-      absolutePath,
+      promotion.backupPath,
       {
         recursive: true,
         force: true,
@@ -214,13 +413,110 @@ export class GameBuildStorageService {
     );
   }
 
+  /**
+   * Roll back a filesystem promotion when the
+   * database transaction fails.
+   */
+  async rollbackPublishedBuild(
+    promotion: {
+      livePath: string;
+      backupPath: string | null;
+      previousBuildMoved: boolean;
+    },
+  ) {
+    await rm(
+      promotion.livePath,
+      {
+        recursive: true,
+        force: true,
+      },
+    ).catch(() => { });
+
+    if (
+      promotion.previousBuildMoved &&
+      promotion.backupPath
+    ) {
+      await rename(
+        promotion.backupPath,
+        promotion.livePath,
+      ).catch(() => { });
+    }
+  }
+
+  /**
+   * Deletes either a staged build or a live build.
+   */
+  async deleteBuild(
+    buildPath: string | null,
+    slug?: string,
+  ) {
+    if (!buildPath) {
+      return;
+    }
+
+    const stagedPath =
+      this.getStagedAbsolutePath(
+        buildPath,
+      );
+
+    if (stagedPath) {
+      await rm(
+        stagedPath,
+        {
+          recursive: true,
+          force: true,
+        },
+      );
+
+      return;
+    }
+
+    /*
+     * Published build paths are represented by
+     * the game slug.
+     */
+    if (slug) {
+      const livePath =
+        this.getLivePath(slug);
+
+      await rm(
+        livePath,
+        {
+          recursive: true,
+          force: true,
+        },
+      );
+    }
+  }
+
   getBuildPath(
+    slug: string,
+  ) {
+    return this.getLivePath(slug);
+  }
+
+  private async assertValidBuild(
     buildPath: string,
   ) {
-    return join(
-      this.getStoragePath(),
+    const indexPath = join(
       buildPath,
+      'index.html',
     );
+
+    try {
+      const indexStat =
+        await stat(indexPath);
+
+      if (!indexStat.isFile()) {
+        throw new Error(
+          'index.html is not a file',
+        );
+      }
+    } catch {
+      throw new BadRequestException(
+        'Game build must contain an index.html file at the ZIP root',
+      );
+    }
   }
 
   private async extractZipSafely(
@@ -250,7 +546,8 @@ export class GameBuildStorageService {
     for (
       const entry of directory.files
     ) {
-      const entryPath = entry.path;
+      const entryPath =
+        entry.path;
 
       if (
         !entryPath ||
@@ -261,10 +558,6 @@ export class GameBuildStorageService {
         );
       }
 
-      /*
-       * ZIP paths use forward slashes,
-       * regardless of the operating system.
-       */
       const normalizedEntry =
         normalize(
           entryPath.replace(
@@ -273,10 +566,6 @@ export class GameBuildStorageService {
           ),
         );
 
-      /*
-       * Prevent path traversal and
-       * absolute paths.
-       */
       if (
         normalizedEntry === '..' ||
         normalizedEntry.startsWith(
@@ -292,20 +581,18 @@ export class GameBuildStorageService {
         );
       }
 
-      const outputPath = join(
-        destination,
-        normalizedEntry,
-      );
+      const outputPath =
+        join(
+          destination,
+          normalizedEntry,
+        );
 
-      const relativePath = relative(
-        destination,
-        outputPath,
-      );
+      const relativePath =
+        relative(
+          destination,
+          outputPath,
+        );
 
-      /*
-       * Second path traversal check
-       * after path normalization.
-       */
       if (
         relativePath === '..' ||
         relativePath.startsWith(
@@ -321,13 +608,6 @@ export class GameBuildStorageService {
         );
       }
 
-      /*
-       * Only normal files and directories
-       * are allowed.
-       *
-       * This rejects symlinks and other
-       * special ZIP entry types.
-       */
       if (
         entry.type !== 'File' &&
         entry.type !== 'Directory'
@@ -337,10 +617,6 @@ export class GameBuildStorageService {
         );
       }
 
-      /*
-       * Track the uncompressed size before
-       * actually extracting the file.
-       */
       extractedSize +=
         entry.uncompressedSize ?? 0;
 
@@ -350,7 +626,9 @@ export class GameBuildStorageService {
       ) {
         throw new BadRequestException(
           `Game build exceeds the maximum extracted size of ${Math.floor(
-            maxExtractedSize / 1024 / 1024,
+            maxExtractedSize /
+            1024 /
+            1024,
           )} MB.`,
         );
       }
@@ -369,14 +647,20 @@ export class GameBuildStorageService {
       }
 
       await mkdir(
-        join(outputPath, '..'),
+        join(
+          outputPath,
+          '..',
+        ),
         {
           recursive: true,
         },
       );
 
       await new Promise<void>(
-        (resolve, reject) => {
+        (
+          resolve,
+          reject,
+        ) => {
           const stream =
             entry.stream();
 
