@@ -210,6 +210,60 @@ export class AdminController {
     return this.gameService.adminUnpublish(id);
   }
 
+  @Post('games/:id/versions/:versionId/build')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: (req, file, cb) => {
+          cb(null, getGameTempDir());
+        },
+      }),
+      limits: {
+        fileSize: Number(
+          process.env.GAME_MAX_BUILD_SIZE || 104857600,
+        ),
+      },
+    }),
+  )
+  async uploadGameBuild(
+    @Param('id') gameId: string,
+    @Param('versionId') versionId: string,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({
+            maxSize: Number(
+              process.env.GAME_MAX_BUILD_SIZE || 104857600,
+            ),
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    if (!file) {
+      throw new BadRequestException(
+        'Game build ZIP file is required',
+      );
+    }
+
+    if (
+      file.mimetype !== 'application/zip' &&
+      file.mimetype !== 'application/x-zip-compressed' &&
+      !file.originalname.toLowerCase().endsWith('.zip')
+    ) {
+      throw new BadRequestException(
+        'Game build must be a ZIP file',
+      );
+    }
+
+    return this.gameService.adminUploadBuild(
+      gameId,
+      versionId,
+      file,
+    );
+  }
+
   @Get('resources')
   async getResources(@Query() query: ListResourcesDto) {
     return this.resourcesService.list(query, true);
@@ -339,4 +393,24 @@ export class AdminController {
       ),
     ];
   }
+
+}
+
+function getGameTempDir(): string {
+  const configuredPath = process.env.GAME_TEMP_PATH;
+
+  if (configuredPath) {
+    mkdirSync(configuredPath, { recursive: true });
+    return configuredPath;
+  }
+
+  const fallbackPath = join(
+    process.cwd(),
+    'storage',
+    'game-temp',
+  );
+
+  mkdirSync(fallbackPath, { recursive: true });
+
+  return fallbackPath;
 }

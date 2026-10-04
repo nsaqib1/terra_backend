@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { GameController } from './game.controller';
 import { GameService } from './game.service';
 import { GameSessionGuard } from './guards/game-session.guard';
+import { GameBuildStorageService } from './game-build.storage.service';
 
 @Module({
   imports: [
@@ -30,11 +31,13 @@ import { GameSessionGuard } from './guards/game-session.guard';
   providers: [
     GameService,
     GameSessionGuard,
+    GameBuildStorageService,
   ],
 
   exports: [
     GameService,
     GameSessionGuard,
+    GameBuildStorageService,
   ],
 })
 export class GameModule { }

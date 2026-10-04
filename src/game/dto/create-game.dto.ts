@@ -20,7 +20,7 @@ export class CreateGameDto {
   @IsString()
   @MinLength(2)
   @MaxLength(150)
-  title: string;
+  title!: string;
 
   @IsString()
   @MinLength(2)
@@ -28,7 +28,7 @@ export class CreateGameDto {
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: 'Slug must contain only lowercase alphanumeric characters and single hyphens',
   })
-  slug: string;
+  slug!: string;
 
   @IsOptional()
   @IsString()

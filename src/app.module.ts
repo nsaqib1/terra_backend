@@ -52,6 +52,28 @@ const envSchema = z.object({
   MEDIA_MAX_IMAGE_WIDTH: z.coerce.number().int().positive(),
   MEDIA_MAX_IMAGE_HEIGHT: z.coerce.number().int().positive(),
 
+  GAME_STORAGE_PATH: z.string().min(1),
+
+  GAME_TEMP_PATH: z.string().min(1),
+
+  GAME_MAX_BUILD_SIZE: z.coerce
+    .number()
+    .int()
+    .positive()
+    .default(104857600),
+
+  GAME_MAX_EXTRACTED_SIZE: z.coerce
+    .number()
+    .int()
+    .positive()
+    .default(262144000),
+
+  GAME_MAX_BUILD_FILES: z.coerce
+    .number()
+    .int()
+    .positive()
+    .default(5000),
+
   LOG_LEVEL: z.string().default('info'),
 
   POSTGRES_DB: z.string().min(1),

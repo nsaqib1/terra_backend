@@ -18,6 +18,8 @@ services:
       - ./storage/media:/app/storage/media
       - ./storage/resources:/app/storage/resources
       - ./storage/resource-temp:/app/storage/resource-temp
+      - ./storage/games:/app/storage/games
+      - ./storage/game-temp:/app/storage/game-temp
       - .:/app
       - /app/node_modules
     depends_on:

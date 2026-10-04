@@ -15,6 +15,7 @@ import { UpdateGameDto } from './dto/update-game.dto';
 import { CreateGameVersionDto } from './dto/create-game-version.dto';
 import { UpdateGameVersionDto } from './dto/update-game-version.dto';
 import { ConfigService } from '@nestjs/config';
+import { GameBuildStorageService } from './game-build.storage.service';
 
 @Injectable()
 export class GameService {
@@ -22,6 +23,7 @@ export class GameService {
 		private readonly prisma: PrismaService,
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService,
+		private readonly buildStorage: GameBuildStorageService,
 	) { }
 
 	async list(dto: ListGamesDto) {
@@ -572,7 +574,6 @@ export class GameService {
 				data: {
 					gameId,
 					version: dto.version.trim(),
-					buildPath: dto.buildPath?.trim() || null,
 					releaseNotes: dto.releaseNotes?.trim() || null,
 				},
 				select: {
@@ -605,7 +606,6 @@ export class GameService {
 				where: { id: versionId },
 				data: {
 					...(dto.version !== undefined ? { version: dto.version.trim() } : {}),
-					...(dto.buildPath !== undefined ? { buildPath: dto.buildPath?.trim() || null } : {}),
 					...(dto.releaseNotes !== undefined ? { releaseNotes: dto.releaseNotes?.trim() || null } : {}),
 				},
 				select: {
@@ -936,6 +936,78 @@ export class GameService {
 				);
 			}
 
+			throw error;
+		}
+	}
+
+	async adminUploadBuild(
+		gameId: string,
+		versionId: string,
+		file: Express.Multer.File,
+	) {
+		if (!file?.path) {
+			throw new BadRequestException('Build ZIP file is required');
+		}
+
+		const version = await this.prisma.gameVersion.findFirst({
+			where: {
+				id: versionId,
+				gameId,
+			},
+			select: {
+				id: true,
+				gameId: true,
+				version: true,
+				status: true,
+				buildPath: true,
+			},
+		});
+
+		if (!version) {
+			await this.buildStorage.deleteBuild(null);
+			throw new NotFoundException('Game version not found');
+		}
+
+		if (version.status === 'ARCHIVED') {
+			throw new BadRequestException(
+				'Cannot upload a build to an archived version',
+			);
+		}
+
+		if (version.buildPath) {
+			throw new BadRequestException(
+				'This game version already has a build',
+			);
+		}
+
+		const stored = await this.buildStorage.storeBuild(
+			file.path,
+			gameId,
+			versionId,
+		);
+
+		try {
+			return await this.prisma.gameVersion.update({
+				where: {
+					id: versionId,
+				},
+				data: {
+					buildPath: stored.buildPath,
+				},
+				select: {
+					id: true,
+					gameId: true,
+					version: true,
+					buildPath: true,
+					status: true,
+					releaseNotes: true,
+					createdAt: true,
+					updatedAt: true,
+					publishedAt: true,
+				},
+			});
+		} catch (error) {
+			await this.buildStorage.deleteBuild(stored.buildPath);
 			throw error;
 		}
 	}

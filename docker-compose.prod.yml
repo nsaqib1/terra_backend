@@ -25,6 +25,8 @@ services:
       - /srv/terra/storage/media:/app/storage/media
       - /srv/terra/storage/resources:/app/storage/resources
       - /srv/terra/storage/resource-temp:/app/storage/resource-temp
+      - /srv/terra/storage/games:/app/storage/games
+      - /srv/terra/storage/game-temp:/app/storage/game-temp
     expose:
       - "3000"
     depends_on:
