@@ -60,3 +60,6 @@ storage/media/*
 
 storage/resources/*
 !storage/resources/.gitkeep
+
+storage/games/*
+!storage/games/.gitkeep
