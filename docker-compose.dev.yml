@@ -1,5 +1,14 @@
 services:
-
+  caddy:
+    image: caddy:2-alpine
+    container_name: terra_caddy_dev
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./Caddyfile.dev:/etc/caddy/Caddyfile:ro
+      - ./storage/games:/srv/games:ro
+      
   api:
     build:
       context: .

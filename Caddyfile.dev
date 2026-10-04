@@ -1,0 +1,9 @@
+http://games.localhost:8080 {
+    root * /srv/games
+    file_server
+
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
+}
