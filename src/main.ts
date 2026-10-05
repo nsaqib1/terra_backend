@@ -19,8 +19,14 @@ async function bootstrap() {
       },
     }),
   );
+  const corsOrigins = config
+    .getOrThrow<string>('CORS_ORIGINS')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
   app.enableCors({
-    origin: config.getOrThrow<string>('FRONTEND_URL'),
+    origin: corsOrigins,
     credentials: true,
   });
 
