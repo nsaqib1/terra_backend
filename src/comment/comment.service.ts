@@ -64,7 +64,8 @@ export class CommentService {
       parentAuthorId = parent.authorId;
     }
 
-    return this.prisma.$transaction(async (tx) => {
+    const result = await this.prisma.$transaction(async (tx) => {
+      let notificationId: string | null = null;
       const comment = await tx.comment.create({
         data: {
           postId: dto.postId,
@@ -99,17 +100,24 @@ export class CommentService {
       const recipientId = dto.parentId ? parentAuthorId : post.authorId;
 
       if (recipientId) {
-        await this.notifications.createInTransaction(tx, {
+        const notification = await this.notifications.createInTransaction(tx, {
           recipientId,
           actorId: userId,
           type: dto.parentId ? 'COMMENT_REPLIED' : 'POST_COMMENTED',
           postId: dto.postId,
           commentId: comment.id,
         });
+        notificationId = notification?.id ?? null;
       }
 
-      return comment;
+      return { comment, notificationId };
     });
+
+    if (result.notificationId) {
+      void this.notifications.emitCreated(result.notificationId);
+    }
+
+    return result.comment;
   }
 
   async list(dto: ListCommentsDto) {

@@ -61,7 +61,8 @@ export class VoteService {
       throw new NotFoundException('Post not found');
     }
 
-    return this.prisma.$transaction(async (tx) => {
+    const result = await this.prisma.$transaction(async (tx) => {
+      let notificationId: string | null = null;
       const existingVote = await tx.vote.findUnique({
         where: {
           userId_postId: {
@@ -95,18 +96,20 @@ export class VoteService {
         });
 
         if (value === 'UP') {
-          await this.notifications.createInTransaction(tx, {
+          const notification = await this.notifications.createInTransaction(tx, {
             recipientId: post.authorId,
             actorId: userId,
             type: 'POST_UPVOTED',
             postId,
           });
+          notificationId = notification?.id ?? null;
         }
 
         return {
           action: 'created',
           value,
           scoreChange,
+          notificationId,
         };
       }
 
@@ -135,6 +138,7 @@ export class VoteService {
           action: 'removed',
           value: null,
           scoreChange,
+          notificationId,
         };
       }
 
@@ -162,20 +166,29 @@ export class VoteService {
       });
 
       if (value === 'UP') {
-        await this.notifications.createInTransaction(tx, {
+        const notification = await this.notifications.createInTransaction(tx, {
           recipientId: post.authorId,
           actorId: userId,
           type: 'POST_UPVOTED',
           postId,
         });
+        notificationId = notification?.id ?? null;
       }
 
       return {
         action: 'changed',
         value,
         scoreChange,
+        notificationId,
       };
     });
+
+    if (result.notificationId) {
+      void this.notifications.emitCreated(result.notificationId);
+    }
+
+    const { notificationId: _notificationId, ...response } = result;
+    return response;
   }
 
   private async voteComment(
@@ -199,7 +212,8 @@ export class VoteService {
       throw new NotFoundException('Comment not found');
     }
 
-    return this.prisma.$transaction(async (tx) => {
+    const result = await this.prisma.$transaction(async (tx) => {
+      let notificationId: string | null = null;
       const existingVote = await tx.vote.findUnique({
         where: {
           userId_commentId: {
@@ -233,19 +247,21 @@ export class VoteService {
         });
 
         if (value === 'UP') {
-          await this.notifications.createInTransaction(tx, {
+          const notification = await this.notifications.createInTransaction(tx, {
             recipientId: comment.authorId,
             actorId: userId,
             type: 'COMMENT_UPVOTED',
             postId: comment.postId,
             commentId,
           });
+          notificationId = notification?.id ?? null;
         }
 
         return {
           action: 'created',
           value,
           scoreChange,
+          notificationId,
         };
       }
 
@@ -274,6 +290,7 @@ export class VoteService {
           action: 'removed',
           value: null,
           scoreChange,
+          notificationId,
         };
       }
 
@@ -301,21 +318,30 @@ export class VoteService {
       });
 
       if (value === 'UP') {
-        await this.notifications.createInTransaction(tx, {
+        const notification = await this.notifications.createInTransaction(tx, {
           recipientId: comment.authorId,
           actorId: userId,
           type: 'COMMENT_UPVOTED',
           postId: comment.postId,
           commentId,
         });
+        notificationId = notification?.id ?? null;
       }
 
       return {
         action: 'changed',
         value,
         scoreChange,
+        notificationId,
       };
     });
+
+    if (result.notificationId) {
+      void this.notifications.emitCreated(result.notificationId);
+    }
+
+    const { notificationId: _notificationId, ...response } = result;
+    return response;
   }
 
   async getMyVotesForPost(userId: string, postId: string) {

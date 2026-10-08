@@ -36,6 +36,6 @@ import { InvitesModule } from '../invites/invites.module';
     JwtStrategy,
   ],
 
-  exports: [AuthService],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, NotificationType } from '../generated/prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
+import { NotificationRealtimeService } from './notification-realtime.service';
 
 const actorSelect = {
   id: true,
@@ -11,7 +12,10 @@ const actorSelect = {
 
 @Injectable()
 export class NotificationsService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly realtime: NotificationRealtimeService,
+  ) {}
 
   async createInTransaction(
     tx: Prisma.TransactionClient,
@@ -28,6 +32,27 @@ export class NotificationsService {
     }
 
     return tx.notification.create({ data });
+  }
+
+  async emitCreated(notificationId: string) {
+    try {
+      const notification = await this.prisma.notification.findUnique({
+        where: { id: notificationId },
+        include: {
+          actor: { select: actorSelect },
+        },
+      });
+
+      if (!notification) {
+        return;
+      }
+
+      this.realtime.emitToUser(notification.recipientId, 'notification.created', {
+        notification,
+      });
+    } catch {
+      // Realtime delivery is best-effort. The notification is already durable in PostgreSQL.
+    }
   }
 
   async list(recipientId: string, cursor?: string, limit = 20) {
@@ -78,6 +103,10 @@ export class NotificationsService {
       if (!existing) {
         throw new NotFoundException('Notification not found');
       }
+    } else {
+      this.realtime.emitToUser(recipientId, 'notification.read', {
+        notificationId,
+      });
     }
 
     return { success: true };
@@ -91,6 +120,12 @@ export class NotificationsService {
       },
       data: { readAt: new Date() },
     });
+
+    if (result.count > 0) {
+      this.realtime.emitToUser(recipientId, 'notifications.read-all', {
+        updated: result.count,
+      });
+    }
 
     return { success: true, updated: result.count };
   }
