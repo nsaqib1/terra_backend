@@ -125,6 +125,11 @@ export type GameScore = Prisma.GameScoreModel
  */
 export type Media = Prisma.MediaModel
 /**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
  * Model Vote
  * 
  */

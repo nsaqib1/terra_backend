@@ -68,6 +68,7 @@ export const ModelName = {
   GameSession: 'GameSession',
   GameScore: 'GameScore',
   Media: 'Media',
+  Notification: 'Notification',
   Vote: 'Vote',
   PointEvent: 'PointEvent',
   DailyVisit: 'DailyVisit',
@@ -350,6 +351,20 @@ export const MediaScalarFieldEnum = {
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  recipientId: 'recipientId',
+  actorId: 'actorId',
+  type: 'type',
+  postId: 'postId',
+  commentId: 'commentId',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const VoteScalarFieldEnum = {

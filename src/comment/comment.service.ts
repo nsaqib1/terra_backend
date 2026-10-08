@@ -6,13 +6,17 @@ import {
 } from '@nestjs/common';
 
 import { PrismaService } from 'src/database/prisma.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { ListCommentsDto } from './dto/list-comments.dto';
 
 @Injectable()
 export class CommentService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notifications: NotificationsService,
+  ) {}
 
   async create(userId: string, dto: CreateCommentDto) {
     const post = await this.prisma.post.findFirst({
@@ -23,12 +27,15 @@ export class CommentService {
       },
       select: {
         id: true,
+        authorId: true,
       },
     });
 
     if (!post) {
       throw new NotFoundException('Post not found');
     }
+
+    let parentAuthorId: string | null = null;
 
     if (dto.parentId) {
       const parent = await this.prisma.comment.findFirst({
@@ -40,6 +47,7 @@ export class CommentService {
         select: {
           id: true,
           parentId: true,
+          authorId: true,
         },
       });
 
@@ -52,6 +60,8 @@ export class CommentService {
           'Replies cannot be nested further',
         );
       }
+
+      parentAuthorId = parent.authorId;
     }
 
     return this.prisma.$transaction(async (tx) => {
@@ -85,6 +95,18 @@ export class CommentService {
           },
         },
       });
+
+      const recipientId = dto.parentId ? parentAuthorId : post.authorId;
+
+      if (recipientId) {
+        await this.notifications.createInTransaction(tx, {
+          recipientId,
+          actorId: userId,
+          type: dto.parentId ? 'COMMENT_REPLIED' : 'POST_COMMENTED',
+          postId: dto.postId,
+          commentId: comment.id,
+        });
+      }
 
       return comment;
     });

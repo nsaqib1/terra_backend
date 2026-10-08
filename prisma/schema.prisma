@@ -25,6 +25,8 @@ model User {
   location          String?               @db.VarChar(150)
   website           String?               @db.VarChar(500)
   comments          Comment[]
+  notificationsReceived Notification[] @relation("NotificationRecipient")
+  notificationsSent Notification[] @relation("NotificationActor")
   memberships       CommunityMembership[]
   proposals         CommunityProposal[]   @relation("ProposedBy")
   reviewedProposals CommunityProposal[]   @relation("ReviewedBy")
@@ -126,6 +128,7 @@ model Post {
   community    Community  @relation(fields: [communityId], references: [id])
   tags         PostTag[]
   votes        Vote[]
+  notifications Notification[]
 
   @@index([communityId, createdAt])
   @@index([communityId, score])
@@ -149,6 +152,7 @@ model Comment {
   replies   Comment[] @relation("CommentReplies")
   post      Post      @relation(fields: [postId], references: [id])
   votes     Vote[]
+  notifications Notification[]
 
   @@index([postId, createdAt])
   @@index([postId, score])
@@ -367,6 +371,32 @@ model Media {
   @@index([postId])
   @@index([status])
   @@index([deletedAt])
+}
+
+enum NotificationType {
+  POST_UPVOTED
+  COMMENT_UPVOTED
+  POST_COMMENTED
+  COMMENT_REPLIED
+}
+
+model Notification {
+  id          String           @id @default(uuid()) @db.Uuid
+  recipientId String           @db.Uuid
+  actorId     String?          @db.Uuid
+  type        NotificationType
+  postId      String?          @db.Uuid
+  commentId   String?          @db.Uuid
+  readAt      DateTime?
+  createdAt   DateTime         @default(now())
+
+  recipient User     @relation("NotificationRecipient", fields: [recipientId], references: [id])
+  actor     User?    @relation("NotificationActor", fields: [actorId], references: [id])
+  post      Post?    @relation(fields: [postId], references: [id])
+  comment   Comment? @relation(fields: [commentId], references: [id])
+
+  @@index([recipientId, createdAt, id])
+  @@index([recipientId, readAt])
 }
 
 model Vote {

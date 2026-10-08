@@ -9,6 +9,16 @@
 * 🟢 You can import this file directly.
 */
 
+export const NotificationType = {
+  POST_UPVOTED: 'POST_UPVOTED',
+  COMMENT_UPVOTED: 'COMMENT_UPVOTED',
+  POST_COMMENTED: 'POST_COMMENTED',
+  COMMENT_REPLIED: 'COMMENT_REPLIED'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
 export const UserRole = {
   USER: 'USER',
   ADMIN: 'ADMIN'

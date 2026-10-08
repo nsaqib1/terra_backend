@@ -7,10 +7,14 @@ import {
 
 import { CreateVoteDto } from './dto/create-vote.dto';
 import { PrismaService } from 'src/database/prisma.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Injectable()
 export class VoteService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notifications: NotificationsService,
+  ) {}
 
   async vote(userId: string, dto: CreateVoteDto) {
     if (!dto.postId && !dto.commentId) {
@@ -90,6 +94,15 @@ export class VoteService {
           },
         });
 
+        if (value === 'UP') {
+          await this.notifications.createInTransaction(tx, {
+            recipientId: post.authorId,
+            actorId: userId,
+            type: 'POST_UPVOTED',
+            postId,
+          });
+        }
+
         return {
           action: 'created',
           value,
@@ -147,6 +160,15 @@ export class VoteService {
           },
         },
       });
+
+      if (value === 'UP') {
+        await this.notifications.createInTransaction(tx, {
+          recipientId: post.authorId,
+          actorId: userId,
+          type: 'POST_UPVOTED',
+          postId,
+        });
+      }
 
       return {
         action: 'changed',
@@ -210,6 +232,16 @@ export class VoteService {
           },
         });
 
+        if (value === 'UP') {
+          await this.notifications.createInTransaction(tx, {
+            recipientId: comment.authorId,
+            actorId: userId,
+            type: 'COMMENT_UPVOTED',
+            postId: comment.postId,
+            commentId,
+          });
+        }
+
         return {
           action: 'created',
           value,
@@ -267,6 +299,16 @@ export class VoteService {
           },
         },
       });
+
+      if (value === 'UP') {
+        await this.notifications.createInTransaction(tx, {
+          recipientId: comment.authorId,
+          actorId: userId,
+          type: 'COMMENT_UPVOTED',
+          postId: comment.postId,
+          commentId,
+        });
+      }
 
       return {
         action: 'changed',

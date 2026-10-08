@@ -19,6 +19,7 @@ import { InvitesModule } from './invites/invites.module';
 import { ResourcesModule } from './resources/resources.module';
 import { z } from 'zod';
 import { GameModule } from './game/game.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 const envSchema = z.object({
   NODE_ENV: z
@@ -111,6 +112,7 @@ const envSchema = z.object({
     InvitesModule,
     ResourcesModule,
     GameModule,
+    NotificationsModule,
   ],
 
   providers: [

@@ -297,6 +297,8 @@ export type UserWhereInput = {
   location?: Prisma.StringNullableFilter<"User"> | string | null
   website?: Prisma.StringNullableFilter<"User"> | string | null
   comments?: Prisma.CommentListRelationFilter
+  notificationsReceived?: Prisma.NotificationListRelationFilter
+  notificationsSent?: Prisma.NotificationListRelationFilter
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
@@ -330,6 +332,8 @@ export type UserOrderByWithRelationInput = {
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
   comments?: Prisma.CommentOrderByRelationAggregateInput
+  notificationsReceived?: Prisma.NotificationOrderByRelationAggregateInput
+  notificationsSent?: Prisma.NotificationOrderByRelationAggregateInput
   memberships?: Prisma.CommunityMembershipOrderByRelationAggregateInput
   proposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
   reviewedProposals?: Prisma.CommunityProposalOrderByRelationAggregateInput
@@ -366,6 +370,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   location?: Prisma.StringNullableFilter<"User"> | string | null
   website?: Prisma.StringNullableFilter<"User"> | string | null
   comments?: Prisma.CommentListRelationFilter
+  notificationsReceived?: Prisma.NotificationListRelationFilter
+  notificationsSent?: Prisma.NotificationListRelationFilter
   memberships?: Prisma.CommunityMembershipListRelationFilter
   proposals?: Prisma.CommunityProposalListRelationFilter
   reviewedProposals?: Prisma.CommunityProposalListRelationFilter
@@ -443,6 +449,8 @@ export type UserCreateInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -476,6 +484,8 @@ export type UserUncheckedCreateInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -509,6 +519,8 @@ export type UserUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -542,6 +554,8 @@ export type UserUncheckedUpdateInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -846,6 +860,36 @@ export type UserUpdateOneRequiredWithoutMediaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMediaInput, Prisma.UserUpdateWithoutMediaInput>, Prisma.UserUncheckedUpdateWithoutMediaInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationsReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsReceivedInput, Prisma.UserUncheckedCreateWithoutNotificationsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutNotificationsSentInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsSentInput, Prisma.UserUncheckedCreateWithoutNotificationsSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsSentInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsReceivedInput, Prisma.UserUncheckedCreateWithoutNotificationsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsReceivedInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsReceivedInput, Prisma.UserUpdateWithoutNotificationsReceivedInput>, Prisma.UserUncheckedUpdateWithoutNotificationsReceivedInput>
+}
+
+export type UserUpdateOneWithoutNotificationsSentNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsSentInput, Prisma.UserUncheckedCreateWithoutNotificationsSentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsSentInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsSentInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsSentInput, Prisma.UserUpdateWithoutNotificationsSentInput>, Prisma.UserUncheckedUpdateWithoutNotificationsSentInput>
+}
+
 export type UserCreateNestedOneWithoutVotesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutVotesInput, Prisma.UserUncheckedCreateWithoutVotesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutVotesInput
@@ -949,6 +993,8 @@ export type UserCreateWithoutProposalsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
@@ -981,6 +1027,8 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
@@ -1018,6 +1066,8 @@ export type UserCreateWithoutReviewedProposalsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
@@ -1050,6 +1100,8 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
@@ -1098,6 +1150,8 @@ export type UserUpdateWithoutProposalsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
@@ -1130,6 +1184,8 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
@@ -1173,6 +1229,8 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
@@ -1205,6 +1263,8 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
@@ -1237,6 +1297,8 @@ export type UserCreateWithoutMembershipsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
   dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
@@ -1269,6 +1331,8 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
   dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
@@ -1317,6 +1381,8 @@ export type UserUpdateWithoutMembershipsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
   dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
@@ -1349,6 +1415,8 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
@@ -1381,6 +1449,8 @@ export type UserCreateWithoutPostsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1413,6 +1483,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1461,6 +1533,8 @@ export type UserUpdateWithoutPostsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1493,6 +1567,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1524,6 +1600,8 @@ export type UserCreateWithoutCommentsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1556,6 +1634,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1604,6 +1684,8 @@ export type UserUpdateWithoutCommentsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1636,6 +1718,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1669,6 +1753,8 @@ export type UserCreateWithoutResourcesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1701,6 +1787,8 @@ export type UserUncheckedCreateWithoutResourcesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1749,6 +1837,8 @@ export type UserUpdateWithoutResourcesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1781,6 +1871,8 @@ export type UserUncheckedUpdateWithoutResourcesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1813,6 +1905,8 @@ export type UserCreateWithoutGameSessionsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1845,6 +1939,8 @@ export type UserUncheckedCreateWithoutGameSessionsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -1893,6 +1989,8 @@ export type UserUpdateWithoutGameSessionsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -1925,6 +2023,8 @@ export type UserUncheckedUpdateWithoutGameSessionsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -1957,6 +2057,8 @@ export type UserCreateWithoutGameScoresInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -1989,6 +2091,8 @@ export type UserUncheckedCreateWithoutGameScoresInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2037,6 +2141,8 @@ export type UserUpdateWithoutGameScoresInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2069,6 +2175,8 @@ export type UserUncheckedUpdateWithoutGameScoresInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2101,6 +2209,8 @@ export type UserCreateWithoutMediaInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2133,6 +2243,8 @@ export type UserUncheckedCreateWithoutMediaInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2181,6 +2293,8 @@ export type UserUpdateWithoutMediaInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2213,12 +2327,318 @@ export type UserUncheckedUpdateWithoutMediaInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
   dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
   createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
   inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  gameSessions?: Prisma.GameSessionUncheckedUpdateManyWithoutUserNestedInput
+  gameScores?: Prisma.GameScoreUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationsReceivedInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  gameSessions?: Prisma.GameSessionCreateNestedManyWithoutUserInput
+  gameScores?: Prisma.GameScoreCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  gameSessions?: Prisma.GameSessionUncheckedCreateNestedManyWithoutUserInput
+  gameScores?: Prisma.GameScoreUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsReceivedInput, Prisma.UserUncheckedCreateWithoutNotificationsReceivedInput>
+}
+
+export type UserCreateWithoutNotificationsSentInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteCreateNestedManyWithoutUserInput
+  gameSessions?: Prisma.GameSessionCreateNestedManyWithoutUserInput
+  gameScores?: Prisma.GameScoreCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsSentInput = {
+  id?: string
+  username: string
+  displayName: string
+  email: string
+  passwordHash: string
+  avatarUrl?: string | null
+  bio?: string | null
+  status?: $Enums.UserStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  role?: $Enums.UserRole
+  points?: number
+  location?: string | null
+  website?: string | null
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
+  proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
+  dailyVisits?: Prisma.DailyVisitUncheckedCreateNestedManyWithoutUserInput
+  createdInvites?: Prisma.InviteUncheckedCreateNestedManyWithoutCreatedByInput
+  inviteUsage?: Prisma.InviteUsageUncheckedCreateNestedOneWithoutUserInput
+  media?: Prisma.MediaUncheckedCreateNestedManyWithoutUploadedByInput
+  resources?: Prisma.ResourceUncheckedCreateNestedManyWithoutUploadedByInput
+  pointEvents?: Prisma.PointEventUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+  votes?: Prisma.VoteUncheckedCreateNestedManyWithoutUserInput
+  gameSessions?: Prisma.GameSessionUncheckedCreateNestedManyWithoutUserInput
+  gameScores?: Prisma.GameScoreUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsSentInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsSentInput, Prisma.UserUncheckedCreateWithoutNotificationsSentInput>
+}
+
+export type UserUpsertWithoutNotificationsReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsReceivedInput, Prisma.UserUncheckedUpdateWithoutNotificationsReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsReceivedInput, Prisma.UserUncheckedCreateWithoutNotificationsReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsReceivedInput, Prisma.UserUncheckedUpdateWithoutNotificationsReceivedInput>
+}
+
+export type UserUpdateWithoutNotificationsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  gameSessions?: Prisma.GameSessionUpdateManyWithoutUserNestedInput
+  gameScores?: Prisma.GameScoreUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUncheckedUpdateManyWithoutUserNestedInput
+  gameSessions?: Prisma.GameSessionUncheckedUpdateManyWithoutUserNestedInput
+  gameScores?: Prisma.GameScoreUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutNotificationsSentInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsSentInput, Prisma.UserUncheckedUpdateWithoutNotificationsSentInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsSentInput, Prisma.UserUncheckedCreateWithoutNotificationsSentInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsSentInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsSentInput, Prisma.UserUncheckedUpdateWithoutNotificationsSentInput>
+}
+
+export type UserUpdateWithoutNotificationsSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUpdateManyWithoutUploadedByNestedInput
+  resources?: Prisma.ResourceUpdateManyWithoutUploadedByNestedInput
+  pointEvents?: Prisma.PointEventUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
+  refreshSessions?: Prisma.RefreshSessionUpdateManyWithoutUserNestedInput
+  votes?: Prisma.VoteUpdateManyWithoutUserNestedInput
+  gameSessions?: Prisma.GameSessionUpdateManyWithoutUserNestedInput
+  gameScores?: Prisma.GameScoreUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsSentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  points?: Prisma.IntFieldUpdateOperationsInput | number
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
+  proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
+  reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
+  dailyVisits?: Prisma.DailyVisitUncheckedUpdateManyWithoutUserNestedInput
+  createdInvites?: Prisma.InviteUncheckedUpdateManyWithoutCreatedByNestedInput
+  inviteUsage?: Prisma.InviteUsageUncheckedUpdateOneWithoutUserNestedInput
+  media?: Prisma.MediaUncheckedUpdateManyWithoutUploadedByNestedInput
   resources?: Prisma.ResourceUncheckedUpdateManyWithoutUploadedByNestedInput
   pointEvents?: Prisma.PointEventUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2245,6 +2665,8 @@ export type UserCreateWithoutVotesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2277,6 +2699,8 @@ export type UserUncheckedCreateWithoutVotesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2325,6 +2749,8 @@ export type UserUpdateWithoutVotesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2357,6 +2783,8 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2389,6 +2817,8 @@ export type UserCreateWithoutPointEventsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2421,6 +2851,8 @@ export type UserUncheckedCreateWithoutPointEventsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2469,6 +2901,8 @@ export type UserUpdateWithoutPointEventsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2501,6 +2935,8 @@ export type UserUncheckedUpdateWithoutPointEventsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2533,6 +2969,8 @@ export type UserCreateWithoutDailyVisitsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2565,6 +3003,8 @@ export type UserUncheckedCreateWithoutDailyVisitsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2613,6 +3053,8 @@ export type UserUpdateWithoutDailyVisitsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2645,6 +3087,8 @@ export type UserUncheckedUpdateWithoutDailyVisitsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2677,6 +3121,8 @@ export type UserCreateWithoutRefreshSessionsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2709,6 +3155,8 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2757,6 +3205,8 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2789,6 +3239,8 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2821,6 +3273,8 @@ export type UserCreateWithoutCreatedInvitesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2853,6 +3307,8 @@ export type UserUncheckedCreateWithoutCreatedInvitesInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -2901,6 +3357,8 @@ export type UserUpdateWithoutCreatedInvitesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -2933,6 +3391,8 @@ export type UserUncheckedUpdateWithoutCreatedInvitesInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -2965,6 +3425,8 @@ export type UserCreateWithoutInviteUsageInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalCreateNestedManyWithoutReviewedByInput
@@ -2997,6 +3459,8 @@ export type UserUncheckedCreateWithoutInviteUsageInput = {
   location?: string | null
   website?: string | null
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
   proposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutProposedByInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedCreateNestedManyWithoutReviewedByInput
@@ -3045,6 +3509,8 @@ export type UserUpdateWithoutInviteUsageInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUpdateManyWithoutReviewedByNestedInput
@@ -3077,6 +3543,8 @@ export type UserUncheckedUpdateWithoutInviteUsageInput = {
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
   proposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutProposedByNestedInput
   reviewedProposals?: Prisma.CommunityProposalUncheckedUpdateManyWithoutReviewedByNestedInput
@@ -3099,6 +3567,8 @@ export type UserUncheckedUpdateWithoutInviteUsageInput = {
 
 export type UserCountOutputType = {
   comments: number
+  notificationsReceived: number
+  notificationsSent: number
   memberships: number
   proposals: number
   reviewedProposals: number
@@ -3116,6 +3586,8 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  notificationsReceived?: boolean | UserCountOutputTypeCountNotificationsReceivedArgs
+  notificationsSent?: boolean | UserCountOutputTypeCountNotificationsSentArgs
   memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
   proposals?: boolean | UserCountOutputTypeCountProposalsArgs
   reviewedProposals?: boolean | UserCountOutputTypeCountReviewedProposalsArgs
@@ -3146,6 +3618,20 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CommentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
 }
 
 /**
@@ -3257,6 +3743,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   location?: boolean
   website?: boolean
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
+  notificationsSent?: boolean | Prisma.User$notificationsSentArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
@@ -3331,6 +3819,8 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "bio" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role" | "points" | "location" | "website", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
+  notificationsSent?: boolean | Prisma.User$notificationsSentArgs<ExtArgs>
   memberships?: boolean | Prisma.User$membershipsArgs<ExtArgs>
   proposals?: boolean | Prisma.User$proposalsArgs<ExtArgs>
   reviewedProposals?: boolean | Prisma.User$reviewedProposalsArgs<ExtArgs>
@@ -3354,6 +3844,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     comments: Prisma.$CommentPayload<ExtArgs>[]
+    notificationsReceived: Prisma.$NotificationPayload<ExtArgs>[]
+    notificationsSent: Prisma.$NotificationPayload<ExtArgs>[]
     memberships: Prisma.$CommunityMembershipPayload<ExtArgs>[]
     proposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
     reviewedProposals: Prisma.$CommunityProposalPayload<ExtArgs>[]
@@ -3780,6 +4272,8 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsReceived<T extends Prisma.User$notificationsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationsSent<T extends Prisma.User$notificationsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   memberships<T extends Prisma.User$membershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proposals<T extends Prisma.User$proposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$proposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedProposals<T extends Prisma.User$reviewedProposalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedProposalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityProposalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4252,6 +4746,54 @@ export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * User.notificationsReceived
+ */
+export type User$notificationsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.notificationsSent
+ */
+export type User$notificationsSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**
