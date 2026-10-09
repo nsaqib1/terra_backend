@@ -148,6 +148,10 @@ export class PostsService {
       ...new Set(dto.tagIds),
     ];
 
+    if (tagIds.length > 5) {
+      throw new ConflictException('A post can have at most 5 topics');
+    }
+
     // -----------------------------------------
     // Validate tags
     // -----------------------------------------
@@ -766,6 +770,10 @@ export class PostsService {
     if (dto.tagIds !== undefined) {
       // Remove duplicate tag IDs
       tagIds = [...new Set(dto.tagIds)];
+
+      if (tagIds.length > 5) {
+        throw new ConflictException('A post can have at most 5 topics');
+      }
 
       if (tagIds.length > 0) {
         const tags = await this.prisma.tag.findMany({

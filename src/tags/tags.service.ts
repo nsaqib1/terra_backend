@@ -96,6 +96,117 @@ export class TagsService {
     };
   }
 
+  async createForCommunity(userId: string, dto: CreateTagDto) {
+    const community = await this.prisma.community.findFirst({
+      where: {
+        id: dto.communityId,
+        status: 'ACTIVE',
+        deletedAt: null,
+      },
+      select: { id: true },
+    });
+
+    if (!community) {
+      throw new NotFoundException('Community not found');
+    }
+
+    const membership = await this.prisma.communityMembership.findUnique({
+      where: {
+        userId_communityId: {
+          userId,
+          communityId: community.id,
+        },
+      },
+      select: { leftAt: true },
+    });
+
+    if (!membership || membership.leftAt) {
+      throw new ConflictException(
+        'Join this community before creating a topic',
+      );
+    }
+
+    const name = this.normalizeName(dto.name);
+    if (name.length < 2) {
+      throw new ConflictException('Topics must contain at least 2 characters');
+    }
+
+    const slug = this.generateSlug(name);
+    if (!slug) {
+      throw new ConflictException(
+        'Use at least one letter or number in the topic name',
+      );
+    }
+
+    const existing = await this.prisma.tag.findUnique({
+      where: {
+        communityId_slug: {
+          communityId: dto.communityId,
+          slug,
+        },
+      },
+      select: {
+        id: true,
+        communityId: true,
+        name: true,
+        slug: true,
+        description: true,
+        usageCount: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (existing) {
+      if (existing.status === TagStatus.ACTIVE) {
+        throw new ConflictException(
+          `A matching topic already exists: ${existing.name}`,
+        );
+      }
+      throw new ConflictException(
+        'This topic has been archived. Choose another name or ask a moderator to restore it.',
+      );
+    }
+
+    try {
+      return await this.prisma.tag.create({
+        data: {
+          communityId: dto.communityId,
+          name,
+          slug,
+          description: null,
+        },
+        select: {
+          id: true,
+          communityId: true,
+          name: true,
+          slug: true,
+          description: true,
+          usageCount: true,
+          status: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
+    } catch (error) {
+      // Handle concurrent creation of the same canonical slug.
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('A matching topic was just created. Search for it and select it.');
+      }
+      throw error;
+    }
+  }
+
+  private normalizeName(value: string): string {
+    return value.normalize('NFKC').trim().replace(/\s+/g, ' ');
+  }
+
   async create(dto: CreateTagDto) {
     const community = await this.prisma.community.findFirst({
       where: {
@@ -236,11 +347,15 @@ export class TagsService {
 
   private generateSlug(name: string): string {
     return name
-      .normalize('NFKD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
+      .normalize('NFKC')
+      .toLocaleLowerCase()
       .trim()
-      .replace(/[^a-z0-9]+/g, '-')
+      // Preserve meaning-bearing symbols in common technical topic names.
+      .replace(/\+\+/g, ' plus plus ')
+      .replace(/#/g, ' sharp ')
+      .replace(/\+/g, ' plus ')
+      .replace(/\./g, ' dot ')
+      .replace(/[^\p{L}\p{N}]+/gu, '-')
       .replace(/^-+|-+$/g, '');
   }
 }
