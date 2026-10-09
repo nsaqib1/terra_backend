@@ -28,6 +28,7 @@ import { CommunityProposalQueryDto } from './dto/community-proposal-query.dto';
 import { CreateCommunityDto } from './dto/create-community.dto';
 import { ReviewCommunityProposalDto } from './dto/review-community-proposal.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
+import { AdminPostQueryDto } from './dto/admin-post-query.dto';
 import { AdminGuard } from './guards/admin.guard';
 import { GameService } from '../game/game.service';
 import { AdminGameQueryDto } from '../game/dto/admin-game-query.dto';
@@ -82,6 +83,36 @@ export class AdminController {
   @Get('communities')
   async getCommunities(@Query() query: AdminCommunityQueryDto) {
     return this.adminService.getCommunities(query);
+  }
+
+  @Get('posts')
+  async getPosts(@Query() query: AdminPostQueryDto) {
+    return this.adminService.getPosts(query);
+  }
+
+  @Get('posts/:id')
+  async getPost(@Param('id') id: string) {
+    return this.adminService.getPost(id);
+  }
+
+  @Post('posts/:id/lock')
+  async lockPost(@Param('id') id: string) {
+    return this.adminService.lockPost(id);
+  }
+
+  @Post('posts/:id/unlock')
+  async unlockPost(@Param('id') id: string) {
+    return this.adminService.unlockPost(id);
+  }
+
+  @Post('posts/:id/remove')
+  async removePost(@Param('id') id: string) {
+    return this.adminService.removePost(id);
+  }
+
+  @Post('posts/:id/restore')
+  async restorePost(@Param('id') id: string) {
+    return this.adminService.restorePost(id);
   }
 
   @Get('communities/:id')

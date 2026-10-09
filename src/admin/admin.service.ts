@@ -10,6 +10,7 @@ import { CommunityProposalQueryDto } from './dto/community-proposal-query.dto';
 import { CreateCommunityDto } from './dto/create-community.dto';
 import { ReviewCommunityProposalDto } from './dto/review-community-proposal.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
+import { AdminPostQueryDto } from './dto/admin-post-query.dto';
 
 @Injectable()
 export class AdminService {
@@ -142,6 +143,245 @@ export class AdminService {
         totalPages: Math.ceil(total / limit),
       },
     };
+  }
+
+  /**
+   * Paginated post moderation list for administrators.
+   * Removed posts remain queryable so moderation history is not lost.
+   */
+  async getPosts(query: AdminPostQueryDto) {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 20;
+    const skip = (page - 1) * limit;
+    const sortOrder = query.sortOrder ?? 'desc';
+
+    const where: any = {};
+
+    if (query.status) where.status = query.status;
+    if (query.communityId) where.communityId = query.communityId;
+    if (query.authorId) where.authorId = query.authorId;
+
+    if (query.search?.trim()) {
+      const term = query.search.trim();
+      where.OR = [
+        { searchText: { contains: term, mode: 'insensitive' } },
+        { author: { username: { contains: term, mode: 'insensitive' } } },
+        { author: { displayName: { contains: term, mode: 'insensitive' } } },
+        { community: { name: { contains: term, mode: 'insensitive' } } },
+        { community: { slug: { contains: term, mode: 'insensitive' } } },
+      ];
+    }
+
+    const orderBy = {
+      [query.sortBy ?? 'createdAt']: sortOrder,
+    } as any;
+
+    const [posts, total] = await this.prisma.$transaction([
+      this.prisma.post.findMany({
+        where,
+        orderBy,
+        skip,
+        take: limit,
+        select: {
+          id: true,
+          status: true,
+          score: true,
+          commentCount: true,
+          createdAt: true,
+          updatedAt: true,
+          deletedAt: true,
+          document: true,
+          author: {
+            select: {
+              id: true,
+              username: true,
+              displayName: true,
+              avatarUrl: true,
+            },
+          },
+          community: {
+            select: {
+              id: true,
+              name: true,
+              slug: true,
+            },
+          },
+          tags: {
+            select: {
+              tag: {
+                select: { id: true, name: true, slug: true },
+              },
+            },
+          },
+          _count: {
+            select: {
+              media: true,
+              votes: true,
+              comments: true,
+            },
+          },
+        },
+      }),
+      this.prisma.post.count({ where }),
+    ]);
+
+    return {
+      data: posts.map((post) => ({
+        ...post,
+        tags: post.tags.map((item) => item.tag),
+        mediaCount: post._count.media,
+        voteCount: post._count.votes,
+      })),
+      meta: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
+  }
+
+  async getPost(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        status: true,
+        score: true,
+        commentCount: true,
+        createdAt: true,
+        updatedAt: true,
+        deletedAt: true,
+        document: true,
+        searchText: true,
+        author: {
+          select: { id: true, username: true, displayName: true, avatarUrl: true },
+        },
+        community: {
+          select: { id: true, name: true, slug: true },
+        },
+        tags: {
+          select: { tag: { select: { id: true, name: true, slug: true } } },
+        },
+        _count: {
+          select: { comments: true, votes: true, media: true },
+        },
+      },
+    });
+
+    if (!post) throw new NotFoundException('Post not found');
+
+    return {
+      ...post,
+      tags: post.tags.map((item) => item.tag),
+      commentCount: post._count.comments,
+      voteCount: post._count.votes,
+      mediaCount: post._count.media,
+    };
+  }
+
+  async lockPost(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      select: { id: true, status: true, deletedAt: true },
+    });
+    if (!post) throw new NotFoundException('Post not found');
+    if (post.status === 'REMOVED' || post.deletedAt) {
+      throw new ConflictException('Removed posts cannot be locked');
+    }
+    if (post.status === 'LOCKED') return this.getPost(id);
+
+    await this.prisma.post.update({
+      where: { id },
+      data: { status: 'LOCKED' },
+    });
+    return this.getPost(id);
+  }
+
+  async unlockPost(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      select: { id: true, status: true, deletedAt: true },
+    });
+    if (!post) throw new NotFoundException('Post not found');
+    if (post.status === 'REMOVED' || post.deletedAt) {
+      throw new ConflictException('Removed posts must be restored first');
+    }
+    if (post.status === 'ACTIVE') return this.getPost(id);
+
+    await this.prisma.post.update({
+      where: { id },
+      data: { status: 'ACTIVE' },
+    });
+    return this.getPost(id);
+  }
+
+  async removePost(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        status: true,
+        deletedAt: true,
+        tags: { select: { tagId: true } },
+      },
+    });
+    if (!post) throw new NotFoundException('Post not found');
+    if (post.status === 'REMOVED' || post.deletedAt) return this.getPost(id);
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.post.update({
+        where: { id },
+        data: { status: 'REMOVED', deletedAt: new Date() },
+      });
+
+      if (post.tags.length) {
+        await Promise.all(
+          post.tags.map((tag) =>
+            tx.tag.update({
+              where: { id: tag.tagId },
+              data: { usageCount: { decrement: 1 } },
+            }),
+          ),
+        );
+      }
+    });
+
+    return this.getPost(id);
+  }
+
+  async restorePost(id: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        status: true,
+        deletedAt: true,
+        tags: { select: { tagId: true } },
+      },
+    });
+    if (!post) throw new NotFoundException('Post not found');
+    if (post.status !== 'REMOVED' && !post.deletedAt) return this.getPost(id);
+
+    await this.prisma.$transaction(async (tx) => {
+      await tx.post.update({
+        where: { id },
+        data: { status: 'ACTIVE', deletedAt: null },
+      });
+
+      if (post.tags.length) {
+        await Promise.all(
+          post.tags.map((tag) =>
+            tx.tag.update({
+              where: { id: tag.tagId },
+              data: { usageCount: { increment: 1 } },
+            }),
+          ),
+        );
+      }
+    });
+
+    return this.getPost(id);
   }
 
   /**
