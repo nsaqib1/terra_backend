@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -470,13 +471,19 @@ export class PostsService {
 
   async findMany(query: GetPostsQueryDto, userId?: string) {
     const { communityId, page, limit, sort = 'newest' } = query;
-
+    const cursorMode = query.cursorMode === true;
     const skip = (page - 1) * limit;
 
     const where: any = {
       status: 'ACTIVE',
       deletedAt: null,
     };
+    if (query.tag) {
+      where.tags = { some: { tag: { OR: [
+        { slug: query.tag.toLowerCase() },
+        { name: { equals: query.tag, mode: 'insensitive' } },
+      ] } } };
+    }
 
     if (communityId) {
       where.communityId = communityId;
@@ -509,14 +516,47 @@ export class PostsService {
       orderBy = [{ createdAt: 'desc' }];
     }
 
-    const [posts, total] =
-      await this.prisma.$transaction([
-        this.prisma.post.findMany({
-          where,
-          orderBy,
-          skip,
-          take: limit,
-          select: {
+    // Cursor mode is used by the Home feed. Other callers retain the existing
+    // page/total contract until they migrate to cursor pagination.
+    let cursorWhere: any = where;
+    let decodedCursor: { id: string; createdAt: string; score?: number; commentCount?: number } | null = null;
+    if (cursorMode && query.cursor) {
+      try {
+        decodedCursor = JSON.parse(Buffer.from(query.cursor, 'base64url').toString('utf8'));
+        if (!decodedCursor?.id || !decodedCursor?.createdAt) throw new Error('Invalid cursor');
+      } catch {
+        throw new BadRequestException('Invalid feed cursor. Refresh the feed and try again.');
+      }
+      const createdAt = new Date(decodedCursor.createdAt);
+      if (Number.isNaN(createdAt.getTime())) throw new BadRequestException('Invalid feed cursor.');
+      let after: any;
+      if (sort === 'oldest') {
+        after = { OR: [{ createdAt: { gt: createdAt } }, { createdAt, id: { gt: decodedCursor.id } }] };
+      } else if (sort === 'top' || sort === 'score' || sort === 'popular') {
+        after = { OR: [
+          { score: { lt: decodedCursor.score ?? 0 } },
+          { score: decodedCursor.score ?? 0, createdAt: { lt: createdAt } },
+          { score: decodedCursor.score ?? 0, createdAt, id: { lt: decodedCursor.id } },
+        ] };
+      } else if (sort === 'comments' || sort === 'most_discussed') {
+        after = { OR: [
+          { commentCount: { lt: decodedCursor.commentCount ?? 0 } },
+          { commentCount: decodedCursor.commentCount ?? 0, createdAt: { lt: createdAt } },
+          { commentCount: decodedCursor.commentCount ?? 0, createdAt, id: { lt: decodedCursor.id } },
+        ] };
+      } else {
+        after = { OR: [{ createdAt: { lt: createdAt } }, { createdAt, id: { lt: decodedCursor.id } }] };
+      }
+      cursorWhere = { AND: [where, after] };
+    }
+
+    const [posts, total] = cursorMode
+      ? [
+          await this.prisma.post.findMany({
+            where: cursorWhere,
+            orderBy: [...orderBy, { id: sort === 'oldest' ? 'asc' : 'desc' }],
+            take: limit + 1,
+            select: {
             id: true,
 
             document: true,
@@ -576,15 +616,39 @@ export class PostsService {
               },
             },
           },
-        }),
+          // One extra row tells us whether another batch exists.
+          }),
+        ] as any
+      : await this.prisma.$transaction([
+          this.prisma.post.findMany({
+            where,
+            orderBy: [...orderBy, { id: sort === 'oldest' ? 'asc' : 'desc' }],
+            skip,
+            take: limit,
+            select: {
+              id: true, document: true, score: true, commentCount: true, status: true,
+              createdAt: true, updatedAt: true,
+              community: { select: { id: true, name: true, slug: true } },
+              author: { select: { id: true, username: true, displayName: true, avatarUrl: true } },
+              tags: { select: { tag: { select: { id: true, name: true, slug: true } } } },
+              media: { where: { status: 'ACTIVE', deletedAt: null }, select: {
+                id: true, type: true, storageKey: true, mimeType: true, width: true,
+                height: true, size: true, altText: true,
+              } },
+            },
+          }),
+          this.prisma.post.count({ where }),
+        ]);
 
-        this.prisma.post.count({
-          where,
-        }),
-      ]);
+    const cursorPosts = cursorMode ? (posts as any[]).slice(0, limit) : (posts as any[]);
+    const hasNextPage = cursorMode ? (posts as any[]).length > limit : page * limit < (total as number);
+    const lastPost = cursorPosts[cursorPosts.length - 1];
+    const nextCursor = cursorMode && hasNextPage && lastPost
+      ? Buffer.from(JSON.stringify({ id: lastPost.id, createdAt: lastPost.createdAt.toISOString(), score: lastPost.score, commentCount: lastPost.commentCount })).toString('base64url')
+      : null;
 
     return {
-      data: posts.map((post) => ({
+      data: cursorPosts.map((post) => ({
         id: post.id,
 
         document: post.document,
@@ -613,10 +677,10 @@ export class PostsService {
       meta: {
         page,
         limit,
-        total,
-        totalPages: Math.ceil(total / limit),
-        hasNextPage:
-          page * limit < total,
+        total: cursorMode ? 0 : (total as number),
+        totalPages: cursorMode ? 0 : Math.ceil((total as number) / limit),
+        hasNextPage,
+        nextCursor,
       },
     };
   }

@@ -2,6 +2,8 @@ import {
   IsIn,
   IsInt,
   IsOptional,
+  IsString,
+  IsBoolean,
   IsUUID,
   Max,
   Min,
@@ -27,6 +29,19 @@ export class GetPostsQueryDto {
   @Min(1)
   @Max(50)
   limit = 20;
+
+  @IsOptional()
+  @IsString()
+  cursor?: string;
+
+  @IsOptional()
+  @IsString()
+  tag?: string;
+
+  @IsOptional()
+  @Type(() => Boolean)
+  @IsBoolean()
+  cursorMode?: boolean;
 
   @IsOptional()
   @IsIn(['newest', 'top', 'comments', 'oldest', 'score', 'popular', 'most_discussed'])
