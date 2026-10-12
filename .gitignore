@@ -63,3 +63,6 @@ storage/resources/*
 
 storage/games/*
 !storage/games/.gitkeep
+
+storage/tools/*
+!storage/tools/.gitkeep
