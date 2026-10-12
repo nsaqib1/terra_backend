@@ -11,6 +11,7 @@ services:
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - /srv/terra/storage/games:/srv/games:ro
+      - /srv/terra/storage/tools:/srv/tools:ro
     depends_on:
       api:
         condition: service_healthy
@@ -28,6 +29,8 @@ services:
       - /srv/terra/storage/resource-temp:/app/storage/resource-temp
       - /srv/terra/storage/games:/app/storage/games
       - /srv/terra/storage/game-temp:/app/storage/game-temp
+      - /srv/terra/storage/tools:/app/storage/tools
+      - /srv/terra/storage/tool-temp:/app/storage/tool-temp
     expose:
       - "3000"
     depends_on:

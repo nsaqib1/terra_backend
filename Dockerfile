@@ -28,6 +28,7 @@ COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/src/generated ./src/generated
 
 RUN mkdir -p /app/storage/media /app/storage/resources /app/storage/resource-temp \
+    /app/storage/games /app/storage/game-temp /app/storage/tools /app/storage/tool-temp \
     && chown -R node:node /app
 
 USER node

@@ -7,3 +7,13 @@ http://games.localhost:8080 {
         Referrer-Policy "no-referrer"
     }
 }
+
+http://tools.localhost:8080 {
+    root * /srv/tools
+    file_server
+
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
+}

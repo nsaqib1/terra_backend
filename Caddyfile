@@ -1,13 +1,23 @@
 api.terramids.com {
-reverse_proxy api:3000
+    reverse_proxy api:3000
 }
 
 games.terramids.com {
-root * /srv/games
-file_server
+    root * /srv/games
+    file_server
 
-header {
-X-Content-Type-Options "nosniff"
-Referrer-Policy "no-referrer"
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
 }
+
+tools.terramids.com {
+    root * /srv/tools
+    file_server
+
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
 }
