@@ -95,6 +95,21 @@ export type ResourceTagDefinition = Prisma.ResourceTagDefinitionModel
  */
 export type ResourceTag = Prisma.ResourceTagModel
 /**
+ * Model Tool
+ * 
+ */
+export type Tool = Prisma.ToolModel
+/**
+ * Model ToolVersion
+ * 
+ */
+export type ToolVersion = Prisma.ToolVersionModel
+/**
+ * Model ToolCommunity
+ * 
+ */
+export type ToolCommunity = Prisma.ToolCommunityModel
+/**
  * Model Game
  * 
  */

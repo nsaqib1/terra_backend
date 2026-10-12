@@ -4,9 +4,10 @@ import { AdminService } from './admin.service';
 import { AdminGuard } from './guards/admin.guard';
 import { ResourcesModule } from '../resources/resources.module';
 import { GameModule } from '../game/game.module';
+import { ToolModule } from '../tool/tool.module';
 
 @Module({
-  imports: [ResourcesModule, GameModule],
+  imports: [ResourcesModule, GameModule, ToolModule],
   controllers: [AdminController],
   providers: [
     AdminService,

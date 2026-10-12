@@ -20,6 +20,7 @@ import { ResourcesModule } from './resources/resources.module';
 import { z } from 'zod';
 import { GameModule } from './game/game.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { ToolModule } from './tool/tool.module';
 
 const envSchema = z.object({
   NODE_ENV: z
@@ -34,6 +35,7 @@ const envSchema = z.object({
   REDIS_PORT: z.coerce.number().int().min(1).max(65535).default(6379),
 
   FRONTEND_URL: z.string().url(),
+  CORS_ORIGINS: z.string().min(1),
 
   JWT_ACCESS_SECRET: z.string().min(32),
   JWT_ACCESS_EXPIRES_IN: z.string().min(1).default('15m'),
@@ -75,6 +77,13 @@ const envSchema = z.object({
     .positive()
     .default(5000),
 
+  TOOL_STORAGE_PATH: z.string().min(1),
+  TOOL_TEMP_PATH: z.string().min(1),
+  TOOL_PUBLIC_URL: z.string().url(),
+  TOOL_MAX_BUILD_SIZE: z.coerce.number().int().positive().default(104857600),
+  TOOL_MAX_EXTRACTED_SIZE: z.coerce.number().int().positive().default(262144000),
+  TOOL_MAX_BUILD_FILES: z.coerce.number().int().positive().default(5000),
+
   LOG_LEVEL: z.string().default('info'),
 
   POSTGRES_DB: z.string().min(1),
@@ -112,6 +121,7 @@ const envSchema = z.object({
     InvitesModule,
     ResourcesModule,
     GameModule,
+    ToolModule,
     NotificationsModule,
   ],
 

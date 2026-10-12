@@ -43,6 +43,12 @@ import { ListResourcesDto } from '../resources/dto/list-resources.dto';
 import { CreateResourceTagDto } from '../resources/dto/create-resource-tag.dto';
 import { UpdateResourceTagDto } from '../resources/dto/update-resource-tag.dto';
 import { UpdateResourceDto } from '../resources/dto/update-resource.dto';
+import { ToolService } from '../tool/tool.service';
+import { AdminToolQueryDto } from '../tool/dto/admin-tool-query.dto';
+import { CreateToolDto } from '../tool/dto/create-tool.dto';
+import { UpdateToolDto } from '../tool/dto/update-tool.dto';
+import { CreateToolVersionDto } from '../tool/dto/create-tool-version.dto';
+import { UpdateToolVersionDto } from '../tool/dto/update-tool-version.dto';
 
 interface AuthenticatedRequest extends Request {
   user: {
@@ -73,6 +79,7 @@ export class AdminController {
     private readonly resourcesService: ResourcesService,
     private readonly resourceTagsService: ResourceTagsService,
     private readonly gameService: GameService,
+    private readonly toolService: ToolService,
   ) { }
 
   @Get('stats')
@@ -295,6 +302,56 @@ export class AdminController {
     );
   }
 
+  @Get('tools')
+  async getTools(@Query() query: AdminToolQueryDto) { return this.toolService.adminList(query); }
+
+  @Get('tools/:id')
+  async getTool(@Param('id') id: string) { return this.toolService.adminGetById(id); }
+
+  @Post('tools')
+  async createTool(@Body() dto: CreateToolDto) { return this.toolService.adminCreate(dto); }
+
+  @Patch('tools/:id')
+  async updateTool(@Param('id') id: string, @Body() dto: UpdateToolDto) { return this.toolService.adminUpdate(id, dto); }
+
+  @Put('tools/:id/communities')
+  async updateToolCommunities(@Param('id') id: string, @Body('communityIds') communityIds: string[]) { return this.toolService.adminUpdateCommunities(id, communityIds ?? []); }
+
+  @Delete('tools/:id')
+  async deleteTool(@Param('id') id: string) { return this.toolService.adminDelete(id); }
+
+  @Post('tools/:id/publish')
+  async publishTool(@Param('id') id: string) { return this.toolService.adminPublish(id); }
+
+  @Post('tools/:id/unpublish')
+  async unpublishTool(@Param('id') id: string) { return this.toolService.adminUnpublish(id); }
+
+  @Get('tools/:id/versions')
+  async getToolVersions(@Param('id') id: string) { return this.toolService.adminListVersions(id); }
+
+  @Post('tools/:id/versions')
+  async createToolVersion(@Param('id') id: string, @Body() dto: CreateToolVersionDto) { return this.toolService.adminCreateVersion(id, dto); }
+
+  @Patch('tools/:id/versions/:versionId')
+  async updateToolVersion(@Param('id') id: string, @Param('versionId') versionId: string, @Body() dto: UpdateToolVersionDto) { return this.toolService.adminUpdateVersion(id, versionId, dto); }
+
+  @Post('tools/:id/versions/:versionId/publish')
+  async publishToolVersion(@Param('id') id: string, @Param('versionId') versionId: string) { return this.toolService.adminPublishVersion(id, versionId); }
+
+  @Post('tools/:id/versions/:versionId/archive')
+  async archiveToolVersion(@Param('id') id: string, @Param('versionId') versionId: string) { return this.toolService.adminArchiveVersion(id, versionId); }
+
+  @Post('tools/:id/versions/:versionId/build')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({ destination: (_req, _file, cb) => cb(null, getToolTempDir()) }),
+    limits: { fileSize: Number(process.env.TOOL_MAX_BUILD_SIZE || 104857600) },
+  }))
+  async uploadToolBuild(@Param('id') id: string, @Param('versionId') versionId: string, @UploadedFile(new ParseFilePipe({ validators: [new MaxFileSizeValidator({ maxSize: Number(process.env.TOOL_MAX_BUILD_SIZE || 104857600) })] })) file: Express.Multer.File) {
+    if (!file) throw new BadRequestException('Tool build ZIP file is required');
+    if (file.mimetype !== 'application/zip' && file.mimetype !== 'application/x-zip-compressed' && !file.originalname.toLowerCase().endsWith('.zip')) throw new BadRequestException('Tool build must be a ZIP file');
+    return this.toolService.adminUploadBuild(id, versionId, file);
+  }
+
   @Get('resources')
   async getResources(@Query() query: ListResourcesDto) {
     return this.resourcesService.list(query, true);
@@ -443,5 +500,12 @@ function getGameTempDir(): string {
 
   mkdirSync(fallbackPath, { recursive: true });
 
+  return fallbackPath;
+}
+function getToolTempDir(): string {
+  const configuredPath = process.env.TOOL_TEMP_PATH;
+  if (configuredPath) { mkdirSync(configuredPath, { recursive: true }); return configuredPath; }
+  const fallbackPath = join(process.cwd(), 'storage', 'tool-temp');
+  mkdirSync(fallbackPath, { recursive: true });
   return fallbackPath;
 }

@@ -464,6 +464,74 @@ export type EnumResourceStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumResourceStatusFilter<$PrismaModel>
 }
 
+export type EnumToolCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolCategory | Prisma.EnumToolCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel> | $Enums.ToolCategory
+}
+
+export type EnumToolTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolType | Prisma.EnumToolTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolTypeFilter<$PrismaModel> | $Enums.ToolType
+}
+
+export type EnumToolStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolStatus | Prisma.EnumToolStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolStatusFilter<$PrismaModel> | $Enums.ToolStatus
+}
+
+export type EnumToolCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolCategory | Prisma.EnumToolCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ToolCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel>
+}
+
+export type EnumToolTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolType | Prisma.EnumToolTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolTypeWithAggregatesFilter<$PrismaModel> | $Enums.ToolType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolTypeFilter<$PrismaModel>
+}
+
+export type EnumToolStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolStatus | Prisma.EnumToolStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolStatusWithAggregatesFilter<$PrismaModel> | $Enums.ToolStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolStatusFilter<$PrismaModel>
+}
+
+export type EnumToolVersionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolVersionStatus | Prisma.EnumToolVersionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel> | $Enums.ToolVersionStatus
+}
+
+export type EnumToolVersionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolVersionStatus | Prisma.EnumToolVersionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolVersionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ToolVersionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel>
+}
+
 export type EnumGameCategoryFilter<$PrismaModel = never> = {
   equals?: $Enums.GameCategory | Prisma.EnumGameCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.GameCategory[] | Prisma.ListEnumGameCategoryFieldRefInput<$PrismaModel>
@@ -1121,6 +1189,74 @@ export type NestedEnumResourceStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumResourceStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumResourceStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumToolCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolCategory | Prisma.EnumToolCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel> | $Enums.ToolCategory
+}
+
+export type NestedEnumToolTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolType | Prisma.EnumToolTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolTypeFilter<$PrismaModel> | $Enums.ToolType
+}
+
+export type NestedEnumToolStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolStatus | Prisma.EnumToolStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolStatusFilter<$PrismaModel> | $Enums.ToolStatus
+}
+
+export type NestedEnumToolCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolCategory | Prisma.EnumToolCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolCategory[] | Prisma.ListEnumToolCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolCategoryWithAggregatesFilter<$PrismaModel> | $Enums.ToolCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumToolTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolType | Prisma.EnumToolTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolType[] | Prisma.ListEnumToolTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolTypeWithAggregatesFilter<$PrismaModel> | $Enums.ToolType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumToolStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolStatus | Prisma.EnumToolStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolStatus[] | Prisma.ListEnumToolStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolStatusWithAggregatesFilter<$PrismaModel> | $Enums.ToolStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumToolVersionStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolVersionStatus | Prisma.EnumToolVersionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel> | $Enums.ToolVersionStatus
+}
+
+export type NestedEnumToolVersionStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ToolVersionStatus | Prisma.EnumToolVersionStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ToolVersionStatus[] | Prisma.ListEnumToolVersionStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumToolVersionStatusWithAggregatesFilter<$PrismaModel> | $Enums.ToolVersionStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumToolVersionStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumGameCategoryFilter<$PrismaModel = never> = {

@@ -134,6 +134,46 @@ export const ResourceStatus = {
 export type ResourceStatus = (typeof ResourceStatus)[keyof typeof ResourceStatus]
 
 
+export const ToolCategory = {
+  DEVELOPER: 'DEVELOPER',
+  PRODUCTIVITY: 'PRODUCTIVITY',
+  MEDIA: 'MEDIA',
+  EDUCATION: 'EDUCATION',
+  ENGINEERING: 'ENGINEERING',
+  OTHER: 'OTHER'
+} as const
+
+export type ToolCategory = (typeof ToolCategory)[keyof typeof ToolCategory]
+
+
+export const ToolType = {
+  CLIENT: 'CLIENT',
+  SERVER: 'SERVER',
+  HYBRID: 'HYBRID'
+} as const
+
+export type ToolType = (typeof ToolType)[keyof typeof ToolType]
+
+
+export const ToolStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  UNPUBLISHED: 'UNPUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ToolStatus = (typeof ToolStatus)[keyof typeof ToolStatus]
+
+
+export const ToolVersionStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ToolVersionStatus = (typeof ToolVersionStatus)[keyof typeof ToolVersionStatus]
+
+
 export const GameCategory = {
   ENTERTAINMENT: 'ENTERTAINMENT',
   LEARNING: 'LEARNING',

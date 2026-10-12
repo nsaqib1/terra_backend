@@ -62,6 +62,9 @@ export const ModelName = {
   Resource: 'Resource',
   ResourceTagDefinition: 'ResourceTagDefinition',
   ResourceTag: 'ResourceTag',
+  Tool: 'Tool',
+  ToolVersion: 'ToolVersion',
+  ToolCommunity: 'ToolCommunity',
   Game: 'Game',
   GameVersion: 'GameVersion',
   GameCommunity: 'GameCommunity',
@@ -258,6 +261,48 @@ export const ResourceTagScalarFieldEnum = {
 } as const
 
 export type ResourceTagScalarFieldEnum = (typeof ResourceTagScalarFieldEnum)[keyof typeof ResourceTagScalarFieldEnum]
+
+
+export const ToolScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  thumbnailUrl: 'thumbnailUrl',
+  category: 'category',
+  type: 'type',
+  status: 'status',
+  currentVersionId: 'currentVersionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ToolScalarFieldEnum = (typeof ToolScalarFieldEnum)[keyof typeof ToolScalarFieldEnum]
+
+
+export const ToolVersionScalarFieldEnum = {
+  id: 'id',
+  toolId: 'toolId',
+  version: 'version',
+  buildPath: 'buildPath',
+  status: 'status',
+  releaseNotes: 'releaseNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt'
+} as const
+
+export type ToolVersionScalarFieldEnum = (typeof ToolVersionScalarFieldEnum)[keyof typeof ToolVersionScalarFieldEnum]
+
+
+export const ToolCommunityScalarFieldEnum = {
+  toolId: 'toolId',
+  communityId: 'communityId',
+  createdAt: 'createdAt'
+} as const
+
+export type ToolCommunityScalarFieldEnum = (typeof ToolCommunityScalarFieldEnum)[keyof typeof ToolCommunityScalarFieldEnum]
 
 
 export const GameScalarFieldEnum = {

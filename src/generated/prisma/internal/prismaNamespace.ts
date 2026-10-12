@@ -408,6 +408,9 @@ export const ModelName = {
   Resource: 'Resource',
   ResourceTagDefinition: 'ResourceTagDefinition',
   ResourceTag: 'ResourceTag',
+  Tool: 'Tool',
+  ToolVersion: 'ToolVersion',
+  ToolCommunity: 'ToolCommunity',
   Game: 'Game',
   GameVersion: 'GameVersion',
   GameCommunity: 'GameCommunity',
@@ -436,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "resource" | "resourceTagDefinition" | "resourceTag" | "game" | "gameVersion" | "gameCommunity" | "gameSession" | "gameScore" | "media" | "notification" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession" | "invite" | "inviteUsage"
+    modelProps: "user" | "community" | "communityProposal" | "communityMembership" | "post" | "comment" | "tag" | "postTag" | "resource" | "resourceTagDefinition" | "resourceTag" | "tool" | "toolVersion" | "toolCommunity" | "game" | "gameVersion" | "gameCommunity" | "gameSession" | "gameScore" | "media" | "notification" | "vote" | "pointEvent" | "dailyVisit" | "refreshSession" | "invite" | "inviteUsage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1251,6 +1254,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ResourceTagCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ResourceTagCountAggregateOutputType> | number
+        }
+      }
+    }
+    Tool: {
+      payload: Prisma.$ToolPayload<ExtArgs>
+      fields: Prisma.ToolFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ToolFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ToolFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        findFirst: {
+          args: Prisma.ToolFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ToolFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        findMany: {
+          args: Prisma.ToolFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>[]
+        }
+        create: {
+          args: Prisma.ToolCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        createMany: {
+          args: Prisma.ToolCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ToolCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>[]
+        }
+        delete: {
+          args: Prisma.ToolDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        update: {
+          args: Prisma.ToolUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        deleteMany: {
+          args: Prisma.ToolDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ToolUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ToolUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>[]
+        }
+        upsert: {
+          args: Prisma.ToolUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolPayload>
+        }
+        aggregate: {
+          args: Prisma.ToolAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTool>
+        }
+        groupBy: {
+          args: Prisma.ToolGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ToolCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolCountAggregateOutputType> | number
+        }
+      }
+    }
+    ToolVersion: {
+      payload: Prisma.$ToolVersionPayload<ExtArgs>
+      fields: Prisma.ToolVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ToolVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ToolVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.ToolVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ToolVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        findMany: {
+          args: Prisma.ToolVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>[]
+        }
+        create: {
+          args: Prisma.ToolVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        createMany: {
+          args: Prisma.ToolVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ToolVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.ToolVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        update: {
+          args: Prisma.ToolVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ToolVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ToolVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ToolVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ToolVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.ToolVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateToolVersion>
+        }
+        groupBy: {
+          args: Prisma.ToolVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ToolVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    ToolCommunity: {
+      payload: Prisma.$ToolCommunityPayload<ExtArgs>
+      fields: Prisma.ToolCommunityFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ToolCommunityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ToolCommunityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        findFirst: {
+          args: Prisma.ToolCommunityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ToolCommunityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        findMany: {
+          args: Prisma.ToolCommunityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>[]
+        }
+        create: {
+          args: Prisma.ToolCommunityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        createMany: {
+          args: Prisma.ToolCommunityCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ToolCommunityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>[]
+        }
+        delete: {
+          args: Prisma.ToolCommunityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        update: {
+          args: Prisma.ToolCommunityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        deleteMany: {
+          args: Prisma.ToolCommunityDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ToolCommunityUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ToolCommunityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>[]
+        }
+        upsert: {
+          args: Prisma.ToolCommunityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ToolCommunityPayload>
+        }
+        aggregate: {
+          args: Prisma.ToolCommunityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateToolCommunity>
+        }
+        groupBy: {
+          args: Prisma.ToolCommunityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolCommunityGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ToolCommunityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ToolCommunityCountAggregateOutputType> | number
         }
       }
     }
@@ -2422,6 +2647,48 @@ export const ResourceTagScalarFieldEnum = {
 export type ResourceTagScalarFieldEnum = (typeof ResourceTagScalarFieldEnum)[keyof typeof ResourceTagScalarFieldEnum]
 
 
+export const ToolScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  thumbnailUrl: 'thumbnailUrl',
+  category: 'category',
+  type: 'type',
+  status: 'status',
+  currentVersionId: 'currentVersionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ToolScalarFieldEnum = (typeof ToolScalarFieldEnum)[keyof typeof ToolScalarFieldEnum]
+
+
+export const ToolVersionScalarFieldEnum = {
+  id: 'id',
+  toolId: 'toolId',
+  version: 'version',
+  buildPath: 'buildPath',
+  status: 'status',
+  releaseNotes: 'releaseNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  publishedAt: 'publishedAt'
+} as const
+
+export type ToolVersionScalarFieldEnum = (typeof ToolVersionScalarFieldEnum)[keyof typeof ToolVersionScalarFieldEnum]
+
+
+export const ToolCommunityScalarFieldEnum = {
+  toolId: 'toolId',
+  communityId: 'communityId',
+  createdAt: 'createdAt'
+} as const
+
+export type ToolCommunityScalarFieldEnum = (typeof ToolCommunityScalarFieldEnum)[keyof typeof ToolCommunityScalarFieldEnum]
+
+
 export const GameScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
@@ -2862,6 +3129,62 @@ export type ListEnumResourceStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'ToolCategory'
+ */
+export type EnumToolCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolCategory[]'
+ */
+export type ListEnumToolCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolType'
+ */
+export type EnumToolTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolType'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolType[]'
+ */
+export type ListEnumToolTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolStatus'
+ */
+export type EnumToolStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolStatus[]'
+ */
+export type ListEnumToolStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolVersionStatus'
+ */
+export type EnumToolVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolVersionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ToolVersionStatus[]'
+ */
+export type ListEnumToolVersionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ToolVersionStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'GameCategory'
  */
 export type EnumGameCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GameCategory'>
@@ -3197,6 +3520,9 @@ export type GlobalOmitConfig = {
   resource?: Prisma.ResourceOmit
   resourceTagDefinition?: Prisma.ResourceTagDefinitionOmit
   resourceTag?: Prisma.ResourceTagOmit
+  tool?: Prisma.ToolOmit
+  toolVersion?: Prisma.ToolVersionOmit
+  toolCommunity?: Prisma.ToolCommunityOmit
   game?: Prisma.GameOmit
   gameVersion?: Prisma.GameVersionOmit
   gameCommunity?: Prisma.GameCommunityOmit
