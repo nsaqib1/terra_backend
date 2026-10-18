@@ -26,6 +26,7 @@ export class UserService {
             username: true,
             displayName: true,
             avatarUrl: true,
+            coverUrl: true,
             bio: true,
             location: true,
             website: true,
@@ -326,6 +327,21 @@ export class UserService {
       }
     }
 
+    if (dto.coverUrl) {
+      const match = dto.coverUrl.match(/\/media\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        await this.prisma.media.updateMany({
+          where: {
+            id: match[1],
+            uploadedById: userId,
+          },
+          data: {
+            status: 'ACTIVE',
+          },
+        });
+      }
+    }
+
     const updatedUser = await this.prisma.user.update({
       where: {
         id: userId,
@@ -349,12 +365,16 @@ export class UserService {
         ...(dto.avatarUrl !== undefined && {
           avatarUrl: dto.avatarUrl,
         }),
+        ...(dto.coverUrl !== undefined && {
+          coverUrl: dto.coverUrl,
+        }),
       },
       select: {
         id: true,
         username: true,
         displayName: true,
         avatarUrl: true,
+        coverUrl: true,
         bio: true,
         location: true,
         website: true,

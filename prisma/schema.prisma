@@ -15,6 +15,7 @@ model User {
   email             String                @unique @db.VarChar(255)
   passwordHash      String
   avatarUrl         String?
+  coverUrl          String?
   bio               String?
   status            UserStatus            @default(ACTIVE)
   createdAt         DateTime              @default(now())

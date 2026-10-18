@@ -22,6 +22,9 @@ describe('UserService', () => {
     vote: {
       count: jest.Mock;
     };
+    media: {
+      updateMany: jest.Mock;
+    };
   };
 
   const mockUser = {
@@ -29,6 +32,7 @@ describe('UserService', () => {
     username: 'janedoe',
     displayName: 'Jane Doe',
     avatarUrl: null,
+    coverUrl: null,
     bio: 'Community builder...',
     location: 'Austin, TX',
     website: 'https://janedoe.dev',
@@ -53,6 +57,9 @@ describe('UserService', () => {
       },
       vote: {
         count: jest.fn(),
+      },
+      media: {
+        updateMany: jest.fn(),
       },
     };
 
@@ -232,17 +239,29 @@ describe('UserService', () => {
         ...mockUser,
         displayName: 'Jane Updated',
         bio: 'New bio',
+        coverUrl: 'https://api.test/media/new-cover',
       };
 
       prisma.user.update.mockResolvedValue(updatedUserData);
+      prisma.media.updateMany.mockResolvedValue({ count: 1 });
 
       const result = await service.updateProfile('user-uuid-1', {
         displayName: 'Jane Updated',
         bio: 'New bio',
+        coverUrl: 'https://api.test/media/new-cover',
       });
 
       expect(result).toEqual({
         user: updatedUserData,
+      });
+      expect(prisma.media.updateMany).toHaveBeenCalledWith({
+        where: {
+          id: 'new-cover',
+          uploadedById: 'user-uuid-1',
+        },
+        data: {
+          status: 'ACTIVE',
+        },
       });
     });
 
