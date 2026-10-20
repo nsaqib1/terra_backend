@@ -222,14 +222,20 @@ export class AuthService {
       throw new UnauthorizedException('User is not active');
     }
 
-    await this.prisma.refreshSession.update({
+    const rotation = await this.prisma.refreshSession.updateMany({
       where: {
         id: session.id,
+        revokedAt: null,
+        tokenHash: session.tokenHash,
       },
       data: {
         revokedAt: new Date(),
       },
     });
+
+    if (rotation.count !== 1) {
+      throw new UnauthorizedException('Refresh session is invalid');
+    }
 
     const tokens = await this.createTokenPair(user.id);
 

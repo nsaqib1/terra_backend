@@ -24,6 +24,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { MediaService } from './media.service';
 import type { Response } from 'express';
 
+const maxMediaFileSize = Number(process.env.MEDIA_MAX_FILE_SIZE || 10485760);
+
 interface AuthenticatedRequest extends Request {
   user: {
     userId: string;
@@ -39,7 +41,11 @@ export class MediaController {
   @Post('upload')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(
-    FileInterceptor('file'),
+    FileInterceptor('file', {
+      limits: {
+        fileSize: maxMediaFileSize,
+      },
+    }),
   )
   async upload(
     @Req() request: AuthenticatedRequest,
@@ -48,10 +54,7 @@ export class MediaController {
       new ParseFilePipe({
         validators: [
           new MaxFileSizeValidator({
-            maxSize: Number(
-              process.env.MEDIA_MAX_FILE_SIZE ||
-              10485760,
-            ),
+            maxSize: maxMediaFileSize,
           }),
 
           new FileTypeValidator({
