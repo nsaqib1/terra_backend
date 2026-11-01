@@ -25,6 +25,7 @@ model User {
   points            Int                   @default(0)
   location          String?               @db.VarChar(150)
   website           String?               @db.VarChar(500)
+  preferredLanguage Language              @default(EN)
   comments          Comment[]
   notificationsReceived Notification[] @relation("NotificationRecipient")
   notificationsSent Notification[] @relation("NotificationActor")
@@ -545,6 +546,11 @@ model InviteUsage {
 
   @@index([inviteId])
   @@index([userId])
+}
+
+enum Language {
+  EN
+  BN
 }
 
 enum UserRole {

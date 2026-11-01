@@ -19,6 +19,14 @@ export const NotificationType = {
 export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
 
 
+export const Language = {
+  EN: 'EN',
+  BN: 'BN'
+} as const
+
+export type Language = (typeof Language)[keyof typeof Language]
+
+
 export const UserRole = {
   USER: 'USER',
   ADMIN: 'ADMIN'

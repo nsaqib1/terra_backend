@@ -1,5 +1,6 @@
 import {
   IsOptional,
+  IsEnum,
   IsString,
   Matches,
   MaxLength,
@@ -8,7 +9,16 @@ import {
 } from 'class-validator';
 import { Transform } from 'class-transformer';
 
+enum PreferredLanguage {
+  EN = 'EN',
+  BN = 'BN',
+}
+
 export class UpdateProfileDto {
+  @IsOptional()
+  @IsEnum(PreferredLanguage)
+  preferredLanguage?: PreferredLanguage;
+
   @IsOptional()
   @Transform(({ value }) =>
     typeof value === 'string' ? value.trim() : value,
@@ -95,3 +105,4 @@ export class UpdateProfileDto {
   @MaxLength(2048)
   coverUrl?: string | null;
 }
+

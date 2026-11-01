@@ -51,6 +51,7 @@ export type UserMinAggregateOutputType = {
   points: number | null
   location: string | null
   website: string | null
+  preferredLanguage: $Enums.Language | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -70,6 +71,7 @@ export type UserMaxAggregateOutputType = {
   points: number | null
   location: string | null
   website: string | null
+  preferredLanguage: $Enums.Language | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -89,6 +91,7 @@ export type UserCountAggregateOutputType = {
   points: number
   location: number
   website: number
+  preferredLanguage: number
   _all: number
 }
 
@@ -118,6 +121,7 @@ export type UserMinAggregateInputType = {
   points?: true
   location?: true
   website?: true
+  preferredLanguage?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -137,6 +141,7 @@ export type UserMaxAggregateInputType = {
   points?: true
   location?: true
   website?: true
+  preferredLanguage?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -156,6 +161,7 @@ export type UserCountAggregateInputType = {
   points?: true
   location?: true
   website?: true
+  preferredLanguage?: true
   _all?: true
 }
 
@@ -262,6 +268,7 @@ export type UserGroupByOutputType = {
   points: number
   location: string | null
   website: string | null
+  preferredLanguage: $Enums.Language
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -304,6 +311,7 @@ export type UserWhereInput = {
   points?: Prisma.IntFilter<"User"> | number
   location?: Prisma.StringNullableFilter<"User"> | string | null
   website?: Prisma.StringNullableFilter<"User"> | string | null
+  preferredLanguage?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
   comments?: Prisma.CommentListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
@@ -340,6 +348,7 @@ export type UserOrderByWithRelationInput = {
   points?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredLanguage?: Prisma.SortOrder
   comments?: Prisma.CommentOrderByRelationAggregateInput
   notificationsReceived?: Prisma.NotificationOrderByRelationAggregateInput
   notificationsSent?: Prisma.NotificationOrderByRelationAggregateInput
@@ -379,6 +388,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   points?: Prisma.IntFilter<"User"> | number
   location?: Prisma.StringNullableFilter<"User"> | string | null
   website?: Prisma.StringNullableFilter<"User"> | string | null
+  preferredLanguage?: Prisma.EnumLanguageFilter<"User"> | $Enums.Language
   comments?: Prisma.CommentListRelationFilter
   notificationsReceived?: Prisma.NotificationListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
@@ -415,6 +425,7 @@ export type UserOrderByWithAggregationInput = {
   points?: Prisma.SortOrder
   location?: Prisma.SortOrderInput | Prisma.SortOrder
   website?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredLanguage?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -442,6 +453,7 @@ export type UserScalarWhereWithAggregatesInput = {
   points?: Prisma.IntWithAggregatesFilter<"User"> | number
   location?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   website?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  preferredLanguage?: Prisma.EnumLanguageWithAggregatesFilter<"User"> | $Enums.Language
 }
 
 export type UserCreateInput = {
@@ -461,6 +473,7 @@ export type UserCreateInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -497,6 +510,7 @@ export type UserUncheckedCreateInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -533,6 +547,7 @@ export type UserUpdateInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -569,6 +584,7 @@ export type UserUncheckedUpdateInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -605,6 +621,7 @@ export type UserCreateManyInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
 }
 
 export type UserUpdateManyMutationInput = {
@@ -624,6 +641,7 @@ export type UserUpdateManyMutationInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -643,6 +661,7 @@ export type UserUncheckedUpdateManyInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -662,6 +681,7 @@ export type UserCountOrderByAggregateInput = {
   points?: Prisma.SortOrder
   location?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  preferredLanguage?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -685,6 +705,7 @@ export type UserMaxOrderByAggregateInput = {
   points?: Prisma.SortOrder
   location?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  preferredLanguage?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -704,6 +725,7 @@ export type UserMinOrderByAggregateInput = {
   points?: Prisma.SortOrder
   location?: Prisma.SortOrder
   website?: Prisma.SortOrder
+  preferredLanguage?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -750,6 +772,10 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type EnumLanguageFieldUpdateOperationsInput = {
+  set?: $Enums.Language
 }
 
 export type UserCreateNestedOneWithoutProposalsInput = {
@@ -1015,6 +1041,7 @@ export type UserCreateWithoutProposalsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1050,6 +1077,7 @@ export type UserUncheckedCreateWithoutProposalsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -1090,6 +1118,7 @@ export type UserCreateWithoutReviewedProposalsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1125,6 +1154,7 @@ export type UserUncheckedCreateWithoutReviewedProposalsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -1176,6 +1206,7 @@ export type UserUpdateWithoutProposalsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -1211,6 +1242,7 @@ export type UserUncheckedUpdateWithoutProposalsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -1257,6 +1289,7 @@ export type UserUpdateWithoutReviewedProposalsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -1292,6 +1325,7 @@ export type UserUncheckedUpdateWithoutReviewedProposalsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -1327,6 +1361,7 @@ export type UserCreateWithoutMembershipsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1362,6 +1397,7 @@ export type UserUncheckedCreateWithoutMembershipsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -1413,6 +1449,7 @@ export type UserUpdateWithoutMembershipsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -1448,6 +1485,7 @@ export type UserUncheckedUpdateWithoutMembershipsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -1483,6 +1521,7 @@ export type UserCreateWithoutPostsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1518,6 +1557,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -1569,6 +1609,7 @@ export type UserUpdateWithoutPostsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -1604,6 +1645,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -1639,6 +1681,7 @@ export type UserCreateWithoutCommentsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
@@ -1674,6 +1717,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -1725,6 +1769,7 @@ export type UserUpdateWithoutCommentsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
@@ -1760,6 +1805,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -1795,6 +1841,7 @@ export type UserCreateWithoutResourcesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1830,6 +1877,7 @@ export type UserUncheckedCreateWithoutResourcesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -1881,6 +1929,7 @@ export type UserUpdateWithoutResourcesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -1916,6 +1965,7 @@ export type UserUncheckedUpdateWithoutResourcesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -1951,6 +2001,7 @@ export type UserCreateWithoutGameSessionsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -1986,6 +2037,7 @@ export type UserUncheckedCreateWithoutGameSessionsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -2037,6 +2089,7 @@ export type UserUpdateWithoutGameSessionsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -2072,6 +2125,7 @@ export type UserUncheckedUpdateWithoutGameSessionsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -2107,6 +2161,7 @@ export type UserCreateWithoutGameScoresInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -2142,6 +2197,7 @@ export type UserUncheckedCreateWithoutGameScoresInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -2193,6 +2249,7 @@ export type UserUpdateWithoutGameScoresInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -2228,6 +2285,7 @@ export type UserUncheckedUpdateWithoutGameScoresInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -2263,6 +2321,7 @@ export type UserCreateWithoutMediaInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -2298,6 +2357,7 @@ export type UserUncheckedCreateWithoutMediaInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -2349,6 +2409,7 @@ export type UserUpdateWithoutMediaInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -2384,6 +2445,7 @@ export type UserUncheckedUpdateWithoutMediaInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -2419,6 +2481,7 @@ export type UserCreateWithoutNotificationsReceivedInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
@@ -2454,6 +2517,7 @@ export type UserUncheckedCreateWithoutNotificationsReceivedInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -2494,6 +2558,7 @@ export type UserCreateWithoutNotificationsSentInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   memberships?: Prisma.CommunityMembershipCreateNestedManyWithoutUserInput
@@ -2529,6 +2594,7 @@ export type UserUncheckedCreateWithoutNotificationsSentInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   memberships?: Prisma.CommunityMembershipUncheckedCreateNestedManyWithoutUserInput
@@ -2580,6 +2646,7 @@ export type UserUpdateWithoutNotificationsReceivedInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
@@ -2615,6 +2682,7 @@ export type UserUncheckedUpdateWithoutNotificationsReceivedInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -2661,6 +2729,7 @@ export type UserUpdateWithoutNotificationsSentInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   memberships?: Prisma.CommunityMembershipUpdateManyWithoutUserNestedInput
@@ -2696,6 +2765,7 @@ export type UserUncheckedUpdateWithoutNotificationsSentInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   memberships?: Prisma.CommunityMembershipUncheckedUpdateManyWithoutUserNestedInput
@@ -2731,6 +2801,7 @@ export type UserCreateWithoutVotesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -2766,6 +2837,7 @@ export type UserUncheckedCreateWithoutVotesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -2817,6 +2889,7 @@ export type UserUpdateWithoutVotesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -2852,6 +2925,7 @@ export type UserUncheckedUpdateWithoutVotesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -2887,6 +2961,7 @@ export type UserCreateWithoutPointEventsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -2922,6 +2997,7 @@ export type UserUncheckedCreateWithoutPointEventsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -2973,6 +3049,7 @@ export type UserUpdateWithoutPointEventsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -3008,6 +3085,7 @@ export type UserUncheckedUpdateWithoutPointEventsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -3043,6 +3121,7 @@ export type UserCreateWithoutDailyVisitsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -3078,6 +3157,7 @@ export type UserUncheckedCreateWithoutDailyVisitsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -3129,6 +3209,7 @@ export type UserUpdateWithoutDailyVisitsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -3164,6 +3245,7 @@ export type UserUncheckedUpdateWithoutDailyVisitsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -3199,6 +3281,7 @@ export type UserCreateWithoutRefreshSessionsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -3234,6 +3317,7 @@ export type UserUncheckedCreateWithoutRefreshSessionsInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -3285,6 +3369,7 @@ export type UserUpdateWithoutRefreshSessionsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -3320,6 +3405,7 @@ export type UserUncheckedUpdateWithoutRefreshSessionsInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -3355,6 +3441,7 @@ export type UserCreateWithoutCreatedInvitesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -3390,6 +3477,7 @@ export type UserUncheckedCreateWithoutCreatedInvitesInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -3441,6 +3529,7 @@ export type UserUpdateWithoutCreatedInvitesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -3476,6 +3565,7 @@ export type UserUncheckedUpdateWithoutCreatedInvitesInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -3511,6 +3601,7 @@ export type UserCreateWithoutInviteUsageInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutActorInput
@@ -3546,6 +3637,7 @@ export type UserUncheckedCreateWithoutInviteUsageInput = {
   points?: number
   location?: string | null
   website?: string | null
+  preferredLanguage?: $Enums.Language
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
@@ -3597,6 +3689,7 @@ export type UserUpdateWithoutInviteUsageInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutActorNestedInput
@@ -3632,6 +3725,7 @@ export type UserUncheckedUpdateWithoutInviteUsageInput = {
   points?: Prisma.IntFieldUpdateOperationsInput | number
   location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   website?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredLanguage?: Prisma.EnumLanguageFieldUpdateOperationsInput | $Enums.Language
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
@@ -3833,6 +3927,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   points?: boolean
   location?: boolean
   website?: boolean
+  preferredLanguage?: boolean
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
   notificationsSent?: boolean | Prisma.User$notificationsSentArgs<ExtArgs>
@@ -3870,6 +3965,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   points?: boolean
   location?: boolean
   website?: boolean
+  preferredLanguage?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3889,6 +3985,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   points?: boolean
   location?: boolean
   website?: boolean
+  preferredLanguage?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -3908,9 +4005,10 @@ export type UserSelectScalar = {
   points?: boolean
   location?: boolean
   website?: boolean
+  preferredLanguage?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "coverUrl" | "bio" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role" | "points" | "location" | "website", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "displayName" | "email" | "passwordHash" | "avatarUrl" | "coverUrl" | "bio" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "role" | "points" | "location" | "website" | "preferredLanguage", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
   notificationsReceived?: boolean | Prisma.User$notificationsReceivedArgs<ExtArgs>
@@ -3972,6 +4070,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     points: number
     location: string | null
     website: string | null
+    preferredLanguage: $Enums.Language
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -4428,6 +4527,7 @@ export interface UserFieldRefs {
   readonly points: Prisma.FieldRef<"User", 'Int'>
   readonly location: Prisma.FieldRef<"User", 'String'>
   readonly website: Prisma.FieldRef<"User", 'String'>
+  readonly preferredLanguage: Prisma.FieldRef<"User", 'Language'>
 }
     
 

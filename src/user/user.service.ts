@@ -368,6 +368,9 @@ export class UserService {
         ...(dto.coverUrl !== undefined && {
           coverUrl: dto.coverUrl,
         }),
+        ...(dto.preferredLanguage !== undefined && {
+          preferredLanguage: dto.preferredLanguage,
+        }),
       },
       select: {
         id: true,
@@ -379,6 +382,7 @@ export class UserService {
         location: true,
         website: true,
         points: true,
+        preferredLanguage: true,
         createdAt: true,
       },
     });
